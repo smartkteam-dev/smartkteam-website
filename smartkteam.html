@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart KTeam — Digital Growth Agency, Seattle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1a2e;--ivory:#faf9f7;--accent:#e8521a;--accent-light:#f07340;
+    --slate:#16213e;--mid:#6e7191;--warm:#f0ebe3;--rule:rgba(232,82,26,0.2);
+    --text-xs:11px;--text-sm:13px;--text-base:15px;--text-lg:17px;
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Montserrat',sans-serif;background:var(--ivory);color:var(--ink);overflow-x:hidden;cursor:none;}
+  
+  /* CURSOR */
+  .cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;}
+  .cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.18s ease;opacity:0.5;}
+  .cursor-ring.hover{transform:translate(-50%,-50%) scale(1.8);opacity:0.25;}
+  .page{display:none;}.page.active{display:block;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:28px 64px;transition:background 0.4s,padding 0.4s,box-shadow 0.4s;}
+  nav.scrolled{background:rgba(250,249,247,0.97);backdrop-filter:blur(16px);padding:18px 64px;box-shadow:0 1px 0 var(--rule);}
+  nav.dark-nav{background:transparent;}
+  .nav-logo{display:flex;align-items:center;text-decoration:none;cursor:none;flex-shrink:0;}
+  .nav-logo svg{height:46px;width:auto;transition:filter 0.4s;}
+  nav.scrolled .nav-logo svg .logo-text{fill:var(--ink);}
+  /* on dark nav: text stays as is (white-ish). on scrolled: invert the text only */
+  nav:not(.scrolled) .logo-bar{fill:#e8521a;}
+  nav:not(.scrolled) .logo-text-path{fill:#faf9f7;}
+  nav.scrolled .logo-bar{fill:#e8521a;}
+  nav.scrolled .logo-text-path{fill:#1a1a2e;}
+  .nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+  .nav-links a{font-size:var(--text-sm);letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,242,236,0.85);text-decoration:none;transition:color 0.3s;font-weight:500;cursor:none;position:relative;}
+  .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--accent);transition:width 0.3s;}
+  .nav-links a:hover::after{width:100%;}
+  nav.scrolled .nav-links a{color:var(--mid);}
+  .nav-links a:hover,nav.scrolled .nav-links a:hover{color:var(--accent);}
+  .nav-dropdown{position:relative;}
+  .nav-dropdown-menu{display:none;position:absolute;top:100%;left:0;background:var(--ivory);border:1px solid var(--rule);min-width:240px;padding:12px 0;box-shadow:0 12px 48px rgba(26,26,46,0.12);padding-top:20px;}
+  .nav-dropdown-menu::before{content:'';position:absolute;top:-16px;left:0;right:0;height:16px;}
+  .nav-dropdown:hover .nav-dropdown-menu{display:block;}
+  .nav-dropdown-menu a{display:block;padding:12px 24px;font-size:var(--text-sm);letter-spacing:0.1em;color:var(--mid)!important;text-transform:uppercase;}
+  .nav-dropdown-menu a::after{display:none;}
+  .nav-dropdown-menu a:hover{color:var(--accent)!important;background:var(--warm);}
+  .nav-cta{color:var(--accent)!important;border:1.5px solid var(--accent);padding:11px 26px;transition:all 0.3s!important;}
+  .nav-cta:hover{background:var(--accent);color:var(--ivory)!important;}
+  .nav-cta::after{display:none!important;}
+
+  /* SHARED */
+  .page-hero{height:58vh;min-height:420px;background:var(--slate);display:flex;align-items:flex-end;padding:100px 64px 72px;position:relative;overflow:hidden;}
+  .page-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.12;}
+  .page-hero-content{position:relative;z-index:2;}
+  .page-hero-eyebrow{font-size:var(--text-xs);letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;font-weight:600;}
+  .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,78px);font-weight:300;color:var(--ivory);line-height:1.05;}
+  .page-hero h1 em{font-style:italic;color:var(--accent-light);}
+  .page-hero-sub{font-size:var(--text-base);line-height:1.85;color:rgba(245,242,236,0.55);margin-top:20px;max-width:600px;font-weight:300;letter-spacing:0.02em;}
+  .section-pad{padding:110px 64px;}
+  .eyebrow{font-size:var(--text-xs);letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:18px;}
+  .section-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,58px);font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:28px;}
+  .section-h2 em{font-style:italic;color:var(--accent);}
+  .section-h2-light{color:var(--ivory);}
+  .body-text{font-size:var(--text-base);line-height:1.95;color:var(--mid);font-weight:300;letter-spacing:0.02em;}
+  .back-link{display:inline-flex;align-items:center;gap:10px;font-size:var(--text-sm);letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:48px;cursor:none;text-decoration:none;}
+  .back-link::before{content:'←';}
+  .btn-primary{display:inline-block;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;background:var(--accent);color:var(--ivory);padding:18px 40px;text-decoration:none;font-weight:600;transition:all 0.3s;cursor:none;border:none;font-family:'Montserrat',sans-serif;}
+  .btn-primary:hover{background:var(--accent-light);transform:translateY(-1px);}
+
+  /* TWO COL */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;}
+  .two-col-img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+
+  /* BENEFITS */
+  .benefits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--rule);margin-top:64px;}
+  .benefit-card{background:var(--ivory);padding:40px 36px;border-left:3px solid transparent;transition:border-color 0.3s;}
+  .benefit-card:hover{border-left-color:var(--accent);}
+  .benefit-title{font-size:var(--text-sm);letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:var(--ink);margin-bottom:12px;}
+  .benefit-desc{font-size:var(--text-base);line-height:1.85;color:var(--mid);font-weight:300;}
+
+  /* PACKAGES */
+  .packages-section{background:var(--slate);padding:110px 64px;}
+  .packages-grid{display:grid;gap:2px;margin-top:56px;}
+  .packages-grid-3{grid-template-columns:repeat(3,1fr);}
+  .package-card{background:rgba(255,255,255,0.04);padding:48px 36px;border-top:2px solid rgba(255,255,255,0.06);position:relative;transition:background 0.3s;}
+  .package-card.featured{background:rgba(232,82,26,0.09);border-top-color:var(--accent);}
+  .package-card:hover{background:rgba(255,255,255,0.08);}
+  .pkg-badge{position:absolute;top:-1px;right:28px;background:var(--accent);font-size:var(--text-xs);letter-spacing:0.2em;text-transform:uppercase;color:var(--ivory);padding:5px 14px;font-weight:700;}
+  .pkg-name{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--ivory);margin-bottom:6px;}
+  .pkg-price{font-size:var(--text-sm);letter-spacing:0.05em;color:var(--accent);font-weight:600;margin-bottom:28px;}
+  .pkg-rule{width:32px;height:2px;background:rgba(232,82,26,0.4);margin-bottom:28px;}
+  .pkg-features{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .pkg-features li{font-size:var(--text-sm);letter-spacing:0.04em;color:rgba(245,242,236,0.6);font-weight:300;display:flex;gap:12px;align-items:flex-start;line-height:1.6;}
+  .pkg-features li::before{content:'—';color:var(--accent);flex-shrink:0;}
+  .pkg-cta{display:inline-block;margin-top:36px;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;border:1.5px solid rgba(232,82,26,0.5);color:var(--accent);padding:14px 28px;text-decoration:none;transition:all 0.3s;cursor:none;font-weight:600;}
+  .pkg-cta:hover{background:var(--accent);color:var(--ivory);}
+
+  /* STEPS */
+  .steps-list{display:flex;flex-direction:column;margin-top:56px;}
+  .step-item{display:grid;grid-template-columns:72px 1fr;gap:24px;padding:36px 0;border-bottom:1px solid var(--rule);}
+  .step-item:last-child{border-bottom:none;}
+  .step-num{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--accent);opacity:0.5;line-height:1;}
+  .step-title{font-size:var(--text-sm);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:var(--ink);margin-bottom:8px;}
+  .step-desc{font-size:var(--text-base);line-height:1.85;color:var(--mid);font-weight:300;}
+
+  /* FAQ */
+  .faq-list{margin-top:56px;display:flex;flex-direction:column;}
+  .faq-item{border-bottom:1px solid var(--rule);}
+  .faq-question{display:flex;justify-content:space-between;align-items:center;padding:30px 0;cursor:none;gap:28px;}
+  .faq-question h3{font-size:var(--text-base);letter-spacing:0.03em;font-weight:500;color:var(--ink);line-height:1.5;}
+  .faq-toggle{width:30px;height:30px;border:1.5px solid var(--rule);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;color:var(--accent);transition:all 0.3s;}
+  .faq-item.open .faq-toggle{background:var(--accent);color:var(--ivory);transform:rotate(45deg);}
+  .faq-answer{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+  .faq-answer-inner{font-size:var(--text-base);line-height:1.95;color:var(--mid);font-weight:300;padding-bottom:28px;letter-spacing:0.02em;}
+
+  /* BLOG */
+  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;margin-top:56px;}
+  .blog-card{display:flex;flex-direction:column;}
+  .blog-img-wrap{overflow:hidden;}
+  .blog-img{width:100%;aspect-ratio:16/9;object-fit:cover;filter:grayscale(15%);transition:filter 0.4s,transform 0.5s;display:block;}
+  .blog-card:hover .blog-img{filter:grayscale(0%);transform:scale(1.04);}
+  .blog-meta{display:flex;gap:14px;align-items:center;margin-top:20px;margin-bottom:12px;}
+  .blog-tag{font-size:var(--text-xs);letter-spacing:0.25em;text-transform:uppercase;background:var(--warm);color:var(--accent);padding:5px 12px;font-weight:700;}
+  .blog-date{font-size:var(--text-sm);letter-spacing:0.08em;color:var(--mid);font-weight:300;}
+  .blog-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--ink);line-height:1.3;margin-bottom:12px;}
+  .blog-excerpt{font-size:var(--text-base);line-height:1.85;color:var(--mid);font-weight:300;}
+  .blog-read-more{display:inline-flex;align-items:center;gap:8px;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-top:16px;font-weight:600;text-decoration:none;}
+  .blog-read-more::after{content:'→';transition:transform 0.3s;}
+  .blog-read-more:hover::after{transform:translateX(4px);}
+
+  /* CTA BAND */
+  .cta-band{background:var(--slate);padding:80px 64px;display:flex;justify-content:space-between;align-items:center;gap:48px;}
+  .cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,3.5vw,50px);font-weight:300;color:var(--ivory);}
+  .cta-band h2 em{font-style:italic;color:var(--accent-light);}
+
+  /* FOOTER */
+  footer{background:#0d1020;padding:88px 64px 44px;border-top:1px solid rgba(232,82,26,0.08);}
+  .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;padding-bottom:56px;border-bottom:1px solid rgba(232,82,26,0.07);}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--ivory);letter-spacing:0.05em;margin-bottom:16px;display:block;}
+  .footer-tagline{font-size:var(--text-sm);line-height:1.85;color:rgba(245,242,236,0.32);font-weight:300;letter-spacing:0.04em;max-width:260px;}
+  .footer-address{font-size:var(--text-sm);line-height:2;color:rgba(245,242,236,0.2);font-weight:300;margin-top:24px;}
+  .footer-col-title{font-size:var(--text-xs);letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:20px;}
+  .footer-links{list-style:none;display:flex;flex-direction:column;gap:13px;}
+  .footer-links a{font-size:var(--text-sm);color:rgba(245,242,236,0.32);text-decoration:none;letter-spacing:0.04em;font-weight:300;transition:color 0.3s;cursor:none;}
+  .footer-links a:hover{color:var(--accent);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;}
+  .footer-copy{font-size:var(--text-sm);letter-spacing:0.1em;color:rgba(245,242,236,0.18);}
+  .footer-socials{display:flex;gap:24px;}
+  .footer-socials a{font-size:var(--text-sm);letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,242,236,0.25);text-decoration:none;transition:color 0.3s;cursor:none;}
+  .footer-socials a:hover{color:var(--accent);}
+
+  /* MARQUEE */
+  .marquee-wrap{background:var(--accent);overflow:hidden;padding:16px 0;}
+  .marquee-track{display:flex;white-space:nowrap;animation:marquee 24s linear infinite;}
+  .marquee-item{font-size:var(--text-sm);letter-spacing:0.25em;text-transform:uppercase;color:var(--ink);padding:0 36px;font-weight:700;}
+
+  /* ============ HOME HERO ============ */
+  .hero{height:100vh;background:var(--slate);position:relative;overflow:hidden;display:flex;align-items:stretch;}
+  .hero-photo-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1800&q=85') center/cover no-repeat;opacity:0.35;z-index:0;}
+  #heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;mix-blend-mode:screen;}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(22,33,62,0.72) 0%,rgba(26,26,46,0.55) 55%,rgba(22,33,62,0.68) 100%);z-index:2;}
+  .hero-grid-line{position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(232,82,26,0.08);z-index:3;}
+  .hero-content{position:relative;z-index:4;display:grid;grid-template-columns:1.1fr 0.9fr;width:100%;align-items:center;}
+  .hero-left{padding:100px 64px 80px;display:flex;flex-direction:column;justify-content:flex-end;height:100%;}
+  .hero-eyebrow{font-size:var(--text-xs);letter-spacing:0.45em;text-transform:uppercase;color:var(--accent);margin-bottom:32px;font-weight:700;opacity:0;animation:fadeUp 0.9s ease 0.2s forwards;display:flex;align-items:center;gap:16px;}
+  .hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--accent);}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,7vw,100px);font-weight:300;line-height:0.96;color:var(--ivory);opacity:0;animation:fadeUp 1s ease 0.4s forwards;}
+  .hero-title em{font-style:italic;color:var(--accent-light);display:block;}
+  .hero-title strong{font-weight:600;display:block;}
+  .hero-rule{width:0;height:2px;background:var(--accent);margin:36px 0;opacity:0;animation:expandRule 0.8s ease 0.9s forwards;}
+  .hero-sub{font-size:var(--text-lg);line-height:1.75;letter-spacing:0.02em;color:rgba(245,242,236,0.6);max-width:440px;font-weight:300;opacity:0;animation:fadeUp 1s ease 1s forwards;}
+  .hero-cta-group{display:flex;gap:24px;align-items:center;margin-top:48px;opacity:0;animation:fadeUp 1s ease 1.2s forwards;}
+  .btn-ghost{font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,242,236,0.65);text-decoration:none;font-weight:500;transition:color 0.3s;display:flex;align-items:center;gap:12px;cursor:none;}
+  .btn-ghost::after{content:'→';font-size:16px;transition:transform 0.3s;}
+  .btn-ghost:hover{color:var(--accent);}
+  .btn-ghost:hover::after{transform:translateX(6px);}
+  .hero-right{border-left:1px solid rgba(232,82,26,0.1);display:flex;flex-direction:column;justify-content:center;align-items:flex-end;padding:0 64px;gap:0;}
+  .hero-stat-block{display:flex;flex-direction:column;gap:0;opacity:0;animation:fadeIn 1.2s ease 1.4s forwards;width:100%;}
+  .hero-stat{padding:36px 0;border-bottom:1px solid rgba(232,82,26,0.08);display:flex;flex-direction:column;align-items:flex-end;}
+  .hero-stat:last-child{border-bottom:none;}
+  .hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;color:var(--ivory);line-height:0.9;}
+  .hero-stat-num span{color:var(--accent);font-size:32px;}
+  .hero-stat-label{font-size:var(--text-sm);letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,242,236,0.3);margin-top:8px;font-weight:400;}
+  .hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:fadeIn 1s ease 2s forwards;}
+  .hero-scroll span{font-size:var(--text-xs);letter-spacing:0.35em;text-transform:uppercase;color:rgba(245,242,236,0.3);font-weight:500;}
+  .scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollPulse 2s ease infinite;}
+
+  /* TICKER BAND */
+  .ticker-band{background:var(--ink);padding:18px 0;border-top:2px solid var(--accent);}
+  .ticker-track{display:flex;white-space:nowrap;animation:marquee 30s linear infinite;}
+  .ticker-item{font-size:var(--text-sm);letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,242,236,0.35);padding:0 40px;font-weight:400;display:flex;align-items:center;gap:16px;}
+  .ticker-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;flex-shrink:0;}
+
+  /* HOME INTRO */
+  .intro{display:grid;grid-template-columns:1fr 2.5fr;padding:120px 64px;border-bottom:1px solid var(--rule);background:var(--ivory);gap:80px;}
+  .intro-label{font-size:var(--text-xs);letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);font-weight:700;padding-top:8px;}
+  .intro-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.8vw,54px);font-weight:300;line-height:1.12;color:var(--ink);margin-bottom:32px;}
+  .intro-headline em{font-style:italic;color:var(--accent);}
+  .intro-body{font-size:var(--text-base);line-height:2;color:var(--mid);max-width:580px;font-weight:300;letter-spacing:0.02em;}
+  .intro-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:60px;background:var(--rule);}
+  .intro-stat{background:var(--ivory);padding:36px 28px;text-align:left;}
+  .intro-fact-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--ink);line-height:1;}
+  .intro-fact-num em{color:var(--accent);font-style:normal;font-size:24px;}
+  .intro-fact-label{font-size:var(--text-sm);letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);margin-top:8px;font-weight:400;}
+
+  /* SLIDESHOW */
+  .slideshow{position:relative;height:480px;overflow:hidden;background:var(--ink);}
+  .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;z-index:0;}
+  .slide.active{opacity:1;z-index:1;}
+  .slide img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.05);transition:transform 8s ease;}
+  .slide.active img{transform:scale(1);}
+  .slide-caption{position:absolute;bottom:0;left:0;right:0;padding:28px 48px;background:linear-gradient(to top,rgba(26,26,46,0.85) 0%,transparent 100%);display:flex;justify-content:space-between;align-items:flex-end;z-index:2;}
+  .slide-caption-label{font-size:var(--text-sm);letter-spacing:0.25em;text-transform:uppercase;color:rgba(245,242,236,0.8);font-weight:600;}
+  .slide-caption-counter{font-family:'Cormorant Garamond',serif;font-size:20px;color:rgba(245,242,236,0.35);font-style:italic;}
+  .slide-dots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:3;}
+  .slide-dot{width:28px;height:2px;background:rgba(245,242,236,0.25);transition:background 0.4s,width 0.4s;cursor:none;}
+  .slide-dot.active{background:var(--accent);width:48px;}
+  .slide-prev,.slide-next{position:absolute;top:50%;transform:translateY(-50%);z-index:3;background:rgba(26,26,46,0.35);border:1px solid rgba(232,82,26,0.3);color:var(--accent);width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:none;transition:all 0.3s;font-size:18px;backdrop-filter:blur(4px);}
+  .slide-prev{left:24px;}
+  .slide-next{right:24px;}
+  .slide-prev:hover,.slide-next:hover{background:var(--accent);color:var(--ivory);}
+
+  /* SERVICES */
+  .services-section{background:var(--slate);padding:110px 64px;position:relative;overflow:hidden;}
+  .services-section::before{content:'SERVICES';position:absolute;font-family:'Cormorant Garamond',serif;font-size:200px;font-weight:300;color:rgba(255,255,255,0.018);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;letter-spacing:0.1em;}
+  .home-section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;}
+  .home-section-count{font-family:'Cormorant Garamond',serif;font-size:110px;font-weight:300;color:rgba(232,82,26,0.08);line-height:1;}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(232,82,26,0.1);}
+  .service-card{background:var(--slate);padding:52px 36px;position:relative;overflow:hidden;transition:background 0.4s;cursor:none;}
+  .service-card:hover{background:#0c1628;}
+  .service-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--accent);transition:width 0.45s;}
+  .service-card:hover::after{width:100%;}
+  .service-card-inner{position:relative;z-index:1;}
+  .service-num{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--accent);margin-bottom:28px;letter-spacing:0.12em;}
+  .service-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--ivory);margin-bottom:14px;line-height:1.2;}
+  .service-desc{font-size:var(--text-base);line-height:1.85;color:rgba(245,242,236,0.42);font-weight:300;}
+  .service-arrow{display:inline-flex;align-items:center;gap:10px;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-top:28px;font-weight:600;opacity:0;transform:translateX(-10px);transition:all 0.3s;text-decoration:none;cursor:none;}
+  .service-card:hover .service-arrow{opacity:1;transform:translateX(0);}
+
+  /* WHY US */
+  .why-section{display:grid;grid-template-columns:1fr 1fr;min-height:75vh;}
+  .why-visual{background:url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1000&q=85') center/cover no-repeat;position:relative;}
+  .why-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,26,46,0.15),transparent);}
+  .why-visual-badge{position:absolute;bottom:40px;left:40px;z-index:1;background:var(--accent);color:var(--ivory);padding:20px 28px;}
+  .why-visual-badge-text{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;font-style:italic;line-height:1.2;}
+  .why-visual-badge-sub{font-size:var(--text-xs);letter-spacing:0.2em;text-transform:uppercase;font-weight:600;opacity:0.8;margin-top:6px;}
+  .why-content{background:var(--warm);padding:96px 80px;display:flex;flex-direction:column;justify-content:center;}
+  .why-list{list-style:none;margin-top:40px;display:flex;flex-direction:column;gap:0;}
+  .why-item{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:28px 0;border-bottom:1px solid rgba(26,26,46,0.08);}
+  .why-item:last-child{border-bottom:none;}
+  .why-item-num{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--accent);line-height:1.3;font-style:italic;}
+  .why-item-title{font-size:var(--text-sm);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:var(--ink);margin-bottom:6px;}
+  .why-item-desc{font-size:var(--text-base);line-height:1.85;color:var(--mid);font-weight:300;}
+
+  /* TESTIMONIAL */
+  .testimonial{background:linear-gradient(rgba(22,33,62,0.95),rgba(22,33,62,0.95)),url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80') center/cover no-repeat;padding:130px 64px;position:relative;overflow:hidden;}
+  .testimonial-inner{max-width:860px;margin:0 auto;text-align:center;}
+  .testimonial-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.2vw,44px);font-weight:300;font-style:italic;color:var(--ivory);line-height:1.55;}
+  .testimonial-rule{width:40px;height:2px;background:var(--accent);margin:40px auto;}
+  .testimonial-author{font-size:var(--text-sm);letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+  .testimonial-role{font-size:var(--text-sm);color:rgba(245,242,236,0.3);margin-top:6px;font-weight:300;}
+  .testimonial-deco{position:absolute;font-family:'Cormorant Garamond',serif;font-size:280px;color:rgba(232,82,26,0.04);top:-60px;left:-20px;line-height:1;pointer-events:none;}
+
+  /* PROCESS */
+  .process{padding:110px 64px;border-bottom:1px solid var(--rule);}
+  .process-grid{display:grid;grid-template-columns:1fr 1fr;gap:88px;margin-top:60px;align-items:start;}
+  .process-steps{display:flex;flex-direction:column;}
+  .process-step{display:grid;grid-template-columns:72px 1fr;gap:20px;padding:36px 0;border-bottom:1px solid var(--rule);}
+  .process-step:last-child{border-bottom:none;}
+  .process-step-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--accent);opacity:0.4;line-height:1;}
+  .process-step-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:8px;}
+  .process-step-desc{font-size:var(--text-base);line-height:1.85;color:var(--mid);font-weight:300;}
+  .process-visual{position:sticky;top:100px;}
+  .process-img{width:100%;aspect-ratio:3/4;background:url('https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=85') center/cover no-repeat;}
+  .process-img-caption{margin-top:20px;display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--rule);}
+  .process-img-caption span{font-size:var(--text-sm);letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);}
+  .process-img-caption em{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;color:var(--accent);}
+
+  /* LANGUAGES BAND */
+  .languages{background:var(--accent);padding:56px 64px;display:flex;justify-content:space-between;align-items:center;}
+  .lang-label{font-size:var(--text-sm);letter-spacing:0.25em;text-transform:uppercase;color:var(--ink);font-weight:700;opacity:0.6;}
+  .lang-list{display:flex;gap:56px;}
+  .lang-item{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--ink);}
+
+  /* CONTACT */
+  .cta-section{background:linear-gradient(rgba(26,26,46,0.95),rgba(26,26,46,0.95)),url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600&q=80') center/cover no-repeat fixed;padding:120px 64px;display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center;}
+  .cta-form{display:flex;flex-direction:column;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-bottom:1px;}
+  .form-field{margin-bottom:1px;}
+  .form-field input,.form-field select,.form-field textarea{width:100%;background:rgba(255,255,255,0.04);border:none;border-bottom:1px solid rgba(232,82,26,0.2);padding:20px 0;font-family:'Montserrat',sans-serif;font-size:var(--text-base);letter-spacing:0.06em;color:var(--ivory);outline:none;transition:border-color 0.3s;cursor:none;}
+  .form-field select{appearance:none;}
+  .form-field select option{background:var(--slate);color:var(--ivory);}
+  .form-field textarea{resize:none;height:80px;}
+  .form-field input::placeholder,.form-field textarea::placeholder{color:rgba(245,242,236,0.22);font-size:var(--text-sm);letter-spacing:0.15em;text-transform:uppercase;}
+  .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-bottom-color:var(--accent);}
+  .form-submit{margin-top:36px;display:flex;justify-content:space-between;align-items:center;}
+  .form-note{font-size:var(--text-sm);letter-spacing:0.08em;color:rgba(245,242,236,0.2);text-transform:uppercase;}
+  .btn-submit{font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;background:transparent;border:1.5px solid var(--accent);color:var(--accent);padding:16px 36px;cursor:none;font-family:'Montserrat',sans-serif;font-weight:700;transition:all 0.3s;}
+  .btn-submit:hover{background:var(--accent);color:var(--ivory);}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.75s ease,transform 0.75s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .reveal-delay-1{transition-delay:0.12s;}
+  .reveal-delay-2{transition-delay:0.24s;}
+  .reveal-delay-3{transition-delay:0.36s;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  @keyframes expandRule{from{opacity:0;width:0;}to{opacity:1;width:56px;}}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @keyframes scrollPulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
+  @keyframes floatUp{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+
+  /* ============ MOBILE NAV HAMBURGER ============ */
+  .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:none;padding:4px;background:none;border:none;}
+  .nav-hamburger span{display:block;width:24px;height:2px;background:var(--ivory);transition:all 0.3s;}
+  nav.scrolled .nav-hamburger span{background:var(--ink);}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-hamburger.open span:nth-child(2){opacity:0;}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-nav-overlay{display:none;position:fixed;inset:0;background:var(--slate);z-index:99;flex-direction:column;padding:100px 36px 48px;overflow-y:auto;}
+  .mobile-nav-overlay.open{display:flex;}
+  .mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:0;}
+  .mobile-nav-links > li > a{display:block;font-size:28px;font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--ivory);padding:18px 0;border-bottom:1px solid rgba(232,82,26,0.12);text-decoration:none;letter-spacing:0.02em;}
+  .mobile-nav-links > li > a:hover{color:var(--accent);}
+  .mobile-nav-submenu{display:flex;flex-direction:column;gap:0;padding-left:16px;}
+  .mobile-nav-submenu a{display:block;font-size:15px;color:rgba(245,242,236,0.55);padding:12px 0;border-bottom:1px solid rgba(232,82,26,0.06);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;font-weight:400;}
+  .mobile-nav-submenu a:hover{color:var(--accent);}
+  .mobile-nav-cta{margin-top:36px;}
+
+  /* ============ TABLET — 1024px ============ */
+  @media (max-width:1024px){
+    nav{padding:22px 36px;}
+    nav.scrolled{padding:16px 36px;}
+
+    .hero-content{grid-template-columns:1fr;}
+    .hero-right{display:none;}
+    .hero-grid-line{display:none;}
+    .hero-left{padding:100px 36px 72px;}
+    .hero-title{font-size:clamp(48px,7vw,80px);}
+
+    .intro{grid-template-columns:1fr;padding:80px 36px;gap:32px;}
+    .intro-stats{grid-template-columns:repeat(2,1fr);}
+
+    .services-section{padding:80px 36px;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+
+    .why-section{grid-template-columns:1fr;}
+    .why-visual{height:320px;min-height:unset;}
+    .why-content{padding:64px 36px;}
+
+    .two-col{grid-template-columns:1fr;gap:40px;}
+    .two-col-img{max-height:320px;}
+
+    .packages-section{padding:80px 36px;}
+    .packages-grid-3{grid-template-columns:1fr 1fr;}
+
+    .benefits-grid{grid-template-columns:1fr 1fr;}
+
+    .process{padding:80px 36px;}
+    .process-grid{grid-template-columns:1fr;gap:0;}
+    .process-visual{display:none;}
+
+    .testimonial{padding:88px 36px;}
+
+    .languages{padding:40px 36px;flex-direction:column;gap:20px;text-align:center;}
+    .lang-list{gap:32px;}
+
+    .cta-section{grid-template-columns:1fr;gap:48px;padding:80px 36px;}
+
+    .cta-band{padding:60px 36px;flex-direction:column;text-align:center;gap:28px;}
+
+    .blog-grid{grid-template-columns:1fr 1fr;gap:32px;}
+
+    footer{padding:64px 36px 36px;}
+    .footer-top{grid-template-columns:1fr 1fr;gap:40px;}
+
+    .section-pad{padding:80px 36px;}
+    .page-hero{padding:100px 36px 56px;}
+
+    .slideshow{height:380px;}
+    .steps-list{margin-top:40px;}
+  }
+
+  /* ============ MOBILE — 768px ============ */
+  @media (max-width:768px){
+    body{cursor:auto;}
+    .cursor,.cursor-ring{display:none;}
+
+    nav{padding:18px 20px;}
+    nav.scrolled{padding:14px 20px;}
+    .nav-links{display:none;}
+    .nav-hamburger{display:flex;}
+    .nav-logo svg{height:38px;}
+
+    .hero{height:100svh;}
+    .hero-left{padding:80px 20px 60px;}
+    .hero-eyebrow{font-size:10px;letter-spacing:0.3em;margin-bottom:20px;}
+    .hero-title{font-size:clamp(40px,10vw,64px);line-height:1.0;}
+    .hero-rule{margin:22px 0;}
+    .hero-sub{font-size:14px;max-width:100%;}
+    .hero-cta-group{flex-direction:column;align-items:flex-start;gap:16px;margin-top:32px;}
+    .btn-primary{padding:16px 28px;font-size:12px;width:100%;text-align:center;}
+    .btn-ghost{font-size:12px;}
+
+    .ticker-band{padding:12px 0;}
+    .ticker-item{font-size:11px;padding:0 24px;}
+
+    .intro{padding:56px 20px;gap:24px;}
+    .intro-label{font-size:10px;}
+    .intro-headline{font-size:clamp(28px,7vw,40px);}
+    .intro-body{font-size:14px;}
+    .intro-stats{grid-template-columns:1fr 1fr;}
+    .intro-stat{padding:24px 16px;}
+    .intro-fact-num{font-size:40px;}
+
+    .slideshow{height:260px;}
+    .slide-caption{padding:16px 20px;}
+    .slide-caption-label{font-size:11px;}
+    .slide-caption-counter{display:none;}
+    .slide-prev,.slide-next{width:36px;height:36px;font-size:14px;}
+
+    .services-section{padding:56px 20px;}
+    .services-grid{grid-template-columns:1fr;}
+    .service-card{padding:36px 24px;}
+    .home-section-header{flex-direction:column;align-items:flex-start;gap:0;margin-bottom:36px;}
+    .home-section-count{font-size:64px;}
+    .service-arrow{opacity:1;transform:none;}
+
+    .why-section{grid-template-columns:1fr;}
+    .why-visual{height:220px;}
+    .why-visual-badge{bottom:20px;left:20px;padding:14px 18px;}
+    .why-visual-badge-text{font-size:20px;}
+    .why-content{padding:48px 20px;}
+    .why-item{grid-template-columns:40px 1fr;gap:12px;padding:20px 0;}
+    .why-item-desc{font-size:14px;}
+
+    .testimonial{padding:64px 20px;}
+    .testimonial-quote{font-size:clamp(20px,5vw,28px);}
+    .testimonial-deco{font-size:160px;top:-20px;left:-10px;}
+
+    .process{padding:56px 20px;}
+    .process-step{grid-template-columns:48px 1fr;gap:14px;padding:24px 0;}
+    .process-step-num{font-size:28px;}
+    .process-step-title{font-size:17px;}
+    .process-step-desc{font-size:14px;}
+
+    .languages{padding:32px 20px;flex-direction:column;gap:16px;text-align:center;}
+    .lang-list{gap:24px;}
+    .lang-item{font-size:26px;}
+    .lang-label{font-size:11px;}
+
+    .cta-section{padding:56px 20px;grid-template-columns:1fr;gap:40px;}
+    .cta-section h2{font-size:clamp(32px,8vw,44px);}
+    .form-row{grid-template-columns:1fr;}
+    .form-submit{flex-direction:column;align-items:flex-start;gap:16px;}
+    .btn-submit{width:100%;text-align:center;padding:16px;}
+
+    .cta-band{padding:48px 20px;flex-direction:column;text-align:center;gap:24px;}
+    .cta-band h2{font-size:clamp(28px,7vw,40px);}
+
+    .two-col{grid-template-columns:1fr;gap:32px;}
+    .two-col-img{max-height:240px;}
+
+    .benefits-grid{grid-template-columns:1fr;}
+    .benefit-card{padding:28px 20px;}
+    .benefit-title{font-size:12px;}
+    .benefit-desc{font-size:14px;}
+
+    .packages-section{padding:56px 20px;}
+    .packages-grid-3{grid-template-columns:1fr;}
+    .package-card{padding:36px 24px;}
+
+    .steps-list{margin-top:32px;}
+    .step-item{grid-template-columns:48px 1fr;gap:14px;padding:24px 0;}
+    .step-num{font-size:28px;}
+    .step-title{font-size:12px;}
+    .step-desc{font-size:14px;}
+
+    .faq-question h3{font-size:14px;}
+    .faq-answer-inner{font-size:14px;}
+
+    .blog-grid{grid-template-columns:1fr;gap:40px;}
+    .blog-title{font-size:22px;}
+
+    footer{padding:48px 20px 28px;}
+    .footer-top{grid-template-columns:1fr;gap:36px;}
+    .footer-tagline{max-width:100%;}
+    .footer-bottom{flex-direction:column;gap:16px;text-align:center;}
+
+    .section-pad{padding:56px 20px;}
+    .page-hero{padding:90px 20px 44px;min-height:340px;}
+    .page-hero h1{font-size:clamp(34px,8vw,52px);}
+    .page-hero-sub{font-size:14px;}
+    .back-link{font-size:12px;margin-bottom:32px;}
+
+    .eyebrow{font-size:10px;}
+    .section-h2{font-size:clamp(28px,7vw,42px);}
+    .body-text{font-size:14px;}
+  }
+
+  /* ============ SMALL PHONES — 400px ============ */
+  @media (max-width:400px){
+    .hero-title{font-size:clamp(36px,10vw,52px);}
+    .intro-stats{grid-template-columns:1fr 1fr;}
+    .packages-grid-3{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo" onclick="showPage('home');return false;">
+    <svg viewBox="0 0 220 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect class="logo-bar" x="0" y="6" width="4" height="36" rx="2" fill="#e8521a"/>
+      <text class="logo-text-path" x="18" y="35" font-family="'Montserrat', sans-serif" font-size="22" font-weight="600" letter-spacing="-0.5" fill="#faf9f7">smart kteam</text>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <a href="#" onclick="return false;">Services ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="#" onclick="showPage('gbp');return false;">Google Business Profile</a>
+        <a href="#" onclick="showPage('website');return false;">Website Design</a>
+        <a href="#" onclick="showPage('seo');return false;">SEO</a>
+        <a href="#" onclick="showPage('booking');return false;">Booking &amp; Payment</a>
+        <a href="#" onclick="showPage('ads');return false;">Google Ads</a>
+      </div>
+    </li>
+    <li><a href="#" onclick="showPage('home');scrollAfter('about');return false;">About</a></li>
+    <li><a href="#" onclick="showPage('blog');return false;">Blog</a></li>
+    <li><a href="#" onclick="showPage('qa');return false;">Q&amp;A</a></li>
+    <li><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="nav-cta">Free Consultation</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="mobile-nav-overlay" id="mobileNav">
+  <ul class="mobile-nav-links">
+    <li>
+      <a href="#" onclick="return false;" style="color:var(--accent);">Services</a>
+      <div class="mobile-nav-submenu">
+        <a href="#" onclick="closeMobileNav();showPage('gbp');return false;">Google Business Profile</a>
+        <a href="#" onclick="closeMobileNav();showPage('website');return false;">Website Design</a>
+        <a href="#" onclick="closeMobileNav();showPage('seo');return false;">SEO</a>
+        <a href="#" onclick="closeMobileNav();showPage('booking');return false;">Booking &amp; Payment</a>
+        <a href="#" onclick="closeMobileNav();showPage('ads');return false;">Google Ads</a>
+      </div>
+    </li>
+    <li><a href="#" onclick="closeMobileNav();showPage('home');scrollAfter('about');return false;">About</a></li>
+    <li><a href="#" onclick="closeMobileNav();showPage('blog');return false;">Blog</a></li>
+    <li><a href="#" onclick="closeMobileNav();showPage('qa');return false;">Q&amp;A</a></li>
+  </ul>
+  <div class="mobile-nav-cta">
+    <a href="#" onclick="closeMobileNav();showPage('home');scrollAfter('contact');return false;" class="btn-primary" style="display:block;text-align:center;">Free Consultation</a>
+  </div>
+</div>
+
+<!-- ====== HOME ====== -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-photo-bg"></div>
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-grid-line"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Seattle · Bellevue · Pacific Northwest</div>
+        <h1 class="hero-title">
+          Digital Growth<br>
+          <em>Engineered</em>
+          <strong>for the Bold.</strong>
+        </h1>
+        <div class="hero-rule"></div>
+        <p class="hero-sub">We turn small businesses into digital powerhouses — with AI-powered websites, SEO, and systems that work while you sleep.</p>
+        <div class="hero-cta-group">
+          <a href="#" onclick="scrollAfter('contact');return false;" class="btn-primary">Start the Conversation</a>
+          <a href="#" onclick="scrollAfter('services');return false;" class="btn-ghost">Explore Services</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-stat-block">
+          <div class="hero-stat">
+            <div class="hero-stat-num">450<span>+</span></div>
+            <div class="hero-stat-label">Satisfied Clients</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">250<span>+</span></div>
+            <div class="hero-stat-label">Websites Delivered</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">3<span>×</span></div>
+            <div class="hero-stat-label">Languages Served</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-band">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ticker-dot"></span>Website Design</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>SEO Ranking</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Google Business Profile</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Booking Systems</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Payment Integration</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Google Ads</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Bellevue · Seattle</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>English · Español · 中文</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Website Design</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>SEO Ranking</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Google Business Profile</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Booking Systems</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Payment Integration</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Google Ads</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Bellevue · Seattle</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>English · Español · 中文</span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro" id="about">
+    <div class="intro-label reveal">Our Philosophy</div>
+    <div>
+      <h2 class="intro-headline reveal">We don't just build websites.<br>We build <em>competitive advantages.</em></h2>
+      <p class="intro-body reveal reveal-delay-1">Smart KTeam was founded in Bellevue — a city defined by ambition and innovation. We work exclusively with small businesses who refuse to be invisible, delivering the kind of digital presence once reserved for enterprise brands. Every pixel, every keyword, every system we build is engineered with one goal: your growth.</p>
+      <div class="intro-stats reveal reveal-delay-2">
+        <div class="intro-stat"><div class="intro-fact-num">450<em>+</em></div><div class="intro-fact-label">Satisfied Clients</div></div>
+        <div class="intro-stat"><div class="intro-fact-num">250<em>+</em></div><div class="intro-fact-label">Websites Built</div></div>
+        <div class="intro-stat"><div class="intro-fact-num">300<em>+</em></div><div class="intro-fact-label">Campaigns Run</div></div>
+        <div class="intro-stat"><div class="intro-fact-num">3<em>×</em></div><div class="intro-fact-label">Languages Served</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDESHOW -->
+  <div class="slideshow" id="mainSlideshow">
+    <div class="slide active">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=85" alt="Analytics Dashboard">
+      <div class="slide-caption"><span class="slide-caption-label">Data & Analytics</span><span class="slide-caption-counter">01 / 06</span></div>
+    </div>
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1600&q=85" alt="SEO Strategy">
+      <div class="slide-caption"><span class="slide-caption-label">SEO Strategy</span><span class="slide-caption-counter">02 / 06</span></div>
+    </div>
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1600&q=85" alt="Web Design">
+      <div class="slide-caption"><span class="slide-caption-label">Web Design</span><span class="slide-caption-counter">03 / 06</span></div>
+    </div>
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=1600&q=85" alt="Digital Campaigns">
+      <div class="slide-caption"><span class="slide-caption-label">Digital Campaigns</span><span class="slide-caption-counter">04 / 06</span></div>
+    </div>
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=85" alt="Booking & Payments">
+      <div class="slide-caption"><span class="slide-caption-label">Booking & Payments</span><span class="slide-caption-counter">05 / 06</span></div>
+    </div>
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600&q=85" alt="Local Business">
+      <div class="slide-caption"><span class="slide-caption-label">Local Business Growth</span><span class="slide-caption-counter">06 / 06</span></div>
+    </div>
+    <button class="slide-prev" onclick="slideMove(-1)">&#8592;</button>
+    <button class="slide-next" onclick="slideMove(1)">&#8594;</button>
+    <div class="slide-dots" id="slideDots"></div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services-section" id="services">
+    <div class="home-section-header">
+      <div>
+        <div class="eyebrow reveal">What We Do</div>
+        <h2 class="section-h2 section-h2-light reveal">Full-Spectrum<br><em>Digital Services</em></h2>
+      </div>
+      <div class="home-section-count reveal">05</div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-card-inner">
+          <div class="service-num">01</div>
+          <h3 class="service-name">Google Business Profile</h3>
+          <p class="service-desc">Dominate local search. Daily posts, review management, and SEO to keep your listing ranking higher on Google Maps.</p>
+          <a href="#" onclick="showPage('gbp');return false;" class="service-arrow">Learn More →</a>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-card-inner">
+          <div class="service-num">02</div>
+          <h3 class="service-name">Website Design</h3>
+          <p class="service-desc">Modern, mobile-optimized websites that command attention and convert visitors into loyal, paying customers.</p>
+          <a href="#" onclick="showPage('website');return false;" class="service-arrow">Learn More →</a>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-card-inner">
+          <div class="service-num">03</div>
+          <h3 class="service-name">SEO &amp; Search Ranking</h3>
+          <p class="service-desc">Strategic SEO that puts your business on page one. Local, high-intent, ready-to-buy customers find you first.</p>
+          <a href="#" onclick="showPage('seo');return false;" class="service-arrow">Learn More →</a>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-card-inner">
+          <div class="service-num">04</div>
+          <h3 class="service-name">Booking &amp; Payment Systems</h3>
+          <p class="service-desc">Seamless 24/7 scheduling and secure payments. Let customers book and pay while you focus on delivering.</p>
+          <a href="#" onclick="showPage('booking');return false;" class="service-arrow">Learn More →</a>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-card-inner">
+          <div class="service-num">05</div>
+          <h3 class="service-name">Google Ads Management</h3>
+          <p class="service-desc">Data-driven paid campaigns that maximize ROI and deliver qualified leads from day one.</p>
+          <a href="#" onclick="showPage('ads');return false;" class="service-arrow">Learn More →</a>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-2" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:rgba(232,82,26,0.06);">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:rgba(245,242,236,0.38);margin-bottom:24px;font-style:italic;">Not sure where to start?</div>
+        <a href="#" onclick="scrollAfter('contact');return false;" class="btn-primary">Free Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why-section">
+    <div class="why-visual">
+      <div class="why-visual-badge">
+        <div class="why-visual-badge-text">Local. Personal.<br>Powerful.</div>
+        <div class="why-visual-badge-sub">Bellevue, WA</div>
+      </div>
+    </div>
+    <div class="why-content">
+      <div class="eyebrow reveal">Why Smart KTeam</div>
+      <h2 class="section-h2 reveal">Built for<br><em>Small Business.</em><br>Think Big.</h2>
+      <ul class="why-list">
+        <li class="why-item reveal reveal-delay-1">
+          <div class="why-item-num">I</div>
+          <div>
+            <div class="why-item-title">Local Presence, Personal Touch</div>
+            <div class="why-item-desc">Based in Bellevue, we visit clients in person across the Seattle metro. Real relationships, not remote tickets.</div>
+          </div>
+        </li>
+        <li class="why-item reveal reveal-delay-2">
+          <div class="why-item-num">II</div>
+          <div>
+            <div class="why-item-title">Multilingual Capability</div>
+            <div class="why-item-desc">We serve clients in English, Spanish, and Chinese — opening doors to Seattle's diverse business community.</div>
+          </div>
+        </li>
+        <li class="why-item reveal reveal-delay-3">
+          <div class="why-item-num">III</div>
+          <div>
+            <div class="why-item-title">Results-First Approach</div>
+            <div class="why-item-desc">Every decision is tied to measurable outcomes: calls, bookings, rankings, and revenue.</div>
+          </div>
+        </li>
+        <li class="why-item reveal">
+          <div class="why-item-num">IV</div>
+          <div>
+            <div class="why-item-title">AI-Powered Efficiency</div>
+            <div class="why-item-desc">We leverage cutting-edge AI to deliver enterprise-quality work at small business prices.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="testimonial">
+    <div class="testimonial-deco">"</div>
+    <div class="testimonial-inner">
+      <p class="testimonial-quote reveal">"Smart KTeam transformed our online presence completely. Within three months, our Google ranking went from invisible to the top of local search. Our booking calendar has never been fuller."</p>
+      <div class="testimonial-rule reveal"></div>
+      <div class="testimonial-author reveal">Maria Chen</div>
+      <div class="testimonial-role reveal">Owner — Ocean Relax Center, Seattle</div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process">
+    <div class="eyebrow reveal">How We Work</div>
+    <h2 class="section-h2 reveal">A Refined <em>Four-Step</em> Process</h2>
+    <div class="process-grid">
+      <div class="process-steps">
+        <div class="process-step reveal"><div class="process-step-num">01</div><div><div class="process-step-title">Discovery Consultation</div><div class="process-step-desc">We meet — in person or virtually — to understand your business, your goals, and the gaps in your current digital presence.</div></div></div>
+        <div class="process-step reveal reveal-delay-1"><div class="process-step-num">02</div><div><div class="process-step-title">Custom Strategy</div><div class="process-step-desc">We craft a tailored digital roadmap specific to your industry, location, and competitive landscape. No cookie-cutter packages.</div></div></div>
+        <div class="process-step reveal reveal-delay-2"><div class="process-step-num">03</div><div><div class="process-step-title">Execution &amp; Launch</div><div class="process-step-desc">Our team builds, configures, and launches with precision. Everything works on day one.</div></div></div>
+        <div class="process-step reveal reveal-delay-3"><div class="process-step-num">04</div><div><div class="process-step-title">Growth &amp; Optimization</div><div class="process-step-desc">We monitor performance, refine campaigns, and visit clients regularly to ensure results compound over time.</div></div></div>
+      </div>
+      <div class="process-visual reveal reveal-delay-2">
+        <div class="process-img"></div>
+        <div class="process-img-caption"><span>Bellevue, Washington</span><em>Est. 2023</em></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGES -->
+  <div class="languages">
+    <div class="lang-label">We Speak Your Language</div>
+    <div class="lang-list">
+      <div class="lang-item">English</div>
+      <div class="lang-item">Español</div>
+      <div class="lang-item">中文</div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section class="cta-section" id="contact">
+    <div>
+      <div class="eyebrow reveal">Start Today</div>
+      <h2 class="section-h2 section-h2-light reveal">Your Free<br><em>Consultation</em><br>Awaits</h2>
+      <p class="body-text reveal" style="color:rgba(245,242,236,0.45);margin-top:20px;font-size:var(--text-base);">Tell us about your business. We'll tell you exactly what's holding you back online — and how to fix it. No pressure. No obligation.</p>
+    </div>
+    <div class="cta-form reveal">
+      <div class="form-row">
+        <div class="form-field"><input type="text" placeholder="First Name"></div>
+        <div class="form-field"><input type="text" placeholder="Last Name"></div>
+      </div>
+      <div class="form-field"><input type="text" placeholder="Business Name"></div>
+      <div class="form-field"><input type="email" placeholder="Email Address"></div>
+      <div class="form-field">
+        <select>
+          <option value="" disabled selected>Service of Interest</option>
+          <option>Website Design</option>
+          <option>SEO Ranking</option>
+          <option>Google Business Profile</option>
+          <option>Booking &amp; Payment System</option>
+          <option>Google Ads</option>
+          <option>Full Package</option>
+        </select>
+      </div>
+      <div class="form-field"><textarea placeholder="Tell us about your business..."></textarea></div>
+      <div class="form-submit">
+        <span class="form-note">Response within 24 hours</span>
+        <button class="btn-submit">Send Message</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====== GBP ====== -->
+<div class="page" id="page-gbp">
+  <div class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=1400&q=85')"></div><div class="page-hero-content"><div class="page-hero-eyebrow">Services</div><h1>Google Business<br><em>Profile Management</em></h1><p class="page-hero-sub">Get noticed on Google Search and Maps. We optimize, manage, and grow your local presence so customers find you first.</p></div></div>
+  <section class="section-pad">
+    <a href="#" onclick="showPage('home');return false;" class="back-link">Back to Home</a>
+    <div class="two-col">
+      <div><div class="eyebrow">What We Do</div><h2 class="section-h2">Stand Out in <em>Local Search</em></h2><p class="body-text">We help your business set up and optimize your Google Business Profile, ensuring your company stands out on Google Search and Maps. Our services include regular profile updates, responding to customer reviews, and applying SEO strategies to improve your ranking — making it easier for customers to find, trust, and connect with you.</p><p class="body-text" style="margin-top:16px;">Regular posting shows Google that your business is active and trustworthy — two key factors for higher local rankings. Well-written posts with local keywords reinforce your relevance and drive customers to call, book, or visit.</p></div>
+      <img src="https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=700&q=85" alt="GBP" class="two-col-img reveal">
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal"><div class="benefit-title">Increased Visibility</div><div class="benefit-desc">Show up in local search results and Google Maps when potential customers search for your services.</div></div>
+      <div class="benefit-card reveal reveal-delay-1"><div class="benefit-title">Boosted Credibility</div><div class="benefit-desc">Build trust with customer reviews, ratings, and complete, accurate business information.</div></div>
+      <div class="benefit-card reveal reveal-delay-2"><div class="benefit-title">More Customer Engagement</div><div class="benefit-desc">Enable direct calls, messages, and bookings straight from your Google listing.</div></div>
+      <div class="benefit-card reveal reveal-delay-3"><div class="benefit-title">SEO Advantage</div><div class="benefit-desc">Improve your ranking in local searches, driving more organic, zero-cost traffic to your business.</div></div>
+    </div>
+  </section>
+  <section class="packages-section">
+    <div class="eyebrow">Pricing</div><h2 class="section-h2 section-h2-light">Choose Your <em>Package</em></h2>
+    <div class="packages-grid packages-grid-3">
+      <div class="package-card reveal"><div class="pkg-name">Lite</div><div class="pkg-price">Basic Management</div><div class="pkg-rule"></div><ul class="pkg-features"><li>GBP Setup &amp; Maintenance</li><li>GBP SEO Optimization</li><li>3 Weekly Google Posts</li></ul><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="pkg-cta">Get Started</a></div>
+      <div class="package-card featured reveal reveal-delay-1"><div class="pkg-badge">Popular</div><div class="pkg-name">Standard</div><div class="pkg-price">Full Management</div><div class="pkg-rule"></div><ul class="pkg-features"><li>GBP Setup &amp; Maintenance</li><li>GBP SEO Optimization</li><li>Google Review Response</li><li>Frequent Photo Updates</li><li>Daily Google Posts</li></ul><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="pkg-cta">Get Started</a></div>
+      <div class="package-card reveal reveal-delay-2"><div class="pkg-name">Premium</div><div class="pkg-price">Full Social Suite</div><div class="pkg-rule"></div><ul class="pkg-features"><li>GBP Setup &amp; Maintenance</li><li>GBP SEO Optimization</li><li>Google Review Response</li><li>Frequent Photo Updates</li><li>Daily Google Posts</li><li>Daily Facebook Posts</li><li>Daily Instagram Posts</li></ul><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="pkg-cta">Get Started</a></div>
+    </div>
+  </section>
+  <div class="cta-band reveal"><h2>Ready to dominate <em>local search?</em></h2><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="btn-primary">Get Free Consultation</a></div>
+</div>
+
+<!-- ====== WEBSITE ====== -->
+<div class="page" id="page-website">
+  <div class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1400&q=85')"></div><div class="page-hero-content"><div class="page-hero-eyebrow">Services</div><h1>Website Design<br><em>&amp; Development</em></h1><p class="page-hero-sub">Your website is your first impression. Polished, fast, and built to guide visitors to take action — turning browsers into paying clients.</p></div></div>
+  <section class="section-pad">
+    <a href="#" onclick="showPage('home');return false;" class="back-link">Back to Home</a>
+    <div class="two-col">
+      <div><div class="eyebrow">Why It Matters</div><h2 class="section-h2">Your Digital <em>Storefront</em></h2><p class="body-text">In today's digital world, a professional website is the cornerstone of your online presence. A modern, well-designed website strengthens your brand and makes it easy for potential customers to find your services. With SEO optimization, your website ranks higher on Google, attracting more targeted traffic.</p><p class="body-text" style="margin-top:16px;">Your website can also support online bookings, secure payments, contact forms, and promotions — making it easy for customers to take action and boosting your conversion rates.</p></div>
+      <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=700&q=85" alt="Website Design" class="two-col-img reveal">
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal"><div class="benefit-title">Focus on Your Unique Business</div><div class="benefit-desc">We understand your business and highlight what makes it stand out, ensuring your site truly reflects your brand's value.</div></div>
+      <div class="benefit-card reveal reveal-delay-1"><div class="benefit-title">Custom-Built Design</div><div class="benefit-desc">Every website is tailor-made — no rigid templates — combining professionalism with a unique, personal touch.</div></div>
+      <div class="benefit-card reveal reveal-delay-2"><div class="benefit-title">Integrated Business Features</div><div class="benefit-desc">Seamlessly combine online booking, payments, gift cards, and social media in one efficient customer experience.</div></div>
+      <div class="benefit-card reveal reveal-delay-3"><div class="benefit-title">Expert Back-End Support</div><div class="benefit-desc">We handle SEO setup, speed optimization, and ongoing maintenance to consistently attract potential customers.</div></div>
+    </div>
+  </section>
+  <section class="packages-section">
+    <div class="eyebrow">Pricing</div><h2 class="section-h2 section-h2-light">Website <em>Packages</em></h2>
+    <p style="font-size:var(--text-sm);color:rgba(245,242,236,0.3);margin-top:8px;letter-spacing:0.04em;">Domain and hosting billed separately · Domain: from $15/yr · Hosting: from $17/mo</p>
+    <div class="packages-grid packages-grid-3">
+      <div class="package-card reveal"><div class="pkg-name">Start</div><div class="pkg-price">Essential Presence</div><div class="pkg-rule"></div><ul class="pkg-features"><li>Modern &amp; Responsive Design</li><li>Premium Theme Customization</li><li>3 Essential Pages</li><li>Content Integration</li><li>Cross-Device Compatibility</li><li>Fast Loading Speed</li><li>Extra pages: $100 each</li></ul><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="pkg-cta">Get Started</a></div>
+      <div class="package-card featured reveal reveal-delay-1"><div class="pkg-badge">Popular</div><div class="pkg-name">Plus</div><div class="pkg-price">Full Business Site</div><div class="pkg-rule"></div><ul class="pkg-features"><li>Modern &amp; Responsive Design</li><li>Premium Theme Customization</li><li>6 Essential Pages</li><li>Content Integration</li><li>Contact Form</li><li>Social Media Integration</li><li>Cross-Device Compatibility</li><li>Extra pages: $100 each</li></ul><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="pkg-cta">Get Started</a></div>
+      <div class="package-card reveal reveal-delay-2"><div class="pkg-name">Pro</div><div class="pkg-price">Complete Platform</div><div class="pkg-rule"></div><ul class="pkg-features"><li>Modern &amp; Responsive Design</li><li>Premium Theme Customization</li><li>10 Essential Pages</li><li>Content Integration</li><li>Contact Form</li><li>Social Media Integration</li><li>FAQ Section</li><li>Blog Integration</li><li>Extra pages: $100 each</li></ul><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="pkg-cta">Get Started</a></div>
+    </div>
+  </section>
+  <div class="cta-band reveal"><h2>Ready for a website that <em>works for you?</em></h2><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="btn-primary">Get Free Consultation</a></div>
+</div>
+
+<!-- ====== SEO ====== -->
+<div class="page" id="page-seo">
+  <div class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1571721795195-a2ca2d3370a9?w=1400&q=85')"></div><div class="page-hero-content"><div class="page-hero-eyebrow">Services</div><h1>SEO &amp; Search<br><em>Ranking</em></h1><p class="page-hero-sub">If your site isn't on page one, customers won't see it. Our SEO improves rankings, boosts visibility, and drives qualified traffic to grow your business.</p></div></div>
+  <section class="section-pad">
+    <a href="#" onclick="showPage('home');return false;" class="back-link">Back to Home</a>
+    <div class="two-col">
+      <div><div class="eyebrow">What is SEO?</div><h2 class="section-h2">Organic Growth <em>That Lasts</em></h2><p class="body-text">SEO (Search Engine Optimization) is a set of strategies that optimize your website's content, structure, and technical aspects to achieve higher rankings on Google and Bing. Unlike paid ads, SEO builds steady, lasting traffic at a lower long-term cost — and makes your brand look more trustworthy and professional.</p></div>
+      <img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=700&q=85" alt="SEO" class="two-col-img reveal">
+    </div>
+    <div class="steps-list">
+      <div class="step-item reveal"><div class="step-num">01</div><div><div class="step-title">On-Page SEO</div><div class="step-desc">Optimize keywords, page titles, headings, and content to improve search engine visibility and attract the right audience.</div></div></div>
+      <div class="step-item reveal reveal-delay-1"><div class="step-num">02</div><div><div class="step-title">Technical SEO</div><div class="step-desc">Enhance website speed, mobile responsiveness, structure, and security for both users and search engines.</div></div></div>
+      <div class="step-item reveal reveal-delay-2"><div class="step-num">03</div><div><div class="step-title">Content SEO</div><div class="step-desc">Create high-quality, engaging content that informs visitors and supports your overall SEO strategy.</div></div></div>
+      <div class="step-item reveal"><div class="step-num">04</div><div><div class="step-title">Off-Page SEO / Link Building</div><div class="step-desc">Build credible backlinks, manage online mentions, and improve domain authority across the web.</div></div></div>
+      <div class="step-item reveal reveal-delay-1"><div class="step-num">05</div><div><div class="step-title">Local SEO</div><div class="step-desc">Optimize your Google Business Profile, collect reviews, and manage local listings so nearby customers find you easily.</div></div></div>
+    </div>
+  </section>
+  <section class="packages-section">
+    <div class="eyebrow">Pricing</div><h2 class="section-h2 section-h2-light">SEO <em>Packages</em></h2>
+    <p style="font-size:var(--text-sm);color:rgba(245,242,236,0.3);margin-top:8px;letter-spacing:0.04em;">6-Month subscription — special pricing</p>
+    <div class="packages-grid packages-grid-3">
+      <div class="package-card reveal"><div class="pkg-name">Silver</div><div class="pkg-price">$399 / 6 months</div><div class="pkg-rule"></div><ul class="pkg-features"><li>2 Competitor Analysis</li><li>Keyword Research</li><li>Page Speed Optimization (up to 10)</li><li>Google Analytics Setup</li><li>Google Search Console</li><li>Meta Data Optimization</li><li>GBP Optimization</li><li>700 Multi-Tier Backlinks</li></ul><a href="https://square.link/u/3FJkZEIe" target="_blank" class="pkg-cta">Order Now</a></div>
+      <div class="package-card featured reveal reveal-delay-1"><div class="pkg-badge">Best Value</div><div class="pkg-name">Gold</div><div class="pkg-price">$599 / 6 months</div><div class="pkg-rule"></div><ul class="pkg-features"><li>5 Competitor Analysis</li><li>Keyword Research</li><li>Page Speed Optimization (up to 20)</li><li>Google Analytics + Search Console</li><li>Meta Data &amp; GBP Optimization</li><li>200 One-Tier Backlinks (DA 70)</li><li>700 Multi-Tier Backlinks (DA 70)</li><li>Analytics &amp; Ranking Reports</li></ul><a href="https://square.link/u/obvShJzO" target="_blank" class="pkg-cta">Order Now</a></div>
+      <div class="package-card reveal reveal-delay-2"><div class="pkg-name">Platinum</div><div class="pkg-price">$799 / 6 months</div><div class="pkg-rule"></div><ul class="pkg-features"><li>10 Competitor Analysis</li><li>Keyword Research</li><li>Page Speed Optimization (up to 20)</li><li>Google Analytics + Search Console</li><li>Meta Data &amp; GBP Optimization</li><li>70 One-Tier Backlinks (DA 90)</li><li>1600 Multi-Tier Backlinks (DA 70)</li><li>Analytics &amp; Ranking Reports</li></ul><a href="https://square.link/u/XkPIUi7N" target="_blank" class="pkg-cta">Order Now</a></div>
+    </div>
+  </section>
+  <div class="cta-band reveal"><h2>Ready to reach <em>page one?</em></h2><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="btn-primary">Get Free Consultation</a></div>
+</div>
+
+<!-- ====== BOOKING ====== -->
+<div class="page" id="page-booking">
+  <div class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1400&q=85')"></div><div class="page-hero-content"><div class="page-hero-eyebrow">Services</div><h1>Booking &amp; Payment<br><em>Systems</em></h1><p class="page-hero-sub">A seamless system that lets your customers book services anytime and pay securely online. Simplify scheduling and grow your business with ease.</p></div></div>
+  <section class="section-pad">
+    <a href="#" onclick="showPage('home');return false;" class="back-link">Back to Home</a>
+    <div class="two-col">
+      <div><div class="eyebrow">Book. Pay. Done.</div><h2 class="section-h2">Run Your Business <em>On Autopilot</em></h2><p class="body-text">We help your business set up an all-in-one booking and payment system that streamlines operations, makes managing appointments effortless, reduces no-shows, and provides your customers with simple, secure transactions — 24 hours a day, 7 days a week.</p></div>
+      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=85" alt="Booking" class="two-col-img reveal">
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal"><div class="benefit-title">24/7 Online Booking</div><div class="benefit-desc">Customers can schedule anytime, boosting convenience and increasing bookings without any manual work from you.</div></div>
+      <div class="benefit-card reveal reveal-delay-1"><div class="benefit-title">Automated Reminders</div><div class="benefit-desc">Cut down on no-shows with automatic SMS and email notifications sent before each appointment.</div></div>
+      <div class="benefit-card reveal reveal-delay-2"><div class="benefit-title">Easy &amp; Secure Payments</div><div class="benefit-desc">Accept cards, digital wallets, and contactless options. Book and pay in one smooth, seamless process.</div></div>
+      <div class="benefit-card reveal reveal-delay-3"><div class="benefit-title">Faster Payouts &amp; Records</div><div class="benefit-desc">Quick payments plus automated invoicing and receipts. Your finances stay organized without the hassle.</div></div>
+    </div>
+  </section>
+  <section class="packages-section">
+    <div class="eyebrow">Pricing</div><h2 class="section-h2 section-h2-light">Booking <em>Packages</em></h2>
+    <div class="packages-grid packages-grid-3">
+      <div class="package-card reveal"><div class="pkg-name">Start</div><div class="pkg-price">Basic Setup</div><div class="pkg-rule"></div><ul class="pkg-features"><li>Basic Information Setup</li><li>Service Details Setup</li><li>Staff Setup (1–3 members)</li><li>Booking Rules Configuration</li></ul><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="pkg-cta">Get Started</a></div>
+      <div class="package-card featured reveal reveal-delay-1"><div class="pkg-badge">Popular</div><div class="pkg-name">Plus</div><div class="pkg-price">Booking + Payments</div><div class="pkg-rule"></div><ul class="pkg-features"><li>Basic Information Setup</li><li>Service Details Setup</li><li>Staff Setup (1–5 members)</li><li>Booking Rules Configuration</li><li>Booking Page SEO Setup</li><li>Online Payment Integration</li></ul><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="pkg-cta">Get Started</a></div>
+      <div class="package-card reveal reveal-delay-2"><div class="pkg-name">Pro</div><div class="pkg-price">Complete System</div><div class="pkg-rule"></div><ul class="pkg-features"><li>Basic Information Setup</li><li>Service Details Setup</li><li>Staff Setup (1–10 members)</li><li>Booking Rules Configuration</li><li>Booking Page SEO Setup</li><li>Online Payment Integration</li><li>Gift Card Online Sales</li><li>Gift Card Top-Up</li><li>Online Booking Portal</li></ul><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="pkg-cta">Get Started</a></div>
+    </div>
+  </section>
+  <div class="cta-band reveal"><h2>Ready to simplify <em>your bookings?</em></h2><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="btn-primary">Get Free Consultation</a></div>
+</div>
+
+<!-- ====== ADS ====== -->
+<div class="page" id="page-ads">
+  <div class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1400&q=85')"></div><div class="page-hero-content"><div class="page-hero-eyebrow">Services</div><h1>Google Ads<br><em>Management</em></h1><p class="page-hero-sub">Stop waiting for leads. Get immediate results with a steady stream of qualified customers through expert Google Ads management.</p></div></div>
+  <section class="section-pad">
+    <a href="#" onclick="showPage('home');return false;" class="back-link">Back to Home</a>
+    <div class="two-col">
+      <div><div class="eyebrow">Target. Advertise. Grow.</div><h2 class="section-h2">Paid Campaigns That <em>Actually Convert</em></h2><p class="body-text">We help your business create custom Google Ads campaigns tailored to your budget, reaching the right audience at the right moment and maximizing your return on investment. Success goes beyond launching — it requires strategic keyword selection, smart bidding, and continuous optimization.</p></div>
+      <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=700&q=85" alt="Google Ads" class="two-col-img reveal">
+    </div>
+    <div class="steps-list">
+      <div class="step-item reveal"><div class="step-num">01</div><div><div class="step-title">Competitor Analysis</div><div class="step-desc">Study your competitors' campaigns to identify strengths, weaknesses, and opportunities to outperform them.</div></div></div>
+      <div class="step-item reveal reveal-delay-1"><div class="step-num">02</div><div><div class="step-title">Keyword Research</div><div class="step-desc">Find the most relevant and high-performing keywords to target the right audience and maximize ad effectiveness.</div></div></div>
+      <div class="step-item reveal reveal-delay-2"><div class="step-num">03</div><div><div class="step-title">Audience Targeting &amp; Segmentation</div><div class="step-desc">Define and segment your audience based on demographics, interests, and behaviors to reach potential customers efficiently.</div></div></div>
+      <div class="step-item reveal"><div class="step-num">04</div><div><div class="step-title">Ad Copy &amp; Creative Optimization</div><div class="step-desc">Craft compelling ad copy and visuals that grab attention, communicate value, and drive clicks.</div></div></div>
+      <div class="step-item reveal reveal-delay-1"><div class="step-num">05</div><div><div class="step-title">Bid Strategy &amp; Budget Management</div><div class="step-desc">Optimize bids and allocate budgets strategically to maximize ROI and ensure cost-effective campaigns.</div></div></div>
+      <div class="step-item reveal reveal-delay-2"><div class="step-num">06</div><div><div class="step-title">Performance Tracking &amp; Optimization</div><div class="step-desc">Monitor campaigns using analytics, adjust strategies based on data, and continually improve results.</div></div></div>
+    </div>
+  </section>
+  <div class="cta-band reveal"><h2>Ready to grow with <em>Google Ads?</em></h2><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="btn-primary">Get Free Consultation</a></div>
+</div>
+
+<!-- ====== Q&A ====== -->
+<div class="page" id="page-qa">
+  <div class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=85')"></div><div class="page-hero-content"><div class="page-hero-eyebrow">Knowledge Base</div><h1>Frequently Asked<br><em>Questions</em></h1><p class="page-hero-sub">Clear, easy answers about our digital marketing services. Your go-to guide to stay informed and feel confident working with us.</p></div></div>
+  <section class="section-pad">
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3>What is SEO, and why does every business need it?</h3><div class="faq-toggle">+</div></div><div class="faq-answer"><div class="faq-answer-inner">SEO (Search Engine Optimization) means improving your website's content, structure, and keywords so it ranks higher on Google. Good SEO helps your business get steady, free traffic without paying for ads. It also makes your brand look more trustworthy and improves the user experience — faster page speed, easier navigation, and better mobile display — all of which help turn visitors into customers.</div></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3>What is the difference between SEO and SEM?</h3><div class="faq-toggle">+</div></div><div class="faq-answer"><div class="faq-answer-inner">SEO focuses on getting traffic naturally by improving your website and content. It takes time but gives long-term results at lower cost. SEM (Search Engine Marketing) usually means paid ads like Google Ads, which bring quick results but need ongoing budget. In short — SEO builds steady, lasting traffic; SEM gives fast visibility. Many businesses use both for the best results.</div></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3>Why is it important to update my website content frequently?</h3><div class="faq-toggle">+</div></div><div class="faq-answer"><div class="faq-answer-inner">Regularly updating your website helps both Google and your visitors. Search engines prefer active, information-rich websites, so fresh, high-quality content can help you rank higher. Posting useful blogs, news, or case studies also keeps visitors coming back, increases time spent on your site, and builds trust in your brand.</div></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3>Why do I have high website traffic but low conversions?</h3><div class="faq-toggle">+</div></div><div class="faq-answer"><div class="faq-answer-inner">Getting visitors doesn't always mean getting sales. Common reasons include slow loading pages, poor design, unclear messaging, too many steps to contact you, or lack of trust signals. To fix this, make your site simple and fast, use clear calls to action, show customer reviews, and track user behavior to find and fix weak spots.</div></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3>Why doesn't my website rank on Google?</h3><div class="faq-toggle">+</div></div><div class="faq-answer"><div class="faq-answer-inner">Common reasons include using the wrong keywords, poor-quality or duplicate content, weak site structure, no backlinks, or a slow non-mobile-friendly site. To improve, research better keywords, write strong original content, fix site speed issues, and get quality links from trusted sites.</div></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3>Why aren't my Google Ads working well?</h3><div class="faq-toggle">+</div></div><div class="faq-answer"><div class="faq-answer-inner">Poor results often come from targeting the wrong audience, weak ad copy, a bad landing page, or budget mismanagement. Try refining your audience, improving your ad message, making sure your landing page matches the ad promise, and checking data like click-through and conversion rates. Good advertising needs constant testing and improvement.</div></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3>How can I measure my digital marketing success?</h3><div class="faq-toggle">+</div></div><div class="faq-answer"><div class="faq-answer-inner">Track it through website visits, bounce rate, time on site, conversions (calls, sign-ups, sales), ad ROI, and customer retention. Tools like Google Analytics and ad dashboards help you see what's working. Measuring and adjusting your campaigns ensures your marketing budget brings real results.</div></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3>Why does my business need an online booking system?</h3><div class="faq-toggle">+</div></div><div class="faq-answer"><div class="faq-answer-inner">An online booking system lets customers book your services anytime — day or night — without calling or texting you. It saves you time and helps you get more appointments. Smart KTeam sets it up so it's easy to use. Your clients can book with just a few clicks, and you stay organized without the hassle.</div></div></div>
+    </div>
+  </section>
+  <div class="cta-band reveal"><h2>Still have <em>questions?</em></h2><a href="#" onclick="showPage('home');scrollAfter('contact');return false;" class="btn-primary">Talk to Us</a></div>
+</div>
+
+<!-- ====== BLOG ====== -->
+<div class="page" id="page-blog">
+  <div class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1400&q=85')"></div><div class="page-hero-content"><div class="page-hero-eyebrow">Insights</div><h1>The Smart KTeam<br><em>Blog</em></h1><p class="page-hero-sub">Digital marketing insights, local SEO tips, and growth strategies for small businesses in Seattle and beyond.</p></div></div>
+  <section class="section-pad">
+    <div class="blog-grid">
+      <div class="blog-card reveal"><div class="blog-img-wrap"><img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&q=85" alt="Google Maps" class="blog-img"></div><div class="blog-meta"><span class="blog-tag">Local SEO</span><span class="blog-date">Coming Soon</span></div><h3 class="blog-title">How to Improve Your Google Maps Ranking in 2025</h3><p class="blog-excerpt">A step-by-step guide to getting your small business into the top 3 local results on Google Maps — without paying for ads.</p><a href="#" class="blog-read-more">Read Article</a></div>
+      <div class="blog-card reveal reveal-delay-1"><div class="blog-img-wrap"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=85" alt="Marketing" class="blog-img"></div><div class="blog-meta"><span class="blog-tag">Strategy</span><span class="blog-date">Coming Soon</span></div><h3 class="blog-title">Small Business Marketing: The Complete 2025 Playbook</h3><p class="blog-excerpt">Everything a local small business needs to build a digital presence that attracts customers and generates consistent revenue.</p><a href="#" class="blog-read-more">Read Article</a></div>
+      <div class="blog-card reveal reveal-delay-2"><div class="blog-img-wrap"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=85" alt="Booking" class="blog-img"></div><div class="blog-meta"><span class="blog-tag">Operations</span><span class="blog-date">Coming Soon</span></div><h3 class="blog-title">Why Every Service Business Needs an Online Booking System</h3><p class="blog-excerpt">How automated scheduling reduces no-shows, saves time, and increases bookings for salons, spas, and service businesses.</p><a href="#" class="blog-read-more">Read Article</a></div>
+    </div>
+    <div style="text-align:center;margin-top:88px;padding-top:60px;border-top:1px solid var(--rule);">
+      <div class="eyebrow" style="text-align:center">More Coming Soon</div>
+      <h2 class="section-h2" style="text-align:center;max-width:520px;margin:16px auto 0;">Fresh insights <em>every week</em></h2>
+      <p class="body-text" style="text-align:center;max-width:440px;margin:20px auto 0;">Subscribe to get digital marketing tips delivered directly to your inbox.</p>
+      <div style="display:flex;max-width:400px;margin:32px auto 0;">
+        <input type="email" placeholder="Your email address" style="flex:1;padding:16px 20px;border:1px solid var(--rule);background:var(--warm);font-family:'Montserrat',sans-serif;font-size:var(--text-base);letter-spacing:0.04em;outline:none;color:var(--ink);">
+        <button class="btn-primary" style="border:none;white-space:nowrap;">Subscribe</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-logo">Smart KTeam</span>
+      <p class="footer-tagline">Digital growth for ambitious small businesses in Seattle and beyond.</p>
+      <div class="footer-address">1248 121st Ave NE · Bellevue, WA 98005<br>smart.kteam.us@gmail.com</div>
+    </div>
+    <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="#" onclick="showPage('gbp');return false;">Google Business Profile</a></li><li><a href="#" onclick="showPage('website');return false;">Website Design</a></li><li><a href="#" onclick="showPage('seo');return false;">SEO Ranking</a></li><li><a href="#" onclick="showPage('booking');return false;">Booking Systems</a></li><li><a href="#" onclick="showPage('ads');return false;">Google Ads</a></li></ul></div>
+    <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="#" onclick="showPage('home');return false;">About Us</a></li><li><a href="#" onclick="showPage('blog');return false;">Blog</a></li><li><a href="#" onclick="showPage('qa');return false;">Q&amp;A</a></li><li><a href="#" onclick="showPage('home');scrollAfter('contact');return false;">Contact</a></li></ul></div>
+    <div><div class="footer-col-title">Connect</div><ul class="footer-links"><li><a href="https://www.facebook.com/smartkteam" target="_blank">Facebook</a></li><li><a href="https://www.instagram.com/smartkteam/" target="_blank">Instagram</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Smart KTeam. All Rights Reserved.</div>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/smartkteam" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/smartkteam/" target="_blank">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============ CANVAS HERO ANIMATION ============
+(function(){
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], lines = [];
+  const ACCENT = 'rgba(232,82,26,';
+  const LIGHT = 'rgba(240,115,64,';
+  const WHITE = 'rgba(255,255,255,';
+
+  function resize(){
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  class Particle {
+    constructor(){this.reset(true);}
+    reset(init){
+      this.x = Math.random()*W;
+      this.y = init ? Math.random()*H : H+10;
+      this.size = Math.random()*2.5+0.8;
+      this.speedX = (Math.random()-0.5)*0.6;
+      this.speedY = -(Math.random()*0.9+0.3);
+      this.life = 0;
+      this.maxLife = Math.random()*280+160;
+      this.color = Math.random()>0.6 ? ACCENT : Math.random()>0.5 ? LIGHT : WHITE;
+    }
+    update(){
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.life++;
+      if(this.life>this.maxLife||this.y<-10) this.reset(false);
+    }
+    draw(){
+      const alpha = Math.sin((this.life/this.maxLife)*Math.PI)*0.9;
+      ctx.beginPath();
+      ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+      ctx.fillStyle = this.color+alpha+')';
+      ctx.fill();
+    }
+  }
+
+  class FlowLine {
+    constructor(){this.reset();}
+    reset(){
+      this.x = Math.random()*W;
+      this.y = H+20;
+      this.width = Math.random()*2+0.5;
+      this.speed = Math.random()*1.8+0.6;
+      this.length = Math.random()*140+80;
+      this.alpha = Math.random()*0.5+0.15;
+      this.color = Math.random()>0.5 ? ACCENT : LIGHT;
+    }
+    update(){
+      this.y -= this.speed;
+      if(this.y+this.length < 0) this.reset();
+    }
+    draw(){
+      const grad = ctx.createLinearGradient(this.x,this.y+this.length,this.x,this.y);
+      grad.addColorStop(0,'transparent');
+      grad.addColorStop(0.4,this.color+this.alpha*0.6+')');
+      grad.addColorStop(1,this.color+this.alpha+')');
+      ctx.beginPath();
+      ctx.moveTo(this.x,this.y+this.length);
+      ctx.lineTo(this.x,this.y);
+      ctx.strokeStyle=grad;
+      ctx.lineWidth=this.width;
+      ctx.stroke();
+    }
+  }
+
+  function drawGrid(){
+    const spacing = 64;
+    const cols = Math.ceil(W/spacing)+1;
+    const rows = Math.ceil(H/spacing)+1;
+    const t = Date.now()*0.0008;
+    for(let i=0;i<cols;i++){
+      for(let j=0;j<rows;j++){
+        const x=i*spacing;const y=j*spacing;
+        const wave=Math.sin(i*0.3+t)*Math.cos(j*0.25+t*0.7);
+        const alpha=0.06+wave*0.03;
+        ctx.beginPath();
+        ctx.arc(x,y,1.2,0,Math.PI*2);
+        ctx.fillStyle=WHITE+Math.max(0,alpha)+')';
+        ctx.fill();
+      }
+    }
+  }
+
+  function init(){
+    resize();
+    for(let i=0;i<120;i++) particles.push(new Particle());
+    for(let i=0;i<30;i++) lines.push(new FlowLine());
+  }
+
+  function animate(){
+    ctx.clearRect(0,0,W,H);
+    drawGrid();
+    lines.forEach(l=>{l.update();l.draw();});
+    particles.forEach(p=>{p.update();p.draw();});
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x;
+        const dy=particles[i].y-particles[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<90){
+          const alpha=(1-dist/90)*0.15;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=ACCENT+alpha+')';
+          ctx.lineWidth=0.6;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize',()=>{
+    resize();
+    particles=[]; lines=[];
+    for(let i=0;i<120;i++) particles.push(new Particle());
+    for(let i=0;i<30;i++) lines.push(new FlowLine());
+  });
+  init();
+  animate();
+})();
+
+// ============ SLIDESHOW ============
+(function(){
+  const slides = document.querySelectorAll('#mainSlideshow .slide');
+  const dotsContainer = document.getElementById('slideDots');
+  let current = 0, timer;
+
+  // Build dots
+  slides.forEach((_,i)=>{
+    const d = document.createElement('div');
+    d.className = 'slide-dot'+(i===0?' active':'');
+    d.onclick = ()=>goTo(i);
+    dotsContainer.appendChild(d);
+  });
+
+  function goTo(n){
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = (n+slides.length)%slides.length;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+    clearInterval(timer);
+    timer = setInterval(()=>goTo(current+1), 5000);
+  }
+
+  window.slideMove = (dir)=>goTo(current+dir);
+  timer = setInterval(()=>goTo(current+1), 5000);
+})();
+
+// ============ MOBILE NAV ============
+function toggleMobileNav(){
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+  document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+}
+function closeMobileNav(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileNav').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ============ CURSOR ============
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function anim(){
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+  rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(anim);
+})();
+document.querySelectorAll('a,button,.service-card,.faq-question,.pkg-cta,.why-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
+});
+
+// ============ NAV LOGO COLOR ============
+function updateLogoColor(){
+  const textEl = document.querySelector('.logo-text-path');
+  if(!textEl) return;
+  if(nav.classList.contains('scrolled')){
+    textEl.setAttribute('fill','#1a1a2e');
+  } else {
+    textEl.setAttribute('fill','#faf9f7');
+  }
+}
+
+// ============ NAV ============
+const nav=document.getElementById('nav');
+let currentPage='home';
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>60){nav.classList.add('scrolled');nav.classList.remove('dark-nav');}
+  else{nav.classList.remove('scrolled');if(currentPage!=='home')nav.classList.add('dark-nav');}
+  updateLogoColor();
+});
+
+// ============ ROUTING ============
+function showPage(id){
+  closeMobileNav();
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  currentPage=id;
+  window.scrollTo({top:0,behavior:'smooth'});
+  nav.classList.remove('scrolled');
+  if(id==='home'){nav.classList.remove('dark-nav');}else{nav.classList.add('dark-nav');}
+  updateLogoColor();
+  setTimeout(initReveal,120);
+}
+
+function scrollAfter(id){
+  if(currentPage!=='home'){showPage('home');}
+  setTimeout(()=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});},currentPage==='home'?0:320);
+}
+
+// ============ REVEAL ============
+function initReveal(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal:not(.visible)').forEach(r=>obs.observe(r));
+}
+initReveal();
+
+// ============ FAQ ============
+function toggleFaq(el){
+  const item=el.parentElement,isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>{
+    i.classList.remove('open');
+    i.querySelector('.faq-answer').style.maxHeight='0';
+  });
+  if(!isOpen){
+    item.classList.add('open');
+    item.querySelector('.faq-answer').style.maxHeight=item.querySelector('.faq-answer-inner').scrollHeight+'px';
+  }
+}
+</script>
+</body>
+</html>
