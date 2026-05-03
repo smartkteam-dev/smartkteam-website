@@ -4,8 +4,5 @@
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/home", "destination": "/", "permanent": true }
-  ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/smartkteam.html" }
   ]
 }
