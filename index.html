@@ -393,7 +393,17 @@
   .form-field select{appearance:none;}
   .form-field select option{background:var(--slate);color:var(--ivory);}
   .form-field textarea{resize:none;height:80px;}
-  .form-field input::placeholder,.form-field textarea::placeholder{color:rgba(245,242,236,0.22);font-size:var(--text-sm);letter-spacing:0.15em;text-transform:uppercase;}
+  .form-field input,.form-field textarea{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;}
+  .form-field input::placeholder,.form-field textarea::placeholder{color:rgba(245,242,236,0.35);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;letter-spacing:0.04em;text-transform:none;}
+  .form-field select{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(245,242,236,0.35);}
+  .form-field select.has-value{color:var(--ivory);}
+  .field-error-msg{display:none;color:#e8521a;font-size:11px;letter-spacing:0.06em;margin-top:4px;font-family:'Montserrat',sans-serif;}
+  .form-field.has-error input,.form-field.has-error textarea,.form-field.has-error select{border-bottom-color:var(--accent);}
+  .form-field.has-error .field-error-msg{display:block;}
+  .form-success{display:none;padding:20px 24px;background:rgba(26,26,46,0.6);border:1px solid rgba(232,82,26,0.4);color:var(--ivory);text-align:center;margin-bottom:24px;}
+  .form-success .success-icon{font-size:24px;display:block;margin-bottom:8px;}
+  .form-success .success-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;}
+  .form-success .success-sub{font-size:var(--text-xs);letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,242,236,0.55);margin-top:6px;display:block;}
   .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-bottom-color:var(--accent);}
   .form-submit{margin-top:36px;display:flex;justify-content:space-between;align-items:center;}
   .form-note{font-size:var(--text-sm);letter-spacing:0.08em;color:rgba(245,242,236,0.2);text-transform:uppercase;}
@@ -883,16 +893,36 @@
       <p class="body-text reveal" style="color:rgba(245,242,236,0.45);margin-top:20px;font-size:var(--text-base);">Tell us about your business. We'll tell you exactly what's holding you back online — and how to fix it. No pressure. No obligation.</p>
     </div>
     <form id="contactForm" class="cta-form reveal">
-      <div id="formMessage" style="display:none;margin-bottom:20px;padding:16px;border-radius:8px;text-align:center;font-size:var(--text-base);"></div>
-      <div class="form-row">
-        <div class="form-field"><label for="fname">First Name</label><input type="text" id="fname" placeholder="First Name" required></div>
-        <div class="form-field"><label for="lname">Last Name</label><input type="text" id="lname" placeholder="Last Name" required></div>
+      <div id="formSuccess" class="form-success">
+        <span class="success-icon">✓</span>
+        <span class="success-text">Your message has been sent to our team!</span>
+        <span class="success-sub">We'll be in touch within 24 hours</span>
       </div>
-      <div class="form-field"><label for="bname">Business Name</label><input type="text" id="bname" placeholder="Business Name" required></div>
-      <div class="form-field"><label for="email">Email Address</label><input type="email" id="email" placeholder="Email Address" required></div>
-      <div class="form-field">
+      <div class="form-row">
+        <div class="form-field" id="field-fname">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="First Name">
+          <span class="field-error-msg">First name is required</span>
+        </div>
+        <div class="form-field" id="field-lname">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Last Name">
+          <span class="field-error-msg">Last name is required</span>
+        </div>
+      </div>
+      <div class="form-field" id="field-bname">
+        <label for="bname">Business Name</label>
+        <input type="text" id="bname" placeholder="Business Name">
+        <span class="field-error-msg">Business name is required</span>
+      </div>
+      <div class="form-field" id="field-email">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Email Address">
+        <span class="field-error-msg">A valid email address is required</span>
+      </div>
+      <div class="form-field" id="field-service">
         <label for="service">Service of Interest</label>
-        <select id="service" required>
+        <select id="service">
           <option value="" disabled selected>Service of Interest</option>
           <option>Website Design</option>
           <option>SEO Ranking</option>
@@ -901,8 +931,13 @@
           <option>Google Ads</option>
           <option>Full Package</option>
         </select>
+        <span class="field-error-msg">Please select a service</span>
       </div>
-      <div class="form-field"><label for="message">Tell us about your business</label><textarea id="message" placeholder="Tell us about your business..." required></textarea></div>
+      <div class="form-field" id="field-message">
+        <label for="message">Tell us about your business</label>
+        <textarea id="message" placeholder="Tell us about your business..."></textarea>
+        <span class="field-error-msg">Please tell us about your business</span>
+      </div>
       <div class="form-submit">
         <span class="form-note">Response within 24 hours</span>
         <button type="button" class="btn-submit" onclick="submitContactForm()">Send Message</button>
@@ -1108,28 +1143,48 @@ function closeMobileNav(){
 // ============ CONTACT FORM ============
 async function submitContactForm(){
   const form = document.getElementById('contactForm');
-  const messageDiv = document.getElementById('formMessage');
+  const successDiv = document.getElementById('formSuccess');
   const submitBtn = form.querySelector('.btn-submit');
 
-  const firstName = document.getElementById('fname').value.trim();
-  const lastName = document.getElementById('lname').value.trim();
-  const businessName = document.getElementById('bname').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const service = document.getElementById('service').value.trim();
-  const message = document.getElementById('message').value.trim();
+  const fields = [
+    { id:'fname', fieldId:'field-fname', validate: v => v.length > 0 },
+    { id:'lname', fieldId:'field-lname', validate: v => v.length > 0 },
+    { id:'bname', fieldId:'field-bname', validate: v => v.length > 0 },
+    { id:'email', fieldId:'field-email', validate: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+    { id:'service', fieldId:'field-service', validate: v => v.length > 0 },
+    { id:'message', fieldId:'field-message', validate: v => v.length > 0 },
+  ];
 
-  if(!firstName || !lastName || !businessName || !email || !service || !message){
-    messageDiv.style.display='block';
-    messageDiv.style.backgroundColor='rgba(232,82,26,0.2)';
-    messageDiv.style.color='#e8521a';
-    messageDiv.textContent='Please fill in all fields';
-    return;
-  }
+  // Validate all fields, mark errors individually
+  let valid = true;
+  fields.forEach(f => {
+    const val = document.getElementById(f.id).value.trim();
+    const fieldEl = document.getElementById(f.fieldId);
+    if(!f.validate(val)){
+      fieldEl.classList.add('has-error');
+      valid = false;
+    } else {
+      fieldEl.classList.remove('has-error');
+    }
+  });
 
-  submitBtn.disabled=true;
-  submitBtn.textContent='Sending...';
+  // Clear error on input
+  fields.forEach(f => {
+    document.getElementById(f.id).addEventListener('input', () => {
+      document.getElementById(f.fieldId).classList.remove('has-error');
+    }, {once: true});
+  });
+
+  if(!valid) return;
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
 
   try{
+    const [firstName,lastName,businessName,email,service,message] = fields.map(f =>
+      document.getElementById(f.id).value.trim()
+    );
+
     const response = await fetch('/api/contact', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -1139,22 +1194,21 @@ async function submitContactForm(){
     const result = await response.json();
 
     if(response.ok){
-      messageDiv.style.display='block';
-      messageDiv.style.backgroundColor='rgba(26,26,46,0.2)';
-      messageDiv.style.color='#1a1a2e';
-      messageDiv.textContent='✓ Message sent! We\'ll be in touch within 24 hours.';
       form.reset();
+      // Clear any lingering errors and show success
+      fields.forEach(f => document.getElementById(f.fieldId).classList.remove('has-error'));
+      successDiv.style.display = 'block';
+      successDiv.scrollIntoView({behavior:'smooth', block:'nearest'});
     } else {
       throw new Error(result.error || 'Failed to send message');
     }
   } catch(error){
-    messageDiv.style.display='block';
-    messageDiv.style.backgroundColor='rgba(232,82,26,0.2)';
-    messageDiv.style.color='#e8521a';
-    messageDiv.textContent='Error: '+error.message+'. Please try again.';
+    const firstField = document.getElementById('field-fname');
+    firstField.classList.add('has-error');
+    firstField.querySelector('.field-error-msg').textContent = 'Error: '+error.message+'. Please try again.';
   } finally {
-    submitBtn.disabled=false;
-    submitBtn.textContent='Send Message';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message';
   }
 }
 
