@@ -14,6 +14,7 @@
 <meta name="geo.placename" content="Bellevue, Washington">
 <meta name="geo.position" content="47.5951;-122.1479">
 <meta name="ICBM" content="47.5951, -122.1479">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="canonical" href="https://smartkteam.com/">
 
 <!-- OPEN GRAPH -->
@@ -129,6 +130,13 @@
   .nav-links a:hover::after{width:100%;}
   nav.scrolled .nav-links a{color:var(--mid);}
   .nav-links a:hover,nav.scrolled .nav-links a:hover{color:var(--accent);}
+  .nav-link-btn{background:none;border:none;font-size:var(--text-sm);letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,242,236,0.85);text-decoration:none;transition:color 0.3s;font-weight:500;cursor:pointer;position:relative;white-space:nowrap;padding:0;font-family:'Montserrat',sans-serif;}
+  .nav-link-btn::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--accent);transition:width 0.3s;}
+  .nav-link-btn:hover::after{width:100%;}
+  nav.scrolled .nav-link-btn{color:var(--mid);}
+  .nav-link-btn:hover,nav.scrolled .nav-link-btn:hover{color:var(--accent);}
+  .mobile-nav-link-btn{background:none;border:none;font-size:var(--text-base);color:inherit;text-decoration:none;transition:color 0.3s;font-weight:500;cursor:pointer;padding:0;font-family:'Montserrat',sans-serif;width:100%;text-align:left;}
+  .mobile-nav-link-btn:hover{color:var(--accent);}
   .nav-dropdown{position:relative;}
   .nav-dropdown-menu{display:none;position:absolute;top:100%;left:0;background:var(--ivory);border:1px solid var(--rule);min-width:240px;padding:12px 0;box-shadow:0 12px 48px rgba(26,26,46,0.12);padding-top:20px;}
   .nav-dropdown-menu::before{content:'';position:absolute;top:-16px;left:0;right:0;height:16px;}
@@ -380,6 +388,7 @@
   .cta-form{display:flex;flex-direction:column;}
   .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-bottom:1px;}
   .form-field{margin-bottom:1px;}
+  .form-field label{display:block;font-size:var(--text-sm);letter-spacing:0.08em;text-transform:uppercase;color:rgba(245,242,236,0.65);margin-bottom:8px;font-weight:500;}
   .form-field input,.form-field select,.form-field textarea{width:100%;background:rgba(255,255,255,0.04);border:none;border-bottom:1px solid rgba(232,82,26,0.2);padding:20px 0;font-family:'Montserrat',sans-serif;font-size:var(--text-base);letter-spacing:0.06em;color:var(--ivory);outline:none;transition:border-color 0.3s;cursor:none;}
   .form-field select{appearance:none;}
   .form-field select option{background:var(--slate);color:var(--ivory);}
@@ -580,7 +589,7 @@
   </a>
   <ul class="nav-links">
     <li class="nav-dropdown">
-      <a href="#" onclick="return false;">Services ▾</a>
+      <button class="nav-link-btn" aria-label="Services menu" aria-expanded="false">Services ▾</button>
       <div class="nav-dropdown-menu">
         <a href="/google-business-profile">Google Business Profile</a>
         <a href="/website-design">Website Design</a>
@@ -603,7 +612,7 @@
 <div class="mobile-nav-overlay" id="mobileNav">
   <ul class="mobile-nav-links">
     <li>
-      <a href="#" onclick="return false;" style="color:var(--accent);">Services</a>
+      <button class="mobile-nav-link-btn" aria-label="Services menu" aria-expanded="false" style="color:var(--accent);">Services</button>
       <div class="mobile-nav-submenu">
         <a href="/google-business-profile">Google Business Profile</a>
         <a href="/website-design">Website Design</a>
@@ -875,13 +884,14 @@
     </div>
     <div class="cta-form reveal">
       <div class="form-row">
-        <div class="form-field"><input type="text" placeholder="First Name"></div>
-        <div class="form-field"><input type="text" placeholder="Last Name"></div>
+        <div class="form-field"><label for="fname">First Name</label><input type="text" id="fname" placeholder="First Name" required></div>
+        <div class="form-field"><label for="lname">Last Name</label><input type="text" id="lname" placeholder="Last Name" required></div>
       </div>
-      <div class="form-field"><input type="text" placeholder="Business Name"></div>
-      <div class="form-field"><input type="email" placeholder="Email Address"></div>
+      <div class="form-field"><label for="bname">Business Name</label><input type="text" id="bname" placeholder="Business Name" required></div>
+      <div class="form-field"><label for="email">Email Address</label><input type="email" id="email" placeholder="Email Address" required></div>
       <div class="form-field">
-        <select>
+        <label for="service">Service of Interest</label>
+        <select id="service" required>
           <option value="" disabled selected>Service of Interest</option>
           <option>Website Design</option>
           <option>SEO Ranking</option>
@@ -891,7 +901,7 @@
           <option>Full Package</option>
         </select>
       </div>
-      <div class="form-field"><textarea placeholder="Tell us about your business..."></textarea></div>
+      <div class="form-field"><label for="message">Tell us about your business</label><textarea id="message" placeholder="Tell us about your business..." required></textarea></div>
       <div class="form-submit">
         <span class="form-note">Response within 24 hours</span>
         <button class="btn-submit">Send Message</button>
