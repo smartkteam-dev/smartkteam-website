@@ -882,7 +882,8 @@
       <h2 class="section-h2 section-h2-light reveal">Your Free<br><em>Consultation</em><br>Awaits</h2>
       <p class="body-text reveal" style="color:rgba(245,242,236,0.45);margin-top:20px;font-size:var(--text-base);">Tell us about your business. We'll tell you exactly what's holding you back online — and how to fix it. No pressure. No obligation.</p>
     </div>
-    <div class="cta-form reveal">
+    <form id="contactForm" class="cta-form reveal">
+      <div id="formMessage" style="display:none;margin-bottom:20px;padding:16px;border-radius:8px;text-align:center;font-size:var(--text-base);"></div>
       <div class="form-row">
         <div class="form-field"><label for="fname">First Name</label><input type="text" id="fname" placeholder="First Name" required></div>
         <div class="form-field"><label for="lname">Last Name</label><input type="text" id="lname" placeholder="Last Name" required></div>
@@ -904,9 +905,9 @@
       <div class="form-field"><label for="message">Tell us about your business</label><textarea id="message" placeholder="Tell us about your business..." required></textarea></div>
       <div class="form-submit">
         <span class="form-note">Response within 24 hours</span>
-        <button class="btn-submit">Send Message</button>
+        <button type="button" class="btn-submit" onclick="submitContactForm()">Send Message</button>
       </div>
-    </div>
+    </form>
   </section>
 </div>
 
@@ -1102,6 +1103,59 @@ function closeMobileNav(){
   document.getElementById('hamburger').classList.remove('open');
   document.getElementById('mobileNav').classList.remove('open');
   document.body.style.overflow = '';
+}
+
+// ============ CONTACT FORM ============
+async function submitContactForm(){
+  const form = document.getElementById('contactForm');
+  const messageDiv = document.getElementById('formMessage');
+  const submitBtn = form.querySelector('.btn-submit');
+
+  const firstName = document.getElementById('fname').value.trim();
+  const lastName = document.getElementById('lname').value.trim();
+  const businessName = document.getElementById('bname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const service = document.getElementById('service').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  if(!firstName || !lastName || !businessName || !email || !service || !message){
+    messageDiv.style.display='block';
+    messageDiv.style.backgroundColor='rgba(232,82,26,0.2)';
+    messageDiv.style.color='#e8521a';
+    messageDiv.textContent='Please fill in all fields';
+    return;
+  }
+
+  submitBtn.disabled=true;
+  submitBtn.textContent='Sending...';
+
+  try{
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({firstName,lastName,businessName,email,service,message})
+    });
+
+    const result = await response.json();
+
+    if(response.ok){
+      messageDiv.style.display='block';
+      messageDiv.style.backgroundColor='rgba(26,26,46,0.2)';
+      messageDiv.style.color='#1a1a2e';
+      messageDiv.textContent='✓ Message sent! We\'ll be in touch within 24 hours.';
+      form.reset();
+    } else {
+      throw new Error(result.error || 'Failed to send message');
+    }
+  } catch(error){
+    messageDiv.style.display='block';
+    messageDiv.style.backgroundColor='rgba(232,82,26,0.2)';
+    messageDiv.style.color='#e8521a';
+    messageDiv.textContent='Error: '+error.message+'. Please try again.';
+  } finally {
+    submitBtn.disabled=false;
+    submitBtn.textContent='Send Message';
+  }
 }
 
 // ============ CURSOR ============
