@@ -384,17 +384,17 @@
   .portfolio-carousel-wrap{position:relative;margin-top:56px;padding:0 80px;}
   .portfolio-carousel{display:flex;gap:24px;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
   .portfolio-carousel::-webkit-scrollbar{display:none;}
-  .portfolio-card{flex:0 0 calc(50% - 12px);height:400px;position:relative;overflow:hidden;cursor:none;background:#f5f5f5;display:flex;align-items:flex-end;justify-content:flex-start;transition:all 0.4s;border:1px solid rgba(232,82,26,0.1);}
-  .portfolio-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,82,26,0.0),rgba(232,82,26,0.12));opacity:0;transition:opacity 0.4s;}
-  .portfolio-card:hover{border-color:var(--accent);box-shadow:0 8px 32px rgba(232,82,26,0.15);}
-  .portfolio-card:hover::before{opacity:1;}
-  .portfolio-card-content{position:relative;z-index:2;padding:32px 24px;width:100%;background:linear-gradient(to top,rgba(26,26,46,0.95),transparent);color:var(--ivory);opacity:0;transform:translateY(20px);transition:all 0.4s;}
-  .portfolio-card:hover .portfolio-card-content{opacity:1;transform:translateY(0);}
-  .portfolio-card-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;margin-bottom:12px;line-height:1.2;}
-  .portfolio-card-category{font-size:var(--text-xs);letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:16px;}
-  .portfolio-card-btn{display:inline-flex;align-items:center;gap:8px;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);font-weight:600;text-decoration:none;transition:gap 0.3s;}
-  .portfolio-card-btn::after{content:'→';}
-  .portfolio-card:hover .portfolio-card-btn{gap:12px;}
+  .portfolio-card{flex:0 0 calc(50% - 12px);position:relative;overflow:hidden;cursor:none;background:var(--slate);padding:52px 36px;transition:background 0.4s;}
+  .portfolio-card:hover{background:#0c1628;}
+  .portfolio-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--accent);transition:width 0.45s;}
+  .portfolio-card:hover::after{width:100%;}
+  .portfolio-card-inner{position:relative;z-index:1;}
+  .portfolio-card-num{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--accent);margin-bottom:28px;letter-spacing:0.12em;}
+  .portfolio-card-category{font-size:var(--text-xs);letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,242,236,0.42);font-weight:600;margin-bottom:8px;}
+  .portfolio-card-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--ivory);margin-bottom:14px;line-height:1.2;}
+  .portfolio-card-desc{font-size:var(--text-base);line-height:1.85;color:rgba(245,242,236,0.42);font-weight:300;}
+  .portfolio-card-btn{display:inline-flex;align-items:center;gap:10px;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-top:28px;font-weight:600;opacity:0;transform:translateX(-10px);transition:all 0.3s;text-decoration:none;}
+  .portfolio-card:hover .portfolio-card-btn{opacity:1;transform:translateX(0);}
 
   .carousel-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;background:var(--ink);border:none;color:var(--ivory);font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s;z-index:10;flex-shrink:0;}
   .carousel-nav:hover{background:var(--accent);color:var(--ink);}
@@ -403,21 +403,21 @@
 
   @media(max-width:1024px){
     .portfolio-carousel-wrap{padding:0 60px;}
-    .portfolio-card{flex:0 0 calc(50% - 12px);height:380px;}
+    .portfolio-card{flex:0 0 calc(50% - 12px);}
   }
 
   @media(max-width:768px){
     .portfolio-section{padding:80px 24px;}
     .portfolio-carousel-wrap{padding:0 50px;margin-top:40px;}
     .portfolio-carousel{gap:16px;}
-    .portfolio-card{flex:0 0 calc(100% - 16px);height:320px;}
+    .portfolio-card{flex:0 0 calc(100% - 16px);padding:40px 28px;}
     .carousel-nav{width:40px;height:40px;font-size:20px;}
   }
 
   @media(max-width:640px){
     .portfolio-section{padding:60px 16px;}
     .portfolio-carousel-wrap{padding:0 40px;}
-    .portfolio-card{height:300px;}
+    .portfolio-card{padding:36px 24px;}
     .portfolio-card-title{font-size:24px;}
   }
 
@@ -425,20 +425,18 @@
     .portfolio-section{padding:50px 12px;}
     .portfolio-carousel-wrap{padding:0 32px;margin-top:32px;}
     .portfolio-carousel{gap:12px;}
-    .portfolio-card{flex:0 0 100%;height:280px;}
+    .portfolio-card{flex:0 0 100%;padding:32px 20px;}
     .carousel-nav{width:36px;height:36px;font-size:18px;}
     .portfolio-card-title{font-size:22px;}
-    .portfolio-card-content{padding:24px 18px;}
   }
 
   @media(max-width:360px){
     .portfolio-section{padding:40px 8px;}
     .portfolio-carousel-wrap{padding:0 28px;}
-    .portfolio-card{height:250px;}
+    .portfolio-card{padding:28px 16px;}
     .carousel-nav{width:32px;height:32px;font-size:16px;}
     .portfolio-card-title{font-size:18px;}
     .portfolio-card-category{font-size:10px;}
-    .portfolio-card-content{padding:18px 14px;}
   }
 
   /* LANGUAGES BAND */
@@ -952,71 +950,78 @@
       <div class="portfolio-carousel" id="portfolio-carousel">
         <!-- Demo 1: Beauty Salon -->
         <div class="portfolio-card">
-          <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=85" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" alt="Beauty Salon Demo">
-          <div class="portfolio-card-content">
+          <div class="portfolio-card-inner">
+            <div class="portfolio-card-num">01</div>
             <div class="portfolio-card-category">Salon &amp; Spa</div>
             <h3 class="portfolio-card-title">Beauty Salon</h3>
-            <a href="/portfolio/beauty-salon" class="portfolio-card-btn">Preview</a>
+            <p class="portfolio-card-desc">Full-service beauty studio with booking, service menus, and a curated brand identity built to attract premium clients.</p>
+            <a href="/portfolio/beauty-salon" class="portfolio-card-btn">Preview →</a>
           </div>
         </div>
 
         <!-- Demo 2: Massage Spa -->
         <div class="portfolio-card">
-          <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=600&q=85" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" alt="Massage Spa Demo">
-          <div class="portfolio-card-content">
+          <div class="portfolio-card-inner">
+            <div class="portfolio-card-num">02</div>
             <div class="portfolio-card-category">Wellness &amp; Spa</div>
             <h3 class="portfolio-card-title">Massage Spa</h3>
-            <a href="#contact" class="portfolio-card-btn">Coming Soon</a>
+            <p class="portfolio-card-desc">Serene digital experience for a massage &amp; wellness center — packages, therapist profiles, and online reservations.</p>
+            <a href="#contact" class="portfolio-card-btn">Coming Soon →</a>
           </div>
         </div>
 
         <!-- Demo 3: Fitness -->
         <div class="portfolio-card">
-          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=85" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" alt="Fitness Studio Demo">
-          <div class="portfolio-card-content">
+          <div class="portfolio-card-inner">
+            <div class="portfolio-card-num">03</div>
             <div class="portfolio-card-category">Fitness</div>
             <h3 class="portfolio-card-title">Gym &amp; Wellness</h3>
-            <a href="#contact" class="portfolio-card-btn">Coming Soon</a>
+            <p class="portfolio-card-desc">High-energy site for a fitness studio with class schedules, membership tiers, and trainer spotlights.</p>
+            <a href="#contact" class="portfolio-card-btn">Coming Soon →</a>
           </div>
         </div>
 
         <!-- Demo 4: Real Estate -->
         <div class="portfolio-card">
-          <img src="https://images.unsplash.com/photo-1758192838598-a1de4da5dcaf?w=600&q=85" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" alt="Real Estate Demo">
-          <div class="portfolio-card-content">
+          <div class="portfolio-card-inner">
+            <div class="portfolio-card-num">04</div>
             <div class="portfolio-card-category">Real Estate</div>
             <h3 class="portfolio-card-title">Property Agency</h3>
-            <a href="#contact" class="portfolio-card-btn">Coming Soon</a>
+            <p class="portfolio-card-desc">Luxury property listings with neighborhood guides, agent profiles, and lead-capture contact flows.</p>
+            <a href="#contact" class="portfolio-card-btn">Coming Soon →</a>
           </div>
         </div>
 
         <!-- Demo 5: Wedding Planner -->
         <div class="portfolio-card">
-          <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&q=85" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" alt="Wedding Planner Demo">
-          <div class="portfolio-card-content">
+          <div class="portfolio-card-inner">
+            <div class="portfolio-card-num">05</div>
             <div class="portfolio-card-category">Event Planning</div>
             <h3 class="portfolio-card-title">Wedding Planner</h3>
-            <a href="#contact" class="portfolio-card-btn">Coming Soon</a>
+            <p class="portfolio-card-desc">Elegant event planning showcase with packages, galleries, vendor partnerships, and inquiry forms.</p>
+            <a href="#contact" class="portfolio-card-btn">Coming Soon →</a>
           </div>
         </div>
 
         <!-- Demo 6: Pet Salon -->
         <div class="portfolio-card">
-          <img src="https://images.unsplash.com/photo-1719464454959-9cf304ef4774?w=600&q=85" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" alt="Pet Salon Demo">
-          <div class="portfolio-card-content">
+          <div class="portfolio-card-inner">
+            <div class="portfolio-card-num">06</div>
             <div class="portfolio-card-category">Pet Services</div>
             <h3 class="portfolio-card-title">Pet Salon</h3>
-            <a href="#contact" class="portfolio-card-btn">Coming Soon</a>
+            <p class="portfolio-card-desc">Friendly grooming studio site with service packages, pet care tips, and appointment booking.</p>
+            <a href="#contact" class="portfolio-card-btn">Coming Soon →</a>
           </div>
         </div>
 
         <!-- Demo 7: Medical Clinic -->
         <div class="portfolio-card">
-          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=85" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" alt="Medical Clinic Demo">
-          <div class="portfolio-card-content">
+          <div class="portfolio-card-inner">
+            <div class="portfolio-card-num">07</div>
             <div class="portfolio-card-category">Healthcare</div>
             <h3 class="portfolio-card-title">Medical Clinic</h3>
-            <a href="#contact" class="portfolio-card-btn">Coming Soon</a>
+            <p class="portfolio-card-desc">Trust-first clinic website with specialties, physician bios, insurance info, and patient intake forms.</p>
+            <a href="#contact" class="portfolio-card-btn">Coming Soon →</a>
           </div>
         </div>
       </div>
