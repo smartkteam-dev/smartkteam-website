@@ -323,17 +323,18 @@
       <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="contact-label">Hours</div><div class="contact-value">Tue – Sat: 9am – 7pm<br>Sun – Mon: Closed</div></div></div>
     </div>
   </div>
-  <div class="contact-form reveal">
+  <form class="contact-form reveal" id="bookingForm" onsubmit="submitBooking(event)">
     <div class="form-row">
-      <div class="form-group"><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="Sophie"></div>
-      <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="Laurent"></div>
+      <div class="form-group"><label class="form-label" for="bs-fname">First Name</label><input class="form-input" id="bs-fname" type="text" placeholder="Sophie" required></div>
+      <div class="form-group"><label class="form-label" for="bs-lname">Last Name</label><input class="form-input" id="bs-lname" type="text" placeholder="Laurent" required></div>
     </div>
-    <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="hello@email.com"></div>
-    <div class="form-group"><label class="form-label">Service</label><select class="form-select"><option>Select a service…</option><option>Signature Facial — $95</option><option>Nail Artistry — $65</option><option>Lash Extensions — $130</option><option>Relaxation Massage — $110</option><option>Brow Design — $45</option><option>Keratin Treatment — $180</option><option>Glow Body Scrub — $85</option><option>Microdermabrasion — $145</option></select></div>
-    <div class="form-group"><label class="form-label">Preferred Date & Time</label><input class="form-input" type="datetime-local"></div>
-    <div class="form-group"><label class="form-label">Notes (optional)</label><textarea class="form-textarea" placeholder="Any skin concerns, allergies, or special requests…"></textarea></div>
-    <button class="btn-primary" style="width:100%;text-align:center;border:none;cursor:pointer;font-family:'Jost',sans-serif;">Request Appointment</button>
-  </div>
+    <div class="form-group"><label class="form-label" for="bs-email">Email</label><input class="form-input" id="bs-email" type="email" placeholder="hello@email.com" required></div>
+    <div class="form-group"><label class="form-label" for="bs-service">Service</label><select class="form-select" id="bs-service" required><option value="">Select a service…</option><option>Signature Facial — $95</option><option>Nail Artistry — $65</option><option>Lash Extensions — $130</option><option>Relaxation Massage — $110</option><option>Brow Design — $45</option><option>Keratin Treatment — $180</option><option>Glow Body Scrub — $85</option><option>Microdermabrasion — $145</option></select></div>
+    <div class="form-group"><label class="form-label" for="bs-date">Preferred Date &amp; Time</label><input class="form-input" id="bs-date" type="datetime-local"></div>
+    <div class="form-group"><label class="form-label" for="bs-notes">Notes (optional)</label><textarea class="form-textarea" id="bs-notes" placeholder="Any skin concerns, allergies, or special requests…"></textarea></div>
+    <div id="bs-success" style="display:none;padding:16px 20px;background:var(--accent-light);border-radius:14px;text-align:center;font-size:14px;color:var(--accent-dark);font-family:'Jost',sans-serif;">Thank you! We'll confirm your appointment within 24 hours.</div>
+    <button class="btn-primary" type="submit" style="width:100%;text-align:center;border:none;cursor:pointer;font-family:'Jost',sans-serif;">Request Appointment</button>
+  </form>
 </section>
 
 <footer><a href="#hero" class="logo">Lumi<em>ère</em></a><p>© 2025 Lumière Beauty Studio. All rights reserved.</p><p style="font-size:12px;">412 Blossom Lane, Seattle, WA · +1 (555) 234-5678</p></footer>
@@ -387,7 +388,7 @@ const cards = track.querySelectorAll('.service-card');
 const cardW = 300 + 24;
 let visible = Math.min(3, Math.floor((window.innerWidth - 96) / cardW));
 let current = 0;
-const maxIndex = cards.length - visible;
+const maxIndex = Math.max(0, cards.length - visible);
 
 function buildDots() {
   dotsWrap.innerHTML = '';
@@ -413,6 +414,14 @@ window.addEventListener('resize', () => {
   goTo(Math.min(current, cards.length - visible));
   buildDots();
 }, { passive: true });
+
+function submitBooking(e) {
+  e.preventDefault();
+  const form = document.getElementById('bookingForm');
+  const success = document.getElementById('bs-success');
+  success.style.display = 'block';
+  form.querySelector('button[type="submit"]').style.display = 'none';
+}
 
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {

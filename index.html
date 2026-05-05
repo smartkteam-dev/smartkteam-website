@@ -671,6 +671,7 @@
       </div>
     </li>
     <li><a href="/#about">About</a></li>
+    <li><a href="/#portfolio">Portfolio</a></li>
     <li><a href="/qa">Q&amp;A</a></li>
     <li><a href="/blog">Blog</a></li>
     <li><a href="/#contact" class="nav-cta">Free Consultation</a></li>
@@ -955,7 +956,7 @@
             <div class="portfolio-card-category">Salon &amp; Spa</div>
             <h3 class="portfolio-card-title">Beauty Salon</h3>
             <p class="portfolio-card-desc">Full-service beauty studio with booking, service menus, and a curated brand identity built to attract premium clients.</p>
-            <a href="/portfolio/beauty-salon" class="portfolio-card-btn">Preview →</a>
+            <a href="/portfolio/beauty-salon" class="portfolio-card-btn" target="_blank" rel="noopener noreferrer">Preview →</a>
           </div>
         </div>
 
@@ -1297,11 +1298,12 @@ function closeMobileNav(){
 // ============ PORTFOLIO CAROUSEL ============
 function scrollCarousel(carouselId, direction){
   const carousel = document.getElementById(carouselId);
-  const cardWidth = carousel.querySelector('.portfolio-card').offsetWidth;
+  if (!carousel) return;
+  const card = carousel.querySelector('.portfolio-card');
+  if (!card) return;
   const gap = window.innerWidth > 768 ? 24 : 16;
-  const scrollAmount = cardWidth + gap;
   carousel.scrollBy({
-    left: direction * scrollAmount,
+    left: direction * (card.offsetWidth + gap),
     behavior: 'smooth'
   });
 }
