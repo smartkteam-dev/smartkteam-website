@@ -1,0 +1,13 @@
+{
+  "title": "Lumière Beauty Studio | Glow From Within",
+  "slug": "beauty-salon",
+  "description": "Premium beauty salon offering facials, nails, lash extensions, massage and more.",
+  "category": "Salon & Spa",
+  "keywords": ["beauty salon", "spa services", "salon booking"],
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "BeautySalon",
+    "name": "Lumière Beauty Studio",
+    "url": "https://smartkteam.com/portfolio/beauty-salon"
+  }
+}
