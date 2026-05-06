@@ -381,7 +381,7 @@
   .portfolio-section{padding:110px 64px;background:var(--ivory);}
   .portfolio-header{margin-bottom:64px;}
   .portfolio-intro{font-size:var(--text-base);line-height:1.95;color:var(--mid);font-weight:300;max-width:680px;margin-top:20px;}
-  .portfolio-carousel-wrap{position:relative;margin-top:56px;}
+  .portfolio-carousel-wrap{position:relative;margin-top:56px;padding:0 56px;}
   .portfolio-carousel{display:flex;gap:24px;overflow:hidden;}
   .portfolio-card{flex:0 0 calc(50% - 12px);position:relative;overflow:hidden;cursor:none;background:var(--slate);padding:52px 36px;transition:background 0.4s;}
   .portfolio-card:hover{background:#0c1628;}
@@ -395,8 +395,8 @@
   .portfolio-card-btn{display:inline-flex;align-items:center;gap:10px;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-top:28px;font-weight:600;opacity:0;transform:translateX(-10px);transition:all 0.3s;text-decoration:none;}
   .portfolio-card:hover .portfolio-card-btn{opacity:1;transform:translateX(0);}
 
-  .carousel-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;background:var(--ink);border:none;color:var(--ivory);font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s;z-index:10;flex-shrink:0;}
-  .carousel-nav:hover{background:var(--accent);color:var(--ink);}
+  .carousel-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;background:var(--ink);border:none;color:var(--ivory);font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s;z-index:10;flex-shrink:0;opacity:0.6;}
+  .carousel-nav:hover{background:var(--accent);color:var(--ink);opacity:1;}
   .carousel-nav-prev{left:0;}
   .carousel-nav-next{right:0;}
 
@@ -406,7 +406,7 @@
 
   @media(max-width:768px){
     .portfolio-section{padding:80px 24px;}
-    .portfolio-carousel-wrap{margin-top:40px;}
+    .portfolio-carousel-wrap{margin-top:40px;padding:0 44px;}
     .portfolio-carousel{gap:16px;}
     .portfolio-card{flex:0 0 calc(100% - 16px);padding:40px 28px;}
     .carousel-nav{width:40px;height:40px;font-size:20px;}
@@ -420,7 +420,7 @@
 
   @media(max-width:480px){
     .portfolio-section{padding:50px 12px;}
-    .portfolio-carousel-wrap{margin-top:32px;}
+    .portfolio-carousel-wrap{margin-top:32px;padding:0 40px;}
     .portfolio-carousel{gap:12px;}
     .portfolio-card{flex:0 0 100%;padding:32px 20px;}
     .carousel-nav{width:36px;height:36px;font-size:18px;}
@@ -429,6 +429,7 @@
 
   @media(max-width:360px){
     .portfolio-section{padding:40px 8px;}
+    .portfolio-carousel-wrap{padding:0 36px;}
     .portfolio-card{padding:28px 16px;}
     .carousel-nav{width:32px;height:32px;font-size:16px;}
     .portfolio-card-title{font-size:18px;}
