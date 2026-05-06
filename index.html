@@ -381,9 +381,8 @@
   .portfolio-section{padding:110px 64px;background:var(--ivory);}
   .portfolio-header{margin-bottom:64px;}
   .portfolio-intro{font-size:var(--text-base);line-height:1.95;color:var(--mid);font-weight:300;max-width:680px;margin-top:20px;}
-  .portfolio-carousel-wrap{position:relative;margin-top:56px;padding:0 80px;}
-  .portfolio-carousel{display:flex;gap:24px;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
-  .portfolio-carousel::-webkit-scrollbar{display:none;}
+  .portfolio-carousel-wrap{position:relative;margin-top:56px;}
+  .portfolio-carousel{display:flex;gap:24px;overflow:hidden;}
   .portfolio-card{flex:0 0 calc(50% - 12px);position:relative;overflow:hidden;cursor:none;background:var(--slate);padding:52px 36px;transition:background 0.4s;}
   .portfolio-card:hover{background:#0c1628;}
   .portfolio-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--accent);transition:width 0.45s;}
@@ -402,13 +401,12 @@
   .carousel-nav-next{right:0;}
 
   @media(max-width:1024px){
-    .portfolio-carousel-wrap{padding:0 60px;}
     .portfolio-card{flex:0 0 calc(50% - 12px);}
   }
 
   @media(max-width:768px){
     .portfolio-section{padding:80px 24px;}
-    .portfolio-carousel-wrap{padding:0 50px;margin-top:40px;}
+    .portfolio-carousel-wrap{margin-top:40px;}
     .portfolio-carousel{gap:16px;}
     .portfolio-card{flex:0 0 calc(100% - 16px);padding:40px 28px;}
     .carousel-nav{width:40px;height:40px;font-size:20px;}
@@ -416,14 +414,13 @@
 
   @media(max-width:640px){
     .portfolio-section{padding:60px 16px;}
-    .portfolio-carousel-wrap{padding:0 40px;}
     .portfolio-card{padding:36px 24px;}
     .portfolio-card-title{font-size:24px;}
   }
 
   @media(max-width:480px){
     .portfolio-section{padding:50px 12px;}
-    .portfolio-carousel-wrap{padding:0 32px;margin-top:32px;}
+    .portfolio-carousel-wrap{margin-top:32px;}
     .portfolio-carousel{gap:12px;}
     .portfolio-card{flex:0 0 100%;padding:32px 20px;}
     .carousel-nav{width:36px;height:36px;font-size:18px;}
@@ -432,7 +429,6 @@
 
   @media(max-width:360px){
     .portfolio-section{padding:40px 8px;}
-    .portfolio-carousel-wrap{padding:0 28px;}
     .portfolio-card{padding:28px 16px;}
     .carousel-nav{width:32px;height:32px;font-size:16px;}
     .portfolio-card-title{font-size:18px;}
@@ -1296,17 +1292,64 @@ function closeMobileNav(){
 }
 
 // ============ PORTFOLIO CAROUSEL ============
-function scrollCarousel(carouselId, direction){
-  const carousel = document.getElementById(carouselId);
+(function(){
+  var carousel = document.getElementById('portfolio-carousel');
   if (!carousel) return;
-  const card = carousel.querySelector('.portfolio-card');
-  if (!card) return;
-  const gap = window.innerWidth > 768 ? 24 : 16;
-  carousel.scrollBy({
-    left: direction * (card.offsetWidth + gap),
-    behavior: 'smooth'
-  });
-}
+
+  var origCards = Array.from(carousel.querySelectorAll('.portfolio-card'));
+  var N = origCards.length;
+
+  var firstClone = origCards[0].cloneNode(true);
+  var lastClone  = origCards[N - 1].cloneNode(true);
+  firstClone.setAttribute('aria-hidden', 'true');
+  lastClone.setAttribute('aria-hidden', 'true');
+  carousel.appendChild(firstClone);
+  carousel.insertBefore(lastClone, origCards[0]);
+
+  var currentIndex = 1;
+  var transitioning = false;
+
+  function getGap() {
+    return window.innerWidth > 768 ? 24 : window.innerWidth > 480 ? 16 : 12;
+  }
+
+  function getOffset(index) {
+    var card = carousel.querySelectorAll('.portfolio-card')[0];
+    if (!card) return 0;
+    return index * (card.offsetWidth + getGap());
+  }
+
+  function jumpTo(index) {
+    carousel.style.scrollBehavior = 'auto';
+    carousel.scrollLeft = getOffset(index);
+  }
+
+  function smoothTo(index) {
+    carousel.style.scrollBehavior = 'smooth';
+    carousel.scrollLeft = getOffset(index);
+  }
+
+  setTimeout(function(){ jumpTo(currentIndex); }, 0);
+
+  window.addEventListener('resize', function(){ jumpTo(currentIndex); });
+
+  window.scrollCarousel = function(carouselId, direction) {
+    if (carouselId !== 'portfolio-carousel' || transitioning) return;
+    transitioning = true;
+    currentIndex += direction;
+    smoothTo(currentIndex);
+    setTimeout(function() {
+      if (currentIndex === 0) {
+        currentIndex = N;
+        jumpTo(currentIndex);
+      } else if (currentIndex === N + 1) {
+        currentIndex = 1;
+        jumpTo(currentIndex);
+      }
+      transitioning = false;
+    }, 500);
+  };
+})();
 
 // ============ CONTACT FORM ============
 async function submitContactForm(){
