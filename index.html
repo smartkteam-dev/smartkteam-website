@@ -112,9 +112,7 @@
   .page{display:none;}.page.active{display:block;}
 
   /* SCROLL PROGRESS BAR */
-  #scrollTrack{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.12);pointer-events:none;z-index:0;}
   #scrollProgress{position:absolute;bottom:0;left:0;height:3px;width:100%;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform 0.1s ease-out;will-change:transform;pointer-events:none;z-index:1;}
-  nav.scrolled #scrollTrack{background:rgba(232,82,26,0.15);}
   nav.scrolled #scrollProgress{background:var(--accent);}
 
   /* NAV */
@@ -686,7 +684,6 @@
   <button class="nav-hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
-  <div id="scrollTrack"></div>
   <div id="scrollProgress"></div>
 </nav>
 
