@@ -615,6 +615,10 @@
     .footer-col-title{text-align:left;}
     .footer-links a{text-align:left;}
     .footer-bottom{flex-direction:column;gap:12px;align-items:flex-start;}
+    /* Scroll-driven service card highlight */
+    .service-card.scroll-active{background:#0c1628;}
+    .service-card.scroll-active::after{width:100%;}
+    .service-card.scroll-active .service-arrow{opacity:1;transform:translateX(0);}
 }
 @media (max-width:400px){
     .hero-title{font-size:clamp(2.2rem,12vw,2.8rem);}
@@ -1496,6 +1500,39 @@ document.querySelectorAll('.nav-dropdown-menu a').forEach(function(link){
     if(menu){ menu.style.display='none'; setTimeout(function(){ menu.style.display=''; }, 400); }
   });
 });
+
+// ============ MOBILE SERVICE CARD SCROLL HIGHLIGHT ============
+(function(){
+  var cards=[];
+  var scrollHandler=null;
+  function highlight(){
+    var center=window.innerHeight/2;
+    var best=null,bestDist=Infinity;
+    cards.forEach(function(card){
+      var rect=card.getBoundingClientRect();
+      var dist=Math.abs((rect.top+rect.height/2)-center);
+      if(dist<bestDist){bestDist=dist;best=card;}
+    });
+    cards.forEach(function(c){c.classList.toggle('scroll-active',c===best);});
+  }
+  function setup(){
+    cards=Array.from(document.querySelectorAll('.services-section .service-card'));
+    if(!cards.length)return;
+    if(window.innerWidth<=768){
+      if(!scrollHandler){
+        scrollHandler=function(){highlight();};
+        window.addEventListener('scroll',scrollHandler,{passive:true});
+      }
+      highlight();
+    } else {
+      if(scrollHandler){window.removeEventListener('scroll',scrollHandler);scrollHandler=null;}
+      cards.forEach(function(c){c.classList.remove('scroll-active');});
+    }
+  }
+  window.addEventListener('resize',setup);
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',setup);}
+  else{setup();}
+})();
 
 // ============ FAQ ============
 function toggleFaq(el){
