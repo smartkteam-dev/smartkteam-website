@@ -113,7 +113,7 @@
 
   /* SCROLL PROGRESS BAR */
   #scrollTrack{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.12);pointer-events:none;z-index:0;}
-  #scrollProgress{position:absolute;bottom:0;left:0;height:3px;width:0%;background:#fff;transition:width 0.1s ease-out;pointer-events:none;z-index:1;}
+  #scrollProgress{position:absolute;bottom:0;left:0;height:3px;width:100%;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform 0.1s ease-out;will-change:transform;pointer-events:none;z-index:1;}
   nav.scrolled #scrollTrack{background:rgba(232,82,26,0.15);}
   nav.scrolled #scrollProgress{background:var(--accent);}
 
@@ -1515,8 +1515,8 @@ document.querySelectorAll('.nav-dropdown-menu a').forEach(function(link){
   if(!bar)return;
   function update(){
     var scrollable=document.documentElement.scrollHeight-window.innerHeight;
-    var pct=scrollable>0?(window.scrollY/scrollable)*100:0;
-    bar.style.width=pct+'%';
+    var pct=scrollable>0?window.scrollY/scrollable:0;
+    bar.style.transform='scaleX('+pct+')';
   }
   window.addEventListener('scroll',update,{passive:true});
   update();
