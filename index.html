@@ -111,6 +111,9 @@
   .cursor-ring.hover{transform:translate(-50%,-50%) scale(1.8);opacity:0.25;}
   .page{display:none;}.page.active{display:block;}
 
+  /* SCROLL PROGRESS BAR */
+  #scrollProgress{position:absolute;bottom:0;left:0;height:2px;width:0%;background:var(--accent);transition:width 0.08s ease-out;pointer-events:none;z-index:0;}
+
   /* NAV */
   nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:28px 64px;transition:background 0.4s,padding 0.4s,box-shadow 0.4s;}
   nav.scrolled{background:rgba(250,249,247,0.97);backdrop-filter:blur(16px);padding:18px 64px;box-shadow:0 1px 0 var(--rule);}
@@ -680,6 +683,7 @@
   <button class="nav-hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
+  <div id="scrollProgress"></div>
 </nav>
 
 <!-- MOBILE NAV OVERLAY -->
@@ -1500,6 +1504,19 @@ document.querySelectorAll('.nav-dropdown-menu a').forEach(function(link){
     if(menu){ menu.style.display='none'; setTimeout(function(){ menu.style.display=''; }, 400); }
   });
 });
+
+// ============ SCROLL PROGRESS BAR ============
+(function(){
+  var bar=document.getElementById('scrollProgress');
+  if(!bar)return;
+  function update(){
+    var scrollable=document.documentElement.scrollHeight-window.innerHeight;
+    var pct=scrollable>0?(window.scrollY/scrollable)*100:0;
+    bar.style.width=pct+'%';
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  update();
+})();
 
 // ============ MOBILE SERVICE CARD SCROLL HIGHLIGHT ============
 (function(){
