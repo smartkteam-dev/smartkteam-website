@@ -113,8 +113,10 @@
 
   /* SCROLL PROGRESS BAR */
   #scrollTrack{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(232,82,26,0.15);pointer-events:none;z-index:0;}
-  #scrollProgress{position:absolute;bottom:0;left:0;height:3px;width:0%;background:linear-gradient(to right,var(--accent),var(--accent-light));box-shadow:0 0 8px rgba(232,82,26,0.8),0 0 18px rgba(232,82,26,0.35);transition:width 0.08s ease-out;pointer-events:none;z-index:1;}
-  #scrollProgress::after{content:'';position:absolute;right:-4px;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 6px 3px rgba(232,82,26,0.9);}
+  #scrollProgress{position:absolute;bottom:0;left:0;height:3px;width:0%;background:linear-gradient(to right,var(--accent),var(--accent-light));box-shadow:0 0 8px rgba(232,82,26,0.8),0 0 18px rgba(232,82,26,0.35);transition:width 0.08s ease-out;pointer-events:none;z-index:1;overflow:hidden;}
+  #scrollProgress::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.55) 50%,transparent 100%);background-size:200% 100%;animation:barShimmer 2.4s ease-in-out infinite;}
+  @keyframes barShimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+  @media(prefers-reduced-motion:reduce){#scrollProgress::after{display:none;}}
 
   /* NAV */
   nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:28px 64px;transition:background 0.4s,padding 0.4s,box-shadow 0.4s;}
