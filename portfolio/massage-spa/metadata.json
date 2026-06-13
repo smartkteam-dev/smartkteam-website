@@ -1,0 +1,13 @@
+{
+  "title": "Serenity Spa | Luxury Massage & Wellness",
+  "slug": "massaga-spa",
+  "description": "Upscale massage spa offering Swedish, deep tissue, hot stone, aromatherapy, prenatal, and couples retreat treatments.",
+  "category": "Massage & Wellness",
+  "keywords": ["massage spa", "luxury massage", "wellness retreat", "hot stone massage", "couples massage", "aromatherapy"],
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "HealthAndBeautyBusiness",
+    "name": "Serenity Spa",
+    "url": "https://smartkteam.com/portfolio/massaga-spa"
+  }
+}
