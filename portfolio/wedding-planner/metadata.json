@@ -1,0 +1,16 @@
+{
+  "id": "wedding-planner",
+  "order": 5,
+  "title": "Elysian Weddings",
+  "category": "Wedding Planner",
+  "description": "Editorial luxury wedding planning with a magazine aesthetic, split-screen hero, and champagne palette.",
+  "palette": {
+    "primary": "#B8966F",
+    "background": "#FAFAF8",
+    "ink": "#1C1C1C",
+    "stone": "#E8E0D5"
+  },
+  "fonts": ["Libre Bodoni", "Great Vibes", "Public Sans"],
+  "style": "Editorial Split-Screen",
+  "sections": ["Hero", "Stats", "Packages", "Gallery", "About", "Process", "Testimonials", "Contact"]
+}
