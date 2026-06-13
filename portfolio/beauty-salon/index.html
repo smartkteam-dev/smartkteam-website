@@ -194,6 +194,8 @@
   footer .logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: white; text-decoration: none; }
   footer .logo em { font-style: italic; color: var(--accent); }
   footer p { font-size: 13px; font-weight: 300; }
+  footer .footer-back { font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.45); display: inline-flex; align-items: center; gap: 6px; text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+  footer .footer-back:hover { color: var(--accent); }
 
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -338,7 +340,7 @@
   </form>
 </section>
 
-<footer><a href="#hero" class="logo">Lumi<em>ère</em></a><p>© 2025 Lumière Beauty Studio. All rights reserved.</p><p style="font-size:12px;">412 Blossom Lane, Seattle, WA · +1 (555) 234-5678</p></footer>
+<footer><a href="#hero" class="logo">Lumi<em>ère</em></a><p>© 2025 Lumière Beauty Studio. All rights reserved.</p><p style="font-size:12px;">412 Blossom Lane, Seattle, WA · +1 (555) 234-5678</p><a href="/" class="footer-back"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Back to Smart KTeam</a></footer>
 
 <script>
 const palettes = [
