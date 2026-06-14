@@ -3,26 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paw &amp; Play Pet Studio — Austin TX</title>
+  <title>Fluffy Cloud Studio — Pet Grooming &amp; Spa, Austin TX</title>
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --pink:    #FF6B9D;
-      --yellow:  #FFDE59;
-      --mint:    #4ECDC4;
-      --lavender:#A78BFA;
-      --cream:   #FFF8F9;
-      --ink:     #1C1033;
-      --mid:     #7A7A9A;
-      --white:   #FFFFFF;
-      --accent:  var(--pink);
+      --lavender: #A99CD6;
+      --sage:     #7BBFAA;
+      --peach:    #E8956A;
+      --sky:      #6BAFD6;
+      --cream:    #FAF8F5;
+      --ink:      #1F1D2E;
+      --mid:      #888899;
+      --white:    #FFFFFF;
+      --accent:   var(--lavender);
+      --accent-soft: rgba(169,156,214,0.12);
     }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Nunito', sans-serif; color: var(--ink); background: var(--white); overflow-x: hidden; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--ink); background: var(--white); overflow-x: hidden; }
 
     /* ── PALETTE BAR ── */
     .palette-bar {
@@ -30,270 +31,281 @@
       background: var(--ink); padding: 9px 24px;
       display: flex; align-items: center; gap: 12px;
     }
-    .palette-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .palette-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.38); }
     .palette-chips { display: flex; gap: 8px; }
     .chip {
       width: 18px; height: 18px; border-radius: 50%; cursor: pointer;
       border: 2px solid transparent; transition: transform 0.15s, border-color 0.15s;
     }
-    .chip:hover, .chip.active { transform: scale(1.2); border-color: rgba(255,255,255,0.7); }
-    .chip-name { font-size: 11px; color: rgba(255,255,255,0.55); margin-left: 4px; }
+    .chip:hover, .chip.active { transform: scale(1.2); border-color: rgba(255,255,255,0.65); }
+    .chip-name { font-size: 11px; color: rgba(255,255,255,0.45); margin-left: 4px; }
 
     /* ── NAV ── */
     nav {
       position: fixed; top: 36px; left: 0; right: 0; z-index: 90;
-      background: var(--white); padding: 0 40px;
-      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(250,248,245,0.96); backdrop-filter: blur(12px);
+      padding: 0 48px; display: flex; align-items: center; justify-content: space-between;
       height: 68px; border-bottom: 1px solid transparent;
       transition: box-shadow 0.3s, border-color 0.3s;
     }
-    nav.scrolled { box-shadow: 0 2px 20px rgba(28,16,51,0.08); border-bottom-color: rgba(28,16,51,0.06); }
-    .nav-logo {
-      font-family: 'Fredoka', sans-serif; font-size: 1.5rem; font-weight: 700;
-      color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 8px;
-    }
-    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-    .nav-links a { font-size: 0.9rem; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(31,29,46,0.07); border-bottom-color: rgba(31,29,46,0.07); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); text-decoration: none; letter-spacing: 0.01em; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--mid); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
     .nav-cta {
-      background: var(--accent); color: var(--white) !important; padding: 10px 22px;
-      border-radius: 50px; font-size: 0.875rem; font-weight: 700;
-      transition: opacity 0.2s, transform 0.2s;
+      background: var(--accent) !important; color: var(--white) !important;
+      padding: 9px 22px; border-radius: 50px; font-size: 0.83rem; font-weight: 600;
+      letter-spacing: 0.03em; transition: opacity 0.2s, transform 0.2s;
     }
-    .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
-    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); color: var(--white) !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
 
     /* ── HERO ── */
     .hero {
-      margin-top: 68px; min-height: calc(100vh - 68px);
-      background: var(--white); padding: 80px 60px 60px;
-      display: grid; grid-template-columns: 55% 45%; align-items: center; gap: 40px;
+      margin-top: 68px; height: calc(100vh - 68px); min-height: 560px;
+      position: relative; overflow: hidden;
     }
-    .hero-text h1 {
-      font-family: 'Fredoka', sans-serif;
-      font-size: clamp(2.4rem, 5.5vw, 5rem);
-      font-weight: 700; line-height: 1.1; color: var(--accent);
-      margin-bottom: 20px;
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1600&q=85&fit=crop');
+      background-size: cover; background-position: center 30%;
     }
-    .hero-text h1 .dark { color: var(--ink); }
-    .hero-text p { font-size: 1.1rem; color: var(--mid); line-height: 1.7; max-width: 480px; margin-bottom: 36px; }
-    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(31,29,46,0.28) 0%, rgba(31,29,46,0.05) 60%, transparent 100%);
+    }
+    .hero-card {
+      position: absolute; top: 50%; left: 7%; transform: translateY(-50%);
+      background: rgba(250,248,245,0.88); backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.7); border-radius: 20px;
+      padding: 52px 48px; max-width: 480px;
+    }
+    .hero-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .hero-card h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.2vw, 2.8rem);
+      font-weight: 600; line-height: 1.2; color: var(--ink); margin-bottom: 16px;
+    }
+    .hero-card h1 em { font-style: italic; color: var(--accent); }
+    .hero-card p { font-size: 0.97rem; color: var(--mid); line-height: 1.75; margin-bottom: 32px; max-width: 360px; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
     .btn-primary {
-      background: var(--accent); color: var(--white); padding: 14px 32px;
-      border-radius: 50px; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700;
-      text-decoration: none; transition: opacity 0.2s, transform 0.2s; display: inline-block;
+      background: var(--accent); color: var(--white); padding: 13px 28px; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; transition: opacity 0.2s, transform 0.2s; display: inline-block; letter-spacing: 0.02em;
     }
-    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
-    .btn-outline {
-      background: transparent; color: var(--accent); padding: 12px 32px;
-      border-radius: 50px; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700;
-      text-decoration: none; border: 2px solid var(--accent); transition: background 0.2s, color 0.2s; display: inline-block;
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent; color: var(--ink); padding: 12px 28px; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; border: 1.5px solid rgba(31,29,46,0.25); transition: border-color 0.2s, color 0.2s; display: inline-block;
     }
-    .btn-outline:hover { background: var(--accent); color: var(--white); }
-    .hero-trust { display: flex; gap: 10px; flex-wrap: wrap; }
-    .trust-pill {
-      background: var(--cream); padding: 6px 16px; border-radius: 50px;
-      font-size: 0.82rem; font-weight: 600; color: var(--ink);
-      display: inline-flex; align-items: center; gap: 5px;
-    }
-    .trust-pill .star { color: #FFB800; }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-stats { display: flex; gap: 24px; padding-top: 24px; border-top: 1px solid rgba(31,29,46,0.1); }
+    .stat-item { display: flex; flex-direction: column; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--ink); line-height: 1; }
+    .stat-label { font-size: 0.72rem; font-weight: 500; color: var(--mid); letter-spacing: 0.06em; margin-top: 4px; }
 
-    /* Hero photo stack */
-    .hero-photos { position: relative; height: 540px; }
-    .hero-circle {
-      position: absolute; width: 340px; height: 340px; border-radius: 50%;
-      background: var(--yellow); opacity: 0.3;
-      top: 50%; left: 50%; transform: translate(-45%, -50%); z-index: 0;
-    }
-    .pet-card {
-      position: absolute; border-radius: 22px; overflow: hidden;
-      box-shadow: 0 16px 48px rgba(28,16,51,0.18);
-    }
-    .pet-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .pet-card-1 { width: 195px; height: 255px; top: 60px; left: 10px; z-index: 2; transform: rotate(-6deg); }
-    .pet-card-2 { width: 215px; height: 285px; top: 80px; left: 50%; margin-left: -107px; z-index: 3; transform: rotate(0deg); }
-    .pet-card-3 { width: 190px; height: 250px; top: 68px; right: 10px; z-index: 2; transform: rotate(6deg); }
+    /* ── INTRO STRIP ── */
+    .intro-strip { background: var(--cream); padding: 28px 48px; display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; border-bottom: 1px solid rgba(31,29,46,0.07); }
+    .intro-item { display: flex; align-items: center; gap: 10px; }
+    .intro-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; }
+    .intro-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; }
+    .intro-text { font-size: 0.82rem; font-weight: 600; color: var(--ink); }
 
     /* ── SECTION SHARED ── */
-    .section-label {
-      font-family: 'Fredoka', sans-serif; font-size: 0.85rem; font-weight: 600;
-      letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: block;
-    }
-    .section-title { font-family: 'Fredoka', sans-serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; color: var(--ink); margin-bottom: 10px; }
-    .section-sub { font-size: 1rem; color: var(--mid); max-width: 520px; line-height: 1.65; margin-bottom: 48px; }
-
-    /* ── WAVE DIVIDERS ── */
-    .wave { display: block; line-height: 0; }
-    .wave svg { display: block; width: 100%; }
+    .section-wrap { padding: 96px 48px; }
+    .section-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 12px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 600; color: var(--ink); line-height: 1.2; margin-bottom: 14px; }
+    .section-title em { font-style: italic; color: var(--accent); }
+    .section-sub { font-size: 0.97rem; color: var(--mid); line-height: 1.75; max-width: 500px; }
 
     /* ── SERVICES ── */
-    .services { background: var(--cream); padding: 80px 60px; }
-    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .services { background: var(--cream); }
+    .services-header { margin-bottom: 52px; }
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
     .service-card {
-      background: var(--white); border-radius: 20px; padding: 32px 24px;
-      transition: transform 0.2s, box-shadow 0.2s, border-left-color 0.2s;
-      border-left: 4px solid transparent;
-      box-shadow: 0 2px 12px rgba(28,16,51,0.06);
+      background: var(--white); border-radius: 16px; padding: 32px 24px;
+      border: 1px solid rgba(31,29,46,0.07);
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
     }
-    .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 36px rgba(255,107,157,0.15); border-left-color: var(--accent); }
-    .service-icon {
-      width: 52px; height: 52px; border-radius: 14px; background: var(--cream);
-      display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
-    }
-    .service-icon svg { width: 26px; height: 26px; }
-    .service-name { font-family: 'Fredoka', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-    .service-desc { font-size: 0.88rem; color: var(--mid); line-height: 1.65; margin-bottom: 16px; }
-    .service-price { font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(169,156,214,0.18); border-color: rgba(169,156,214,0.4); }
+    .service-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); opacity: 0.5; margin-bottom: 20px; }
+    .service-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+    .service-desc { font-size: 0.875rem; color: var(--mid); line-height: 1.7; margin-bottom: 20px; }
+    .service-price { font-size: 0.8rem; font-weight: 600; color: var(--accent); letter-spacing: 0.04em; margin-bottom: 18px; text-transform: uppercase; }
     .service-link {
-      font-size: 0.83rem; font-weight: 700; color: var(--ink); text-decoration: none;
-      border: 1.5px solid rgba(28,16,51,0.2); padding: 6px 16px; border-radius: 50px;
-      transition: border-color 0.2s, color 0.2s; display: inline-block;
+      font-size: 0.8rem; font-weight: 600; color: var(--mid); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px; letter-spacing: 0.04em;
+      transition: color 0.2s; text-transform: uppercase;
     }
-    .service-link:hover { border-color: var(--accent); color: var(--accent); }
+    .service-link:hover { color: var(--accent); }
+    .service-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; transition: transform 0.2s; }
+    .service-link:hover svg { transform: translateX(3px); }
 
     /* ── GALLERY ── */
-    .gallery { background: var(--white); padding: 80px 60px; }
-    .masonry-grid { columns: 4; column-gap: 14px; margin-top: 48px; }
-    .masonry-item {
-      break-inside: avoid; margin-bottom: 14px;
-      border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;
-    }
-    .masonry-item img { display: block; width: 100%; height: auto; transition: transform 0.35s; }
-    .masonry-item:hover img { transform: scale(1.05); }
+    .gallery { background: var(--white); }
+    .gallery-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; flex-wrap: wrap; gap: 16px; }
+    .masonry-grid { columns: 4; column-gap: 14px; }
+    .masonry-item { break-inside: avoid; margin-bottom: 14px; border-radius: 14px; overflow: hidden; position: relative; }
+    .masonry-item img { display: block; width: 100%; height: auto; transition: transform 0.4s; }
+    .masonry-item:hover img { transform: scale(1.04); }
     .masonry-caption {
       position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(28,16,51,0.78));
-      color: var(--white); padding: 28px 16px 14px;
-      font-size: 0.88rem; font-weight: 700;
+      padding: 32px 16px 14px;
+      background: linear-gradient(transparent, rgba(31,29,46,0.7));
+      color: var(--white); font-size: 0.85rem; font-weight: 500;
       transform: translateY(100%); transition: transform 0.3s;
     }
-    .masonry-caption span { display: block; font-weight: 400; opacity: 0.75; font-size: 0.78rem; margin-top: 2px; }
+    .masonry-caption span { font-size: 0.75rem; opacity: 0.7; display: block; margin-top: 2px; }
     .masonry-item:hover .masonry-caption { transform: translateY(0); }
 
-    /* ── BEFORE & AFTER ── */
-    .before-after { background: #FFF0F5; padding: 80px 60px; }
-    .ba-header { text-align: center; margin-bottom: 52px; }
-    .ba-container { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center; max-width: 860px; margin: 0 auto; }
-    .ba-box { border-radius: 20px; overflow: hidden; position: relative; }
-    .ba-box img { display: block; width: 100%; height: 360px; object-fit: cover; }
-    .ba-label {
-      position: absolute; top: 16px; left: 16px; color: var(--white);
-      padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 700;
-      font-family: 'Fredoka', sans-serif; background: var(--accent);
+    /* ── BEFORE AFTER ── */
+    .before-after { background: var(--cream); }
+    .ba-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; max-width: 960px; margin: 0 auto; }
+    .ba-text .section-sub { margin-top: 16px; margin-bottom: 32px; }
+    .ba-quote {
+      font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic;
+      color: var(--ink); line-height: 1.6; padding: 24px; border-left: 3px solid var(--accent);
+      background: var(--white); border-radius: 0 12px 12px 0; margin-top: 32px;
     }
-    .ba-after-label { background: #4ECDC4; }
-    .ba-middle { display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--accent); }
-    .ba-arrows { font-size: 2.2rem; line-height: 1; }
-    .ba-middle p { font-family: 'Fredoka', sans-serif; font-size: 0.95rem; color: var(--mid); text-align: center; }
+    .ba-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .ba-box { border-radius: 16px; overflow: hidden; position: relative; }
+    .ba-box img { display: block; width: 100%; height: 280px; object-fit: cover; }
+    .ba-label {
+      position: absolute; top: 14px; left: 14px; background: rgba(250,248,245,0.9);
+      backdrop-filter: blur(6px); color: var(--ink); padding: 5px 13px; border-radius: 50px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    }
 
     /* ── BOOKING ── */
-    .booking { background: var(--white); padding: 80px 60px; }
-    .booking-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: start; max-width: 1100px; margin: 0 auto; }
-    .booking-trust { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+    .booking { background: var(--white); }
+    .booking-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: start; max-width: 1100px; margin: 0 auto; }
+    .booking-trust { display: flex; flex-direction: column; gap: 22px; margin-top: 36px; }
     .trust-item { display: flex; align-items: flex-start; gap: 14px; }
-    .trust-check {
-      width: 24px; height: 24px; min-width: 24px; border-radius: 50%; background: var(--accent);
-      display: flex; align-items: center; justify-content: center; margin-top: 2px;
-    }
-    .trust-check svg { width: 13px; height: 13px; }
-    .trust-item-text strong { display: block; font-weight: 700; font-size: 0.95rem; color: var(--ink); margin-bottom: 2px; }
-    .trust-item-text span { font-size: 0.85rem; color: var(--mid); line-height: 1.5; }
-    .booking-form { display: flex; flex-direction: column; gap: 16px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .trust-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 8px; }
+    .trust-item-text strong { display: block; font-size: 0.92rem; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+    .trust-item-text span { font-size: 0.83rem; color: var(--mid); line-height: 1.55; }
+    .booking-form { display: flex; flex-direction: column; gap: 14px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group label { font-size: 0.85rem; font-weight: 700; color: var(--ink); }
+    .form-group label { font-size: 0.78rem; font-weight: 600; color: var(--ink); letter-spacing: 0.04em; text-transform: uppercase; }
     .form-group input, .form-group select {
-      padding: 12px 16px; border: 2px solid rgba(28,16,51,0.1); border-radius: 12px;
-      font-family: 'Nunito', sans-serif; font-size: 0.95rem; color: var(--ink);
+      padding: 12px 16px; border: 1.5px solid rgba(31,29,46,0.12); border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.93rem; color: var(--ink);
       background: var(--white); outline: none; transition: border-color 0.2s; -webkit-appearance: none;
     }
     .form-group input:focus, .form-group select:focus { border-color: var(--accent); }
-    .time-btns { display: flex; gap: 8px; flex-wrap: wrap; padding-top: 2px; }
+    .form-group input::placeholder { color: var(--mid); opacity: 0.6; }
+    .time-btns { display: flex; gap: 8px; flex-wrap: wrap; }
     .time-btn {
-      padding: 9px 20px; border-radius: 50px; border: 2px solid rgba(28,16,51,0.12);
-      background: var(--white); font-family: 'Nunito', sans-serif; font-size: 0.88rem;
-      font-weight: 600; color: var(--ink); cursor: pointer; transition: all 0.2s;
+      padding: 8px 18px; border-radius: 50px; border: 1.5px solid rgba(31,29,46,0.12);
+      background: var(--white); font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.83rem; font-weight: 500; color: var(--mid); cursor: pointer; transition: all 0.2s;
     }
     .time-btn:hover, .time-btn.active { background: var(--accent); color: var(--white); border-color: var(--accent); }
     .form-submit {
-      background: var(--accent); color: var(--white); padding: 16px 32px;
-      border-radius: 50px; border: none; font-family: 'Nunito', sans-serif;
-      font-size: 1rem; font-weight: 700; cursor: pointer; transition: opacity 0.2s, transform 0.2s; margin-top: 8px;
+      background: var(--accent); color: var(--white); padding: 15px 32px;
+      border-radius: 50px; border: none; font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.93rem; font-weight: 600; cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s; margin-top: 8px; letter-spacing: 0.02em;
     }
-    .form-submit:hover { opacity: 0.9; transform: translateY(-2px); }
+    .form-submit:hover { opacity: 0.88; transform: translateY(-2px); }
 
     /* ── TEAM ── */
-    .team { background: var(--cream); padding: 80px 60px; }
-    .team-header { text-align: center; }
-    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 52px; }
+    .team { background: var(--cream); }
+    .team-header { margin-bottom: 52px; }
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
     .team-card {
-      background: var(--white); border-radius: 24px; padding: 40px 28px;
-      text-align: center; box-shadow: 0 2px 16px rgba(28,16,51,0.06);
-      transition: transform 0.2s, box-shadow 0.2s;
+      background: var(--white); border-radius: 18px; padding: 36px 28px; text-align: center;
+      border: 1px solid rgba(31,29,46,0.07);
+      transition: transform 0.25s, box-shadow 0.25s;
     }
-    .team-card:hover { transform: translateY(-5px); box-shadow: 0 10px 36px rgba(255,107,157,0.13); }
-    .team-photo { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 4px solid var(--cream); display: block; }
-    .team-name { font-family: 'Fredoka', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-    .team-badge { display: inline-block; background: rgba(255,107,157,0.12); color: var(--accent); padding: 4px 14px; border-radius: 50px; font-size: 0.77rem; font-weight: 700; margin-bottom: 14px; }
-    .team-bio { font-size: 0.88rem; color: var(--mid); line-height: 1.65; margin-bottom: 18px; }
-    .team-paws { display: flex; justify-content: center; gap: 4px; }
-    .paw-svg { width: 16px; height: 16px; fill: var(--accent); flex-shrink: 0; }
+    .team-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(169,156,214,0.15); }
+    .team-photo { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 20px; border: 3px solid var(--cream); }
+    .team-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+    .team-role { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .team-bio { font-size: 0.87rem; color: var(--mid); line-height: 1.7; }
 
     /* ── TESTIMONIALS ── */
-    .testimonials { background: #FFFBDF; padding: 80px 60px; }
-    .testimonials-header { text-align: center; }
-    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
-    .review-card { background: var(--white); border-radius: 20px; padding: 32px; box-shadow: 0 2px 12px rgba(28,16,51,0.05); }
-    .review-stars { color: #FFB800; font-size: 1.05rem; margin-bottom: 16px; letter-spacing: 2px; }
-    .review-text { font-size: 0.93rem; color: var(--ink); line-height: 1.75; margin-bottom: 22px; font-style: italic; }
-    .review-author { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-    .review-name { font-weight: 700; font-size: 0.9rem; color: var(--ink); }
-    .review-pet { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,107,157,0.1); color: var(--accent); padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
+    .testimonials { background: var(--white); }
+    .testimonials-header { margin-bottom: 52px; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .review-card {
+      padding: 36px; border-radius: 16px;
+      background: var(--cream); border: 1px solid rgba(31,29,46,0.06);
+    }
+    .review-stars { font-size: 0.85rem; color: #C8A96E; letter-spacing: 3px; margin-bottom: 18px; }
+    .review-text { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; color: var(--ink); line-height: 1.8; margin-bottom: 24px; }
+    .review-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .review-name { font-size: 0.85rem; font-weight: 600; color: var(--ink); }
+    .review-pet {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); background: var(--accent-soft); padding: 4px 12px; border-radius: 50px;
+    }
 
     /* ── CTA STRIP ── */
-    .cta-strip { background: var(--accent); padding: 80px 60px; text-align: center; }
-    .cta-strip h2 { font-family: 'Fredoka', sans-serif; font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 700; color: var(--white); margin-bottom: 30px; }
-    .btn-white {
-      background: var(--white); color: var(--accent); padding: 16px 40px;
-      border-radius: 50px; font-family: 'Nunito', sans-serif; font-size: 1.05rem; font-weight: 700;
-      text-decoration: none; transition: opacity 0.2s, transform 0.2s; display: inline-block;
+    .cta-strip {
+      background: var(--ink); padding: 96px 48px; text-align: center;
+      position: relative; overflow: hidden;
     }
-    .btn-white:hover { opacity: 0.92; transform: translateY(-2px); }
+    .cta-strip::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: rgba(169,156,214,0.08);
+    }
+    .cta-strip::after {
+      content: ''; position: absolute; bottom: -80px; left: -40px;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: rgba(169,156,214,0.05);
+    }
+    .cta-strip h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 600; color: var(--white); line-height: 1.3; margin-bottom: 12px; position: relative; z-index: 1; }
+    .cta-strip h2 em { font-style: italic; color: var(--accent); }
+    .cta-strip p { font-size: 0.97rem; color: rgba(255,255,255,0.5); margin-bottom: 36px; position: relative; z-index: 1; }
+    .btn-light {
+      background: var(--accent); color: var(--white); padding: 15px 36px;
+      border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.93rem; font-weight: 600; text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s; display: inline-block; position: relative; z-index: 1; letter-spacing: 0.02em;
+    }
+    .btn-light:hover { opacity: 0.88; transform: translateY(-2px); }
 
     /* ── CONTACT ── */
-    .contact { background: var(--white); padding: 80px 60px; }
-    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; max-width: 1000px; margin: 0 auto; }
-    .contact-info h3 { font-family: 'Fredoka', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--ink); margin-bottom: 28px; }
-    .contact-detail { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
-    .contact-icon { width: 42px; height: 42px; border-radius: 12px; background: var(--cream); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .contact-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; }
-    .contact-detail p strong { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 2px; color: var(--mid); }
-    .contact-detail p span { font-size: 0.95rem; color: var(--ink); }
+    .contact { background: var(--cream); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1000px; margin: 0 auto; }
+    .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; color: var(--ink); margin-bottom: 32px; }
+    .contact-detail { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 22px; }
+    .contact-detail svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; flex-shrink: 0; margin-top: 2px; }
+    .contact-detail p strong { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); margin-bottom: 3px; }
+    .contact-detail p span { font-size: 0.93rem; color: var(--ink); }
     .social-row { display: flex; gap: 10px; margin-top: 28px; }
-    .social-btn { width: 42px; height: 42px; border-radius: 12px; background: var(--cream); display: flex; align-items: center; justify-content: center; transition: background 0.2s; cursor: pointer; border: none; }
-    .social-btn:hover { background: var(--accent); }
-    .social-btn svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; transition: stroke 0.2s; }
+    .social-btn { width: 38px; height: 38px; border-radius: 10px; background: var(--white); display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(31,29,46,0.1); transition: background 0.2s, border-color 0.2s; }
+    .social-btn svg { width: 16px; height: 16px; stroke: var(--mid); fill: none; transition: stroke 0.2s; }
+    .social-btn:hover { background: var(--accent); border-color: var(--accent); }
     .social-btn:hover svg { stroke: white; }
-    .hours-section h3 { font-family: 'Fredoka', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--ink); margin-bottom: 28px; }
+    .hours-section h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; color: var(--ink); margin-bottom: 32px; }
     .hours-table { width: 100%; border-collapse: collapse; }
-    .hours-table td { padding: 12px 0; border-bottom: 1px solid rgba(28,16,51,0.07); font-size: 0.93rem; color: var(--ink); }
+    .hours-table td { padding: 12px 0; border-bottom: 1px solid rgba(31,29,46,0.07); font-size: 0.9rem; color: var(--ink); }
     .hours-table td:last-child { text-align: right; color: var(--mid); }
     .hours-table tr:last-child td { border-bottom: none; }
-    .hours-note { margin-top: 18px; font-size: 0.87rem; color: var(--mid); font-style: italic; line-height: 1.55; }
+    .hours-note { margin-top: 18px; font-size: 0.83rem; color: var(--mid); line-height: 1.6; }
 
     /* ── FOOTER ── */
-    footer { background: var(--cream); border-top: 3px solid var(--accent); padding: 40px 60px; }
+    footer { background: var(--white); border-top: 1px solid rgba(31,29,46,0.08); padding: 36px 48px; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-    .footer-logo { font-family: 'Fredoka', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--accent); }
-    .footer-nav { display: flex; gap: 24px; list-style: none; }
-    .footer-nav a { font-size: 0.88rem; font-weight: 600; color: var(--mid); text-decoration: none; transition: color 0.2s; }
-    .footer-nav a:hover { color: var(--accent); }
-    .footer-copy { font-size: 0.82rem; color: var(--mid); }
-    .footer-back { color: var(--accent); text-decoration: none; font-weight: 700; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--ink); }
+    .footer-logo span { color: var(--accent); }
+    .footer-nav { display: flex; gap: 28px; list-style: none; }
+    .footer-nav a { font-size: 0.83rem; font-weight: 500; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+    .footer-nav a:hover { color: var(--ink); }
+    .footer-copy { font-size: 0.78rem; color: var(--mid); }
+    .footer-back { color: var(--accent); text-decoration: none; font-weight: 600; }
     .footer-back:hover { text-decoration: underline; }
 
     /* ── SCROLL REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .d1 { transition-delay: 0.1s; }
     .d2 { transition-delay: 0.2s; }
@@ -304,40 +316,32 @@
     @media (max-width: 1024px) {
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .masonry-grid { columns: 3; }
+      .booking-inner { grid-template-columns: 1fr; gap: 48px; }
       .team-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .nav-links { display: none; position: fixed; top: 104px; left: 0; right: 0; z-index: 80; flex-direction: column; background: var(--white); padding: 20px 24px; gap: 16px; box-shadow: 0 8px 24px rgba(28,16,51,0.1); }
+      .nav-links { display: none; position: fixed; top: 104px; left: 0; right: 0; z-index: 80; flex-direction: column; background: var(--cream); padding: 20px 24px; gap: 16px; box-shadow: 0 8px 24px rgba(31,29,46,0.09); }
       .nav-links.open { display: flex; }
       .nav-toggle { display: flex; }
-      .hero { grid-template-columns: 1fr; padding: 40px 24px 60px; min-height: auto; gap: 48px; }
-      .hero-photos { height: 340px; order: -1; }
-      .pet-card-1 { width: 145px; height: 188px; left: 5px; top: 30px; }
-      .pet-card-2 { width: 158px; height: 208px; top: 52px; margin-left: -79px; }
-      .pet-card-3 { width: 142px; height: 185px; right: 5px; top: 40px; }
-      .hero-circle { width: 230px; height: 230px; }
-      .services { padding: 60px 24px; }
+      .hero { height: auto; min-height: calc(100vh - 68px); }
+      .hero-bg { position: relative; height: 300px; }
+      .hero-bg::after { background: rgba(31,29,46,0.2); }
+      .hero-card { position: relative; top: auto; left: auto; transform: none; max-width: 100%; margin: -32px 16px 0; border-radius: 16px; padding: 36px 28px; }
+      .section-wrap { padding: 64px 24px; }
+      .intro-strip { padding: 20px 24px; gap: 20px; }
       .services-grid { grid-template-columns: 1fr 1fr; }
-      .gallery { padding: 60px 24px; }
       .masonry-grid { columns: 2; }
-      .before-after { padding: 60px 24px; }
-      .ba-container { grid-template-columns: 1fr; }
-      .ba-box img { height: 260px; }
-      .ba-middle { flex-direction: row; }
-      .booking { padding: 60px 24px; }
-      .booking-inner { grid-template-columns: 1fr; gap: 44px; }
+      .ba-inner { grid-template-columns: 1fr; }
+      .ba-photos { grid-template-columns: 1fr 1fr; }
       .form-row { grid-template-columns: 1fr; }
-      .team { padding: 60px 24px; }
       .team-grid { grid-template-columns: 1fr; }
-      .testimonials { padding: 60px 24px; }
       .reviews-grid { grid-template-columns: 1fr; }
-      .cta-strip { padding: 60px 24px; }
-      .contact { padding: 60px 24px; }
       .contact-inner { grid-template-columns: 1fr; gap: 44px; }
-      footer { padding: 32px 24px; }
+      footer { padding: 28px 24px; }
       .footer-inner { flex-direction: column; text-align: center; }
-      .section-sub { margin-bottom: 32px; }
+      .footer-nav { flex-wrap: wrap; justify-content: center; }
+      .cta-strip { padding: 64px 24px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
@@ -351,26 +355,17 @@
 <div class="palette-bar">
   <span class="palette-label">Color</span>
   <div class="palette-chips">
-    <button class="chip active" style="background:#FF6B9D" data-color="#FF6B9D" data-name="Bubblegum Pink" title="Bubblegum Pink" aria-label="Bubblegum Pink"></button>
-    <button class="chip" style="background:#FFDE59" data-color="#FFDE59" data-name="Sunny Yellow" title="Sunny Yellow" aria-label="Sunny Yellow"></button>
-    <button class="chip" style="background:#4ECDC4" data-color="#4ECDC4" data-name="Mint" title="Mint" aria-label="Mint"></button>
-    <button class="chip" style="background:#A78BFA" data-color="#A78BFA" data-name="Lavender" title="Lavender" aria-label="Lavender"></button>
+    <button class="chip active" style="background:#A99CD6" data-color="#A99CD6" data-name="Lavender" title="Lavender" aria-label="Lavender"></button>
+    <button class="chip" style="background:#7BBFAA" data-color="#7BBFAA" data-name="Sage" title="Sage" aria-label="Sage"></button>
+    <button class="chip" style="background:#E8956A" data-color="#E8956A" data-name="Peach" title="Peach" aria-label="Peach"></button>
+    <button class="chip" style="background:#6BAFD6" data-color="#6BAFD6" data-name="Sky Blue" title="Sky Blue" aria-label="Sky Blue"></button>
   </div>
-  <span class="chip-name" id="colorName">Bubblegum Pink</span>
+  <span class="chip-name" id="colorName">Lavender</span>
 </div>
 
 <!-- NAV -->
 <nav id="mainNav">
-  <a class="nav-logo" href="#">
-    <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5" fill="var(--accent)"/>
-      <ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5" fill="var(--accent)"/>
-      <ellipse cx="3" cy="12.5" rx="2.3" ry="3" fill="var(--accent)"/>
-      <ellipse cx="21" cy="12.5" rx="2.3" ry="3" fill="var(--accent)"/>
-      <path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z" fill="var(--accent)"/>
-    </svg>
-    Paw &amp; Play
-  </a>
+  <a class="nav-logo" href="#">Fluffy <span>Cloud</span> Studio</a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#services">Services</a></li>
     <li><a href="#gallery">Gallery</a></li>
@@ -379,7 +374,7 @@
     <li><a href="#booking" class="nav-cta">Book Now</a></li>
   </ul>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round">
       <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
     </svg>
   </button>
@@ -387,217 +382,194 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-text">
-    <h1>Every tail deserves a <span class="dark">spa day.</span></h1>
-    <p>Austin's favorite boutique pet studio. Grooming, daycare, spa treatments, and more — all under one roof, with love in every appointment.</p>
+  <div class="hero-bg" role="img" aria-label="Happy golden retriever outdoors"></div>
+  <div class="hero-card">
+    <span class="hero-eyebrow">Pet Grooming &amp; Spa · Austin, TX</span>
+    <h1>Where every pet feels <em>perfectly at home.</em></h1>
+    <p>Boutique grooming, cage-free daycare, and spa treatments — all delivered with the patience and love your pet deserves.</p>
     <div class="hero-btns">
-      <a href="#booking" class="btn-primary">Book Appointment</a>
-      <a href="#services" class="btn-outline">See Services</a>
+      <a href="#booking" class="btn-primary">Book an Appointment</a>
+      <a href="#services" class="btn-ghost">Explore Services</a>
     </div>
-    <div class="hero-trust">
-      <span class="trust-pill"><span class="star">★</span> 4.9/5 on Google</span>
-      <span class="trust-pill">3,500+ Happy Pets</span>
-      <span class="trust-pill">Same-Day Grooming</span>
-    </div>
-  </div>
-  <div class="hero-photos" aria-hidden="true">
-    <div class="hero-circle"></div>
-    <div class="pet-card pet-card-1">
-      <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=80&fit=crop" alt="Golden retriever puppy" loading="eager" />
-    </div>
-    <div class="pet-card pet-card-2">
-      <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=440&q=80&fit=crop" alt="Adorable cat close-up" loading="eager" />
-    </div>
-    <div class="pet-card pet-card-3">
-      <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&q=80&fit=crop" alt="Fluffy golden retriever" loading="eager" />
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">3,500+</span>
+        <span class="stat-label">Happy Pets</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">4.9</span>
+        <span class="stat-label">Google Rating</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">6 yrs</span>
+        <span class="stat-label">In Austin</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- WAVE: white → cream -->
-<div class="wave" style="background:var(--white);">
-  <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="56">
-    <path d="M0,28 C240,56 480,0 720,28 C960,56 1200,0 1440,28 L1440,56 L0,56 Z" fill="#FFF8F9"/>
-  </svg>
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="intro-item">
+    <div class="intro-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+    <span class="intro-text">Certified Groomers</span>
+  </div>
+  <div class="intro-item">
+    <div class="intro-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
+    <span class="intro-text">Cage-Free Daycare</span>
+  </div>
+  <div class="intro-item">
+    <div class="intro-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16,8 20,8 23,11 23,16 16,16 16,8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+    <span class="intro-text">Same-Day Appointments</span>
+  </div>
+  <div class="intro-item">
+    <div class="intro-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.85 12 19.79 19.79 0 0 1 1.78 3.33 2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.83 5.83l.84-.84a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+    <span class="intro-text">Live Photo Updates</span>
+  </div>
 </div>
 
 <!-- SERVICES -->
-<section class="services" id="services">
-  <span class="section-label reveal">Our Services</span>
-  <h2 class="section-title reveal d1">Everything your pet needs</h2>
-  <p class="section-sub reveal d2">From a quick nail trim to a full spa day — we've got every tail, paw, and whisker covered.</p>
+<section class="section-wrap services" id="services">
+  <div class="services-header">
+    <span class="section-label reveal">Services</span>
+    <h2 class="section-title reveal d1">Everything your pet <em>needs</em></h2>
+    <p class="section-sub reveal d2">From a quick nail trim to a full spa experience — we've got every coat, paw, and whisker covered with care.</p>
+  </div>
   <div class="services-grid">
-
     <div class="service-card reveal d1">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 2a2 2 0 0 0-2 2v0a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2v0a2 2 0 0 0-2-2z"/>
-          <path d="M15 2a2 2 0 0 0-2 2v0a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2v0a2 2 0 0 0-2-2z"/>
-          <path d="M3 8a2 2 0 0 0-2 2v0a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2v0A2 2 0 0 0 3 8z"/>
-          <path d="M21 8a2 2 0 0 0-2 2v0a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2v0a2 2 0 0 0-2-2z"/>
-          <path d="M12 14c-3.5 0-6 2.5-6 5.5S7.5 23 12 23s6-1.5 6-3.5-2.5-5.5-6-5.5z"/>
-        </svg>
-      </div>
+      <div class="service-dot"></div>
       <div class="service-name">Grooming &amp; Styling</div>
-      <div class="service-desc">Full baths, breed-specific haircuts, nail trims, ear cleaning, and a spritz of our signature cologne.</div>
+      <div class="service-desc">Full baths, breed-specific cuts, nail trims, ear cleaning, and a finish that turns heads at the dog park.</div>
       <div class="service-price">From $45</div>
-      <a href="#booking" class="service-link">Book Now</a>
+      <a href="#booking" class="service-link">Book now <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
     </div>
-
     <div class="service-card reveal d2">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-          <polyline points="9,22 9,12 15,12 15,22"/>
-        </svg>
-      </div>
+      <div class="service-dot"></div>
       <div class="service-name">Daycare &amp; Boarding</div>
-      <div class="service-desc">Cage-free play groups, outdoor romp sessions, naptime, and real-time photo updates sent to your phone.</div>
-      <div class="service-price">From $35/day</div>
-      <a href="#booking" class="service-link">Book Now</a>
+      <div class="service-desc">Cage-free play groups, outdoor sessions, structured naptime, and real-time photo updates to your phone.</div>
+      <div class="service-price">From $35 / day</div>
+      <a href="#booking" class="service-link">Book now <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
     </div>
-
     <div class="service-card reveal d3">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-      </div>
+      <div class="service-dot"></div>
       <div class="service-name">Spa Treatments</div>
-      <div class="service-desc">Aromatherapy baths, paw balm massage, blueberry facial, teeth brushing, and deep conditioning.</div>
+      <div class="service-desc">Aromatherapy baths, paw balm massage, blueberry facial, teeth brushing, and deep conditioning — pure relaxation.</div>
       <div class="service-price">From $25 add-on</div>
-      <a href="#booking" class="service-link">Book Now</a>
+      <a href="#booking" class="service-link">Book now <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
     </div>
-
     <div class="service-card reveal d4">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <path d="M16 10a4 4 0 0 1-8 0"/>
-        </svg>
-      </div>
+      <div class="service-dot"></div>
       <div class="service-name">Retail &amp; Shop</div>
-      <div class="service-desc">Premium food, stylish accessories, treats, toys, and grooming products — all curated by our expert team.</div>
+      <div class="service-desc">Premium food, stylish accessories, calming treats, and grooming products — all expertly curated for your pet.</div>
       <div class="service-price">Open Daily</div>
-      <a href="#contact" class="service-link">Visit Us</a>
+      <a href="#contact" class="service-link">Visit us <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
     </div>
-
   </div>
 </section>
 
-<!-- WAVE: cream → white -->
-<div class="wave" style="background:var(--cream);">
-  <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="56">
-    <path d="M0,28 C360,0 720,56 1080,28 C1260,14 1380,42 1440,28 L1440,56 L0,56 Z" fill="#FFFFFF"/>
-  </svg>
-</div>
-
 <!-- GALLERY -->
-<section class="gallery" id="gallery">
-  <span class="section-label reveal">Happy Tails Gallery</span>
-  <h2 class="section-title reveal d1">Smiles, all around</h2>
-  <p class="section-sub reveal d2">Every pet leaves looking (and feeling) like a star. Here are a few of our recent favorites.</p>
+<section class="section-wrap gallery" id="gallery">
+  <div class="gallery-header">
+    <div>
+      <span class="section-label reveal">Happy Tails</span>
+      <h2 class="section-title reveal d1">Pets who left <em>glowing</em></h2>
+    </div>
+    <p class="section-sub reveal d2" style="max-width:300px; text-align:right;">Every appointment ends with a tail wag. Here are some of our recent guests.</p>
+  </div>
   <div class="masonry-grid reveal d3">
     <div class="masonry-item">
       <img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9?w=500&q=80" alt="Happy dog portrait" loading="lazy" />
-      <div class="masonry-caption">Buddy<span>Golden Retriever</span></div>
+      <div class="masonry-caption">Buddy <span>Golden Retriever</span></div>
     </div>
     <div class="masonry-item">
       <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=500&q=80" alt="Playful puppy" loading="lazy" />
-      <div class="masonry-caption">Luna<span>Labrador Mix</span></div>
+      <div class="masonry-caption">Luna <span>Labrador Mix</span></div>
     </div>
     <div class="masonry-item">
       <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=500&q=80" alt="Two dogs playing" loading="lazy" />
-      <div class="masonry-caption">Max &amp; Daisy<span>Daycare Besties</span></div>
+      <div class="masonry-caption">Max &amp; Daisy <span>Daycare Besties</span></div>
     </div>
     <div class="masonry-item">
       <img src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=500&q=80" alt="Cat lounging" loading="lazy" />
-      <div class="masonry-caption">Mochi<span>Persian Cat</span></div>
+      <div class="masonry-caption">Mochi <span>Persian Cat</span></div>
     </div>
     <div class="masonry-item">
       <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=500&q=80" alt="Dog in field" loading="lazy" />
-      <div class="masonry-caption">Biscuit<span>Beagle</span></div>
+      <div class="masonry-caption">Biscuit <span>Beagle</span></div>
     </div>
     <div class="masonry-item">
       <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?w=500&q=80" alt="Happy Labrador" loading="lazy" />
-      <div class="masonry-caption">Cooper<span>Chocolate Lab</span></div>
+      <div class="masonry-caption">Cooper <span>Chocolate Lab</span></div>
     </div>
     <div class="masonry-item">
-      <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=500&q=80" alt="Dog portrait close-up" loading="lazy" />
-      <div class="masonry-caption">Rosie<span>Goldendoodle</span></div>
+      <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=500&q=80" alt="Dog portrait" loading="lazy" />
+      <div class="masonry-caption">Rosie <span>Goldendoodle</span></div>
     </div>
     <div class="masonry-item">
       <img src="https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?w=500&q=80" alt="Cat portrait" loading="lazy" />
-      <div class="masonry-caption">Noodles<span>Tabby Cat</span></div>
+      <div class="masonry-caption">Noodles <span>Tabby Cat</span></div>
     </div>
   </div>
 </section>
 
 <!-- BEFORE & AFTER -->
-<section class="before-after">
-  <div class="ba-header">
-    <span class="section-label reveal">The Paw &amp; Play Difference</span>
-    <h2 class="section-title reveal d1">See the transformation</h2>
-    <p class="section-sub reveal d2" style="max-width:460px; margin-left:auto; margin-right:auto;">Our groomers work their magic on every coat, curl, and paw pad. The results speak for themselves.</p>
-  </div>
-  <div class="ba-container reveal d1">
-    <div class="ba-box">
-      <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=600&q=80&fit=crop" alt="Dog before grooming" loading="lazy" />
-      <span class="ba-label">Before</span>
+<section class="section-wrap before-after">
+  <div class="ba-inner">
+    <div class="ba-text reveal">
+      <span class="section-label">The Difference</span>
+      <h2 class="section-title">Before &amp; after <em>the magic</em></h2>
+      <p class="section-sub">Our groomers take time with every coat type — no rushed appointments, no cutting corners. The transformation is always real.</p>
+      <blockquote class="ba-quote">
+        "Rosie came in a fluffy mess and left looking like she belonged in a magazine. I couldn't believe it was the same dog."
+        <footer style="margin-top:12px; font-style:normal; font-size:0.8rem; color:var(--mid);">— Jennifer K., mom of Rosie</footer>
+      </blockquote>
     </div>
-    <div class="ba-middle">
-      <span class="ba-arrows">✦</span>
-      <p>Our<br>magic</p>
-    </div>
-    <div class="ba-box">
-      <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=600&q=80&fit=crop" alt="Dog freshly groomed" loading="lazy" />
-      <span class="ba-label ba-after-label">After ✓</span>
+    <div class="ba-photos reveal d2">
+      <div class="ba-box">
+        <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=600&q=80&fit=crop" alt="Dog before grooming" loading="lazy" />
+        <span class="ba-label">Before</span>
+      </div>
+      <div class="ba-box">
+        <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=600&q=80&fit=crop" alt="Dog after grooming" loading="lazy" />
+        <span class="ba-label" style="color:var(--accent);">After</span>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- BOOKING -->
-<section class="booking" id="booking">
+<section class="section-wrap booking" id="booking">
   <div class="booking-inner">
     <div>
-      <span class="section-label reveal">Book an Appointment</span>
-      <h2 class="section-title reveal d1">Your pet's next best day starts here</h2>
+      <span class="section-label reveal">Appointments</span>
+      <h2 class="section-title reveal d1">Book your pet's <em>next visit</em></h2>
       <div class="booking-trust reveal d2">
         <div class="trust-item">
-          <div class="trust-check">
-            <svg viewBox="0 0 13 13" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2,6.5 5.5,10 11,3"/></svg>
-          </div>
+          <div class="trust-dot"></div>
           <div class="trust-item-text">
             <strong>Licensed &amp; certified groomers</strong>
-            <span>All groomers hold current certifications from the National Dog Groomers Association</span>
+            <span>All team members hold current certifications from the National Dog Groomers Association</span>
           </div>
         </div>
         <div class="trust-item">
-          <div class="trust-check">
-            <svg viewBox="0 0 13 13" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2,6.5 5.5,10 11,3"/></svg>
-          </div>
+          <div class="trust-dot"></div>
           <div class="trust-item-text">
-            <strong>Cage-free daycare</strong>
-            <span>Open play in spacious, clean environments monitored by staff at all times</span>
+            <strong>Cage-free environment</strong>
+            <span>Open play and supervised rest in a clean, calm space — no kennels</span>
           </div>
         </div>
         <div class="trust-item">
-          <div class="trust-check">
-            <svg viewBox="0 0 13 13" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2,6.5 5.5,10 11,3"/></svg>
-          </div>
+          <div class="trust-dot"></div>
           <div class="trust-item-text">
             <strong>All breeds &amp; sizes welcome</strong>
-            <span>From tiny Chihuahuas to gentle Great Danes — we love them all</span>
+            <span>From Chihuahuas to Great Danes, cats to small exotics</span>
           </div>
         </div>
         <div class="trust-item">
-          <div class="trust-check">
-            <svg viewBox="0 0 13 13" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2,6.5 5.5,10 11,3"/></svg>
-          </div>
+          <div class="trust-dot"></div>
           <div class="trust-item-text">
-            <strong>Text updates throughout</strong>
-            <span>We'll send you adorable photos and progress updates while your pet is with us</span>
+            <strong>Live updates via text</strong>
+            <span>We send photos and check-ins throughout your pet's stay</span>
           </div>
         </div>
       </div>
@@ -628,7 +600,7 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="apptDate">Preferred Date</label>
+          <label for="apptDate">Date</label>
           <input type="date" id="apptDate" />
         </div>
         <div class="form-group">
@@ -646,7 +618,7 @@
           <input type="text" id="ownerName" placeholder="Sarah Johnson" />
         </div>
         <div class="form-group">
-          <label for="ownerPhone">Phone Number</label>
+          <label for="ownerPhone">Phone</label>
           <input type="tel" id="ownerPhone" placeholder="(512) 555-0100" />
         </div>
       </div>
@@ -656,87 +628,62 @@
 </section>
 
 <!-- TEAM -->
-<section class="team" id="team">
+<section class="section-wrap team" id="team">
   <div class="team-header">
     <span class="section-label reveal">Our Groomers</span>
-    <h2 class="section-title reveal d1">Meet the magic makers</h2>
-    <p class="section-sub reveal d2" style="max-width:500px; margin-left:auto; margin-right:auto; margin-bottom:0;">Our certified team of animal lovers brings skill, patience, and genuine care to every single appointment.</p>
+    <h2 class="section-title reveal d1">The people who'll <em>care for your pet</em></h2>
+    <p class="section-sub reveal d2">A small, dedicated team — because we believe in knowing every pet by name.</p>
   </div>
   <div class="team-grid">
-
     <div class="team-card reveal d1">
-      <img class="team-photo" src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=200&q=80&fit=crop&crop=faces" alt="Maya Rivera, Lead Groomer" loading="lazy" />
+      <img class="team-photo" src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=200&q=80&fit=crop&crop=faces" alt="Maya Rivera" loading="lazy" />
       <div class="team-name">Maya Rivera</div>
-      <span class="team-badge">Lead Groomer · 8 yrs</span>
-      <p class="team-bio">Doodle specialist and golden retriever enthusiast. Maya can transform even the fluffiest mess into runway-ready perfection.</p>
-      <div class="team-paws" aria-label="5 out of 5 paws">
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-      </div>
+      <div class="team-role">Lead Groomer · 8 yrs</div>
+      <p class="team-bio">Doodle and golden retriever specialist. Maya's calm approach has a way of relaxing even the most nervous pets from the moment they arrive.</p>
     </div>
-
     <div class="team-card reveal d2">
-      <img class="team-photo" src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=200&q=80&fit=crop&crop=faces" alt="Jake Morales, Senior Groomer" loading="lazy" />
+      <img class="team-photo" src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=200&q=80&fit=crop&crop=faces" alt="Jake Morales" loading="lazy" />
       <div class="team-name">Jake Morales</div>
-      <span class="team-badge">Senior Groomer · 5 yrs</span>
-      <p class="team-bio">Jake has a gift for nervous pups. His calm, patient technique keeps even the most anxious dogs completely relaxed.</p>
-      <div class="team-paws" aria-label="5 out of 5 paws">
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-      </div>
+      <div class="team-role">Senior Groomer · 5 yrs</div>
+      <p class="team-bio">Trained in anxiety-free handling techniques. Jake's patience is legendary among clients with dogs who've had difficult experiences elsewhere.</p>
     </div>
-
     <div class="team-card reveal d3">
-      <img class="team-photo" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80&fit=crop&crop=faces" alt="Chloe Kim, Feline Specialist" loading="lazy" />
+      <img class="team-photo" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80&fit=crop&crop=faces" alt="Chloe Kim" loading="lazy" />
       <div class="team-name">Chloe Kim</div>
-      <span class="team-badge">Feline Specialist · 4 yrs</span>
-      <p class="team-bio">Austin's go-to for cats and small animals. Chloe's gentle hands and love of all things feline make her irreplaceable.</p>
-      <div class="team-paws" aria-label="5 out of 5 paws">
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-        <svg class="paw-svg" viewBox="0 0 24 24"><ellipse cx="6.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="17.5" cy="4.5" rx="2.5" ry="3.5"/><ellipse cx="3" cy="12.5" rx="2.3" ry="3"/><ellipse cx="21" cy="12.5" rx="2.3" ry="3"/><path d="M12 9c-3.5 0-7 3-7 6.5C5 19 7.5 21 12 21s7-2 7-5.5C19 12 15.5 9 12 9z"/></svg>
-      </div>
+      <div class="team-role">Feline Specialist · 4 yrs</div>
+      <p class="team-bio">Austin's go-to for cats and small animals. Chloe's gentle hands turn what's usually a stressful experience into something almost peaceful.</p>
     </div>
-
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testimonials" id="testimonials">
+<section class="section-wrap testimonials" id="testimonials">
   <div class="testimonials-header">
     <span class="section-label reveal">What Pet Parents Say</span>
-    <h2 class="section-title reveal d1">Tails are wagging</h2>
-    <p class="section-sub reveal d2" style="max-width:500px; margin-left:auto; margin-right:auto; margin-bottom:0;">Don't just take our word for it — hear from the humans (and their fur babies) who keep coming back.</p>
+    <h2 class="section-title reveal d1">Trusted by <em>Austin's pet families</em></h2>
+    <p class="section-sub reveal d2">We let the results speak — and so do the people who bring their pets back every month.</p>
   </div>
   <div class="reviews-grid">
     <div class="review-card reveal d1">
       <div class="review-stars">★★★★★</div>
-      <p class="review-text">"Biscuit came home looking like a completely different dog — a much cuter, fluffier version of himself. Maya somehow made him actually enjoy bath time. Booking our third appointment already!"</p>
-      <div class="review-author">
+      <p class="review-text">"Biscuit came home looking like a completely different dog — a much cuter, fluffier version of himself. Maya somehow made him actually enjoy bath time. We won't go anywhere else."</p>
+      <div class="review-footer">
         <span class="review-name">Amanda T.</span>
         <span class="review-pet">Mom of Biscuit</span>
       </div>
     </div>
     <div class="review-card reveal d2">
       <div class="review-stars">★★★★★</div>
-      <p class="review-text">"Dropped Luna off for daycare and they sent me three adorable photos within an hour. She was blissfully exhausted when I picked her up. This place is an absolute godsend for working pet parents!"</p>
-      <div class="review-author">
+      <p class="review-text">"Dropped Luna off for daycare and they sent me three photos within an hour. She was blissfully worn out when I picked her up. An absolute godsend for anyone who works from home."</p>
+      <div class="review-footer">
         <span class="review-name">Carlos M.</span>
         <span class="review-pet">Dad of Luna</span>
       </div>
     </div>
     <div class="review-card reveal d3">
       <div class="review-stars">★★★★★</div>
-      <p class="review-text">"Mochi is a Persian cat and notoriously difficult to groom. Chloe handled her with such patience and love. Mochi actually purred through most of it. An incredible team — we're loyal customers for life."</p>
-      <div class="review-author">
+      <p class="review-text">"Mochi is a Persian and notoriously hard to groom. Chloe handled her with such patience — Mochi actually purred through most of it. Genuinely incredible. We're loyal customers for life."</p>
+      <div class="review-footer">
         <span class="review-name">Jessica L.</span>
         <span class="review-pet">Mom of Mochi</span>
       </div>
@@ -746,36 +693,31 @@
 
 <!-- CTA STRIP -->
 <section class="cta-strip">
-  <h2 class="reveal">Your fur baby deserves the best.</h2>
-  <a href="#booking" class="btn-white reveal d1">Book Now →</a>
+  <h2 class="reveal">Your pet deserves to feel <em>beautiful.</em></h2>
+  <p class="reveal d1">First appointment? We'd love to meet them.</p>
+  <a href="#booking" class="btn-light reveal d2">Book an Appointment →</a>
 </section>
 
 <!-- CONTACT -->
-<section class="contact" id="contact">
+<section class="section-wrap contact" id="contact">
   <div class="contact-inner">
     <div class="contact-info">
-      <h3>Come say hi!</h3>
+      <h3>Visit Us</h3>
       <div class="contact-detail">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         <p><strong>Address</strong><span>2847 South Lamar Blvd, Austin, TX 78704</span></p>
       </div>
       <div class="contact-detail">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.85 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.83 5.83l.84-.84a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.85 12 19.79 19.79 0 0 1 1.78 3.33 2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.83 5.83l.84-.84a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <p><strong>Phone</strong><span>(512) 555-0142</span></p>
       </div>
       <div class="contact-detail">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <p><strong>Email</strong><span>hello@pawandplay.com</span></p>
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <p><strong>Email</strong><span>hello@fluffycloudstudio.com</span></p>
       </div>
       <div class="social-row">
         <button class="social-btn" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         </button>
         <button class="social-btn" aria-label="Facebook">
           <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -795,7 +737,7 @@
           <tr><td>Boarding</td><td>24 / 7 care</td></tr>
         </tbody>
       </table>
-      <p class="hours-note">Walk-ins welcome for nail trims during business hours. Grooming &amp; daycare appointments recommended in advance.</p>
+      <p class="hours-note">Walk-ins welcome for nail trims during regular hours. All other services by appointment — same-day often available.</p>
     </div>
   </div>
 </section>
@@ -803,7 +745,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">Paw &amp; Play</div>
+    <div class="footer-logo">Fluffy <span>Cloud</span> Studio</div>
     <ul class="footer-nav">
       <li><a href="#services">Services</a></li>
       <li><a href="#gallery">Gallery</a></li>
@@ -812,7 +754,7 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <p class="footer-copy">
-      &copy; 2025 Paw &amp; Play Pet Studio ·
+      &copy; 2025 Fluffy Cloud Studio ·
       <a href="/" class="footer-back">Back to Smart KTeam</a>
     </p>
   </div>
@@ -828,26 +770,21 @@
       chip.classList.add('active');
       const color = chip.dataset.color;
       document.documentElement.style.setProperty('--accent', color);
-      document.documentElement.style.setProperty('--pink', color);
+      document.documentElement.style.setProperty('--accent-soft', color + '1F');
       colorName.textContent = chip.dataset.name;
     });
   });
 
   // Nav shadow on scroll
-  const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 20);
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
 
-  // Mobile nav toggle
+  // Mobile nav
   const toggleBtn = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
-  toggleBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-  });
-  navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => navLinks.classList.remove('open'));
-  });
+  toggleBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
   // Time slot toggles
   function toggleTime(btn) {
@@ -856,16 +793,10 @@
   }
 
   // Scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        revealObserver.unobserve(e.target);
-      }
-    });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.1 });
-  revealEls.forEach(el => revealObserver.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>

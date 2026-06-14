@@ -1,16 +1,16 @@
 {
   "id": "pet-salon",
   "order": 6,
-  "title": "Paw & Play Pet Studio",
+  "title": "Fluffy Cloud Studio",
   "category": "Pet Services",
-  "description": "Bright, playful boutique pet salon. Bubblegum pink palette, Fredoka + Nunito fonts, white hero with stacked rotated pet photos, CSS masonry gallery, before/after reveal, booking form, groomer team cards, pet-parent testimonials.",
+  "description": "Boutique pet grooming & spa. Dusty lavender pastel palette, Playfair Display + Plus Jakarta Sans fonts, full-bleed hero with frosted glass card, CSS masonry gallery, before/after editorial layout, booking form, groomer team cards, and pet-parent testimonials.",
   "palette": {
-    "primary": "#FF6B9D",
-    "background": "#FFF8F9",
-    "ink": "#1C1033",
-    "secondary": "#FFDE59"
+    "primary": "#A99CD6",
+    "background": "#FAF8F5",
+    "ink": "#1F1D2E",
+    "secondary": "#7BBFAA"
   },
-  "fonts": ["Fredoka", "Nunito"],
-  "style": "Bright & Playful — Pet Services",
+  "fonts": ["Playfair Display", "Plus Jakarta Sans"],
+  "style": "Premium Boutique — Pet Spa",
   "sections": ["Hero", "Services", "Gallery", "Before & After", "Booking", "Team", "Testimonials", "Contact"]
 }
