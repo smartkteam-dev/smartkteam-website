@@ -1,0 +1,16 @@
+{
+  "id": "cafe",
+  "order": 4,
+  "title": "Slowpour Coffee Co.",
+  "category": "Cafe",
+  "description": "Third-wave coffee shop with workspace focus. Sage green palette, DM Serif Display + DM Sans, photo-left split hero, tabbed menu, and events calendar.",
+  "palette": {
+    "primary": "#4A7C59",
+    "background": "#F7F5F0",
+    "ink": "#1B1B1B",
+    "secondary": "#C5956C"
+  },
+  "fonts": ["DM Serif Display", "DM Sans"],
+  "style": "Clean & Bright — Third Wave",
+  "sections": ["Hero", "Perks Bar", "Menu (Tabbed)", "Workspace", "Events", "About", "Testimonials", "Contact"]
+}
