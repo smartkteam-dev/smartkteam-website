@@ -1,0 +1,16 @@
+{
+  "id": "car-repair",
+  "order": 7,
+  "title": "Ironclad Auto",
+  "category": "Automotive",
+  "description": "Trusted neighborhood garage demo. Charcoal + signal red palette, Barlow Condensed + Barlow fonts, transparent pricing table, certifications badges section, 3-step how-it-works process, mechanic team cards, and appointment request form.",
+  "palette": {
+    "primary": "#D93025",
+    "background": "#F5F4F0",
+    "ink": "#1A1A1A",
+    "secondary": "#E8A020"
+  },
+  "fonts": ["Barlow Condensed", "Barlow"],
+  "style": "Trusted Neighborhood Garage",
+  "sections": ["Hero", "Services", "Pricing", "How It Works", "Certifications", "Team", "Testimonials", "Contact"]
+}
