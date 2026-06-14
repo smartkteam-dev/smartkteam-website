@@ -1,0 +1,16 @@
+{
+  "id": "restaurant",
+  "order": 3,
+  "title": "HANABI Restaurant & Bar",
+  "category": "Restaurant",
+  "description": "Bold Pan-Asian restaurant. Coral + noir palette, Syne + Outfit fonts, full-viewport overlay hero, auto-scrolling marquee, dish photo grid, interactive reservation form, horizontal gallery strip, press quotes.",
+  "palette": {
+    "primary": "#E8451C",
+    "background": "#FDF6ED",
+    "ink": "#0D0D0D",
+    "secondary": "#F5A623"
+  },
+  "fonts": ["Syne", "Outfit"],
+  "style": "Bold & Playful — Pan-Asian",
+  "sections": ["Hero", "Marquee", "Menu Grid", "Reservation", "Chef Story", "Gallery Strip", "Press", "Contact"]
+}

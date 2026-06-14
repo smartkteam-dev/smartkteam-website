@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HANABI — Bold Flavors. Zero Rules.</title>
+  <meta name="description" content="HANABI Restaurant & Bar — modern Pan-Asian dining in the Mission District. Small plates, sharing boards, craft cocktails. Reserve your table." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── RESET ───────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+    ul { list-style: none; }
+
+    /* ── VARIABLES ───────────────────────────────────────────────── */
+    :root {
+      --noir:   #0D0D0D;
+      --cream:  #FDF6ED;
+      --coral:  #E8451C;
+      --gold:   #F5A623;
+      --mid:    #888888;
+      --white:  #FFFFFF;
+      --accent: var(--coral);
+
+      --font-display: 'Syne', system-ui, sans-serif;
+      --font-body:    'Outfit', system-ui, sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ── BASE ────────────────────────────────────────────────────── */
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--noir);
+      font-size: 1rem;
+      line-height: 1.7;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── PALETTE BAR ─────────────────────────────────────────────── */
+    .palette-bar {
+      background: var(--noir);
+      padding: 9px 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      z-index: 100;
+    }
+    .palette-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .palette-chips { display: flex; gap: 9px; align-items: center; }
+    .chip {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .chip:hover { transform: scale(1.2); }
+    .chip.active { border-color: var(--white); }
+    .chip[data-color="coral"]  { background: #E8451C; }
+    .chip[data-color="gold"]   { background: #F5A623; }
+    .chip[data-color="mint"]   { background: #2DB87C; }
+    .chip[data-color="purple"] { background: #7C3AED; }
+    .palette-div { width: 1px; height: 14px; background: rgba(255,255,255,0.12); }
+    .palette-name { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.4); font-weight: 500; }
+
+    /* ── NAV ─────────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 38px; left: 0; right: 0;
+      z-index: 90;
+      background: var(--noir);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      transition: box-shadow 0.3s;
+    }
+    .nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.5); }
+    .nav-wordmark {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: var(--white);
+    }
+    .nav-wordmark span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-reserve {
+      background: var(--accent) !important;
+      color: var(--white) !important;
+      padding: 9px 20px;
+      border-radius: 100px;
+      font-size: 0.75rem !important;
+      font-weight: 500 !important;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-reserve:hover { background: var(--white) !important; color: var(--noir) !important; transform: translateY(-1px); }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--white); }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 38px; left: 0; right: 0; bottom: 0;
+      background: var(--noir);
+      z-index: 89;
+      flex-direction: column;
+      padding: 96px 40px 40px;
+      gap: 24px;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 20px;
+    }
+
+    /* ── HERO ────────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      max-height: 1020px;
+      overflow: hidden;
+      margin-top: 102px; /* palette-bar + nav */
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,13,13,0.55) 0%,
+        rgba(13,13,13,0.3) 40%,
+        rgba(13,13,13,0.65) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 64px;
+    }
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 18vw, 18rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      opacity: 0.92;
+      pointer-events: none;
+      user-select: none;
+    }
+    .hero-sub {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-tagline {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+    }
+    .hero-dot { width: 4px; height: 4px; background: var(--accent); border-radius: 50%; }
+    .hero-cuisine {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .btn-coral {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 14px 32px;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 100px;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .btn-coral:hover { background: var(--white); color: var(--noir); transform: translateY(-2px); }
+    .btn-outline-white {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 13px 28px;
+      border: 1.5px solid rgba(255,255,255,0.45);
+      color: var(--white);
+      border-radius: 100px;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+    .hero-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      background: rgba(13,13,13,0.7);
+      backdrop-filter: blur(6px);
+      padding: 14px 64px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .hero-info-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-info-label {
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      font-weight: 500;
+    }
+    .hero-info-value {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.8);
+      font-weight: 400;
+    }
+    .hero-info-sep { width: 1px; height: 20px; background: rgba(255,255,255,0.12); }
+
+    /* ── MARQUEE ─────────────────────────────────────────────────── */
+    .marquee-strip {
+      background: var(--accent);
+      padding: 14px 0;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 24s linear infinite;
+    }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+    }
+    .marquee-list {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+    }
+    .marquee-item {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      padding: 0 28px;
+      white-space: nowrap;
+    }
+    .marquee-sep {
+      width: 5px; height: 5px;
+      background: rgba(255,255,255,0.45);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── SECTION HELPERS ─────────────────────────────────────────── */
+    .section-eyebrow {
+      font-family: var(--font-body);
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--noir);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    .section-title-light { color: var(--white); }
+    .section-sub {
+      font-size: 0.93rem;
+      color: var(--mid);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-top: 12px;
+      max-width: 480px;
+    }
+
+    /* ── MENU HIGHLIGHTS ─────────────────────────────────────────── */
+    .menu-section {
+      padding: 100px 64px;
+      background: var(--cream);
+    }
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 52px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .menu-link {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.2s;
+    }
+    .menu-link:hover { gap: 14px; }
+    .dish-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+    }
+    .dish-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--noir);
+    }
+    .dish-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease);
+      display: block;
+    }
+    .dish-card:hover .dish-photo { transform: scale(1.08); }
+    .dish-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,0.88) 0%, rgba(13,13,13,0.1) 55%, transparent 100%);
+      transition: background 0.4s;
+    }
+    .dish-card:hover .dish-overlay {
+      background: linear-gradient(to top, rgba(13,13,13,0.92) 0%, rgba(232,69,28,0.15) 100%);
+    }
+    .dish-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 20px 20px 22px;
+      z-index: 2;
+    }
+    .dish-tag {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .dish-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 5px;
+    }
+    .dish-desc {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      font-weight: 300;
+      line-height: 1.5;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s var(--ease);
+    }
+    .dish-card:hover .dish-desc { max-height: 60px; }
+    .dish-price {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 8px;
+    }
+
+    /* ── RESERVATION ─────────────────────────────────────────────── */
+    .reserve-section {
+      background: var(--noir);
+      padding: 100px 64px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .reserve-left {}
+    .reserve-left .section-eyebrow { color: var(--gold); }
+    .reserve-left .section-title { color: var(--white); }
+    .reserve-note {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+      font-weight: 300;
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+    .reserve-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .rs-item {}
+    .rs-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .rs-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      font-weight: 300;
+      margin-top: 4px;
+    }
+    .reserve-form {}
+    .form-group {
+      margin-bottom: 28px;
+    }
+    .form-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .toggle-btn {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 10px 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.55);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: transparent;
+    }
+    .toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .toggle-btn.active { background: var(--accent); border-color: var(--accent); color: var(--white); }
+    .form-input-dark {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--white);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 13px 16px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-input-dark:focus { border-color: var(--accent); }
+    .form-input-dark::placeholder { color: rgba(255,255,255,0.22); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .btn-coral-full {
+      width: 100%;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 8px;
+      transition: background 0.2s;
+      cursor: pointer;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-coral-full:hover { background: var(--gold); }
+
+    /* ── CHEF STORY ──────────────────────────────────────────────── */
+    .chef-section {
+      padding: 110px 64px;
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .chef-text {}
+    .chef-intro {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      font-weight: 700;
+      color: var(--noir);
+      line-height: 1.25;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    .chef-intro em {
+      color: var(--accent);
+      font-style: normal;
+    }
+    .chef-body {
+      font-size: 0.93rem;
+      color: var(--mid);
+      line-height: 1.9;
+      font-weight: 300;
+      margin-bottom: 36px;
+    }
+    .chef-stats {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid rgba(13,13,13,0.08);
+      padding-top: 28px;
+    }
+    .chef-stat {
+      flex: 1;
+      padding-right: 24px;
+      border-right: 1px solid rgba(13,13,13,0.08);
+    }
+    .chef-stat:last-child { border-right: none; padding-right: 0; padding-left: 24px; }
+    .chef-stat:nth-child(2) { padding-left: 24px; }
+    .chef-stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      display: block;
+    }
+    .chef-stat-label {
+      font-size: 0.75rem;
+      color: var(--mid);
+      font-weight: 300;
+      margin-top: 4px;
+    }
+    .chef-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 380px 200px;
+      gap: 4px;
+    }
+    .chef-img-main { grid-column: 1 / -1; overflow: hidden; }
+    .chef-img-sm { overflow: hidden; }
+    .chef-img-main img, .chef-img-sm img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease);
+    }
+    .chef-img-main:hover img, .chef-img-sm:hover img { transform: scale(1.05); }
+
+    /* ── GALLERY STRIP ───────────────────────────────────────────── */
+    .gallery-section { background: var(--noir); padding: 80px 0 0; }
+    .gallery-header { padding: 0 64px 48px; }
+    .gallery-header .section-title { color: var(--white); }
+    .gallery-strip {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      cursor: grab;
+      padding-bottom: 0;
+    }
+    .gallery-strip::-webkit-scrollbar { display: none; }
+    .gallery-strip.grabbing { cursor: grabbing; }
+    .gallery-item {
+      flex-shrink: 0;
+      width: 360px;
+      height: 460px;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+    .gallery-item:first-child { margin-left: 64px; }
+    .gallery-item:last-child { margin-right: 64px; }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s var(--ease);
+      pointer-events: none;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-hint {
+      padding: 20px 64px 72px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    /* ── PRESS ───────────────────────────────────────────────────── */
+    .press-section {
+      background: var(--noir);
+      padding: 80px 64px 100px;
+    }
+    .press-header { text-align: center; margin-bottom: 52px; }
+    .press-header .section-eyebrow { color: var(--gold); }
+    .press-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+    }
+    .press-badge {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 20px;
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+    .press-badge:hover { border-color: var(--accent); color: var(--accent); }
+    .press-quotes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .press-card {
+      background: rgba(255,255,255,0.04);
+      padding: 44px 48px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .press-quote-mark {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 800;
+      color: var(--accent);
+      opacity: 0.25;
+      line-height: 0.7;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .press-quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.4;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    .press-source {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .press-source-rule { width: 20px; height: 1.5px; background: var(--accent); }
+    .press-source-name {
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .press-source-date {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+      font-weight: 300;
+      margin-left: auto;
+    }
+
+    /* ── CTA STRIP ───────────────────────────────────────────────── */
+    .cta-strip {
+      background: var(--accent);
+      padding: 80px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+    }
+    .cta-sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+      margin-top: 10px;
+    }
+    .btn-white-pill {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 16px 40px;
+      background: var(--white);
+      color: var(--noir);
+      border-radius: 100px;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .btn-white-pill:hover { background: var(--noir); color: var(--white); }
+
+    /* ── CONTACT ─────────────────────────────────────────────────── */
+    .contact-section {
+      padding: 100px 64px;
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+    .contact-label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 10px;
+    }
+    .contact-value {
+      font-size: 0.93rem;
+      color: var(--noir);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .contact-value a { color: var(--noir); transition: color 0.2s; }
+    .contact-value a:hover { color: var(--accent); }
+    .contact-block { margin-bottom: 28px; }
+    .social-row { display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap; }
+    .social-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      color: var(--mid);
+      border: 1px solid rgba(13,13,13,0.12);
+      padding: 7px 14px;
+      border-radius: 100px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .social-pill:hover { border-color: var(--accent); color: var(--accent); }
+    .social-pill svg { width: 12px; height: 12px; }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid rgba(13,13,13,0.07); }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td { padding: 9px 0; font-size: 0.85rem; font-weight: 300; color: var(--mid); }
+    .hours-table td:last-child { text-align: right; color: var(--noir); font-weight: 400; }
+    .walkin-note {
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: rgba(232,69,28,0.07);
+      border-left: 3px solid var(--accent);
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────── */
+    footer {
+      background: var(--noir);
+      padding: 56px 64px 32px;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 28px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid rgba(232,69,28,0.3);
+      margin-bottom: 24px;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+    .footer-wordmark span { color: var(--accent); }
+    .footer-nav { display: flex; gap: 28px; flex-wrap: wrap; }
+    .footer-nav a {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--accent); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.22); font-weight: 300; }
+    .footer-back {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: color 0.2s;
+    }
+    .footer-back:hover { color: var(--accent); }
+    .footer-back svg { width: 12px; height: 12px; }
+
+    /* ── SCROLL REVEAL ───────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; transition:none; } }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .dish-grid { grid-template-columns: repeat(2, 1fr); }
+      .press-quotes { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+
+      .hero-content { padding: 0 24px; }
+      .hero-bottom { padding: 14px 24px; gap: 20px; }
+      .hero-info-sep { display: none; }
+
+      .menu-section { padding: 70px 24px; }
+      .dish-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .reserve-section { grid-template-columns: 1fr; padding: 70px 24px; gap: 48px; }
+      .form-row { grid-template-columns: 1fr; }
+
+      .chef-section { grid-template-columns: 1fr; padding: 70px 24px; gap: 48px; }
+      .chef-images { grid-template-rows: 280px 160px; }
+      .chef-stat:first-child { padding-right: 16px; }
+      .chef-stat:nth-child(2) { padding-left: 16px; padding-right: 16px; }
+      .chef-stat:last-child { padding-left: 16px; }
+
+      .gallery-header { padding: 0 24px 40px; }
+      .gallery-item { width: 280px; height: 360px; }
+      .gallery-item:first-child { margin-left: 24px; }
+      .gallery-item:last-child { margin-right: 24px; }
+      .gallery-hint { padding: 16px 24px 56px; }
+
+      .press-section { padding: 70px 24px 80px; }
+      .press-card { padding: 32px 28px; }
+
+      .cta-strip { padding: 70px 24px; flex-direction: column; }
+
+      .contact-section { grid-template-columns: 1fr; padding: 70px 24px; gap: 48px; }
+
+      footer { padding: 40px 24px 28px; }
+      .footer-top { flex-direction: column; align-items: flex-start; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 600px) {
+      .dish-grid { grid-template-columns: 1fr; }
+      .chef-stats { flex-direction: column; gap: 20px; }
+      .chef-stat { border-right: none; padding: 0 !important; border-top: 1px solid rgba(13,13,13,0.08); padding-top: 20px !important; }
+      .chef-stat:first-child { border-top: none; padding-top: 0 !important; }
+      .gallery-item { width: 240px; height: 300px; }
+      .press-logos { gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PALETTE BAR -->
+  <div class="palette-bar">
+    <span class="palette-label">Palette</span>
+    <div class="palette-chips">
+      <div class="chip active" data-color="coral"  title="Coral"></div>
+      <div class="chip"       data-color="gold"    title="Gold"></div>
+      <div class="chip"       data-color="mint"    title="Mint"></div>
+      <div class="chip"       data-color="purple"  title="Purple"></div>
+    </div>
+    <div class="palette-div"></div>
+    <span class="palette-name" id="palName">Coral</span>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="mainNav">
+    <a href="#" class="nav-wordmark">HAN<span>A</span>BI</a>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#chef">Our Story</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Visit</a></li>
+      <li><a href="#reserve" class="nav-reserve">Reserve</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="nav-mobile" id="navMobile">
+    <a href="#menu"    onclick="closeMobile()">Menu</a>
+    <a href="#chef"    onclick="closeMobile()">Our Story</a>
+    <a href="#gallery" onclick="closeMobile()">Gallery</a>
+    <a href="#reserve" onclick="closeMobile()">Reserve</a>
+    <a href="#contact" onclick="closeMobile()">Visit</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1800&q=85"
+           alt="HANABI restaurant interior" loading="eager" />
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-name">HANABI</h1>
+      <div class="hero-sub">
+        <span class="hero-cuisine">Modern Pan-Asian · Mission District</span>
+        <div class="hero-dot"></div>
+        <span class="hero-tagline">Bold flavors. Zero rules.</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#reserve" class="btn-coral">
+          Reserve a Table
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#menu" class="btn-outline-white">Explore Menu</a>
+      </div>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-info-item">
+        <span class="hero-info-label">Hours</span>
+        <span class="hero-info-value">Tue–Sun · 5pm – 11pm</span>
+      </div>
+      <div class="hero-info-sep"></div>
+      <div class="hero-info-item">
+        <span class="hero-info-label">Location</span>
+        <span class="hero-info-value">3341 18th St, San Francisco</span>
+      </div>
+      <div class="hero-info-sep"></div>
+      <div class="hero-info-item">
+        <span class="hero-info-label">Reservations</span>
+        <span class="hero-info-value">(415) 555-0271</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <ul class="marquee-list">
+        <li class="marquee-item">Small Plates</li><li class="marquee-sep"></li>
+        <li class="marquee-item">Sharing Boards</li><li class="marquee-sep"></li>
+        <li class="marquee-item">Craft Cocktails</li><li class="marquee-sep"></li>
+        <li class="marquee-item">Happy Hour 3–6 PM</li><li class="marquee-sep"></li>
+        <li class="marquee-item">Now Booking December</li><li class="marquee-sep"></li>
+        <li class="marquee-item">Omakase Thursdays</li><li class="marquee-sep"></li>
+        <li class="marquee-item">Walk-ins After 9 PM</li><li class="marquee-sep"></li>
+      </ul>
+      <ul class="marquee-list" aria-hidden="true">
+        <li class="marquee-item">Small Plates</li><li class="marquee-sep"></li>
+        <li class="marquee-item">Sharing Boards</li><li class="marquee-sep"></li>
+        <li class="marquee-item">Craft Cocktails</li><li class="marquee-sep"></li>
+        <li class="marquee-item">Happy Hour 3–6 PM</li><li class="marquee-sep"></li>
+        <li class="marquee-item">Now Booking December</li><li class="marquee-sep"></li>
+        <li class="marquee-item">Omakase Thursdays</li><li class="marquee-sep"></li>
+        <li class="marquee-item">Walk-ins After 9 PM</li><li class="marquee-sep"></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MENU HIGHLIGHTS -->
+  <section class="menu-section" id="menu">
+    <div class="menu-header reveal">
+      <div>
+        <span class="section-eyebrow">What we're known for</span>
+        <h2 class="section-title">Our<br>Signatures</h2>
+      </div>
+      <a href="#reserve" class="menu-link">
+        Full menu on arrival
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="dish-grid">
+      <div class="dish-card reveal d1">
+        <img class="dish-photo" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=600&q=80" alt="Tonkotsu ramen bowl" loading="lazy" />
+        <div class="dish-overlay"></div>
+        <div class="dish-info">
+          <span class="dish-tag">Fan Favorite</span>
+          <div class="dish-name">Black Garlic Ramen</div>
+          <div class="dish-desc">48-hour pork bone broth, chashu, soft egg, nori, crispy shallots.</div>
+          <div class="dish-price">$22</div>
+        </div>
+      </div>
+      <div class="dish-card reveal d2">
+        <img class="dish-photo" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?auto=format&fit=crop&w=600&q=80" alt="Pan-Asian plated dish" loading="lazy" />
+        <div class="dish-overlay"></div>
+        <div class="dish-info">
+          <span class="dish-tag">Chef's Pick</span>
+          <div class="dish-name">Wagyu Ssam</div>
+          <div class="dish-desc">A5 wagyu, pickled daikon, gochujang butter, crispy rice cake.</div>
+          <div class="dish-price">$38</div>
+        </div>
+      </div>
+      <div class="dish-card reveal d3">
+        <img class="dish-photo" src="https://images.unsplash.com/photo-1559410545-0bdcd187e0a6?auto=format&fit=crop&w=600&q=80" alt="Premium sushi platter" loading="lazy" />
+        <div class="dish-overlay"></div>
+        <div class="dish-info">
+          <span class="dish-tag">Omakase</span>
+          <div class="dish-name">Tuna Tataki</div>
+          <div class="dish-desc">Seared bluefin, ponzu gel, microgreens, sesame oil drizzle.</div>
+          <div class="dish-price">$28</div>
+        </div>
+      </div>
+      <div class="dish-card reveal d3">
+        <img class="dish-photo" src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=600&q=80" alt="Steamed dumplings" loading="lazy" />
+        <div class="dish-overlay"></div>
+        <div class="dish-info">
+          <span class="dish-tag">Share</span>
+          <div class="dish-name">XO Dumplings</div>
+          <div class="dish-desc">Hand-folded pork & prawn, XO sauce, crispy pan-fried base.</div>
+          <div class="dish-price">$18</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVATION -->
+  <section class="reserve-section" id="reserve">
+    <div class="reserve-left reveal">
+      <span class="section-eyebrow">Book your table</span>
+      <h2 class="section-title section-title-light">Reserve<br>Your Night</h2>
+      <p class="reserve-note">We take reservations up to 30 days in advance. Walk-ins are welcome after 9pm based on availability. For groups of 8 or more, please call us directly.</p>
+      <div class="reserve-stats">
+        <div class="rs-item">
+          <div class="rs-num">60</div>
+          <div class="rs-label">Seats inside</div>
+        </div>
+        <div class="rs-item">
+          <div class="rs-num">24</div>
+          <div class="rs-label">Patio seats</div>
+        </div>
+        <div class="rs-item">
+          <div class="rs-num">4.9★</div>
+          <div class="rs-label">Google rating</div>
+        </div>
+      </div>
+    </div>
+    <div class="reserve-form reveal d2">
+      <form onsubmit="handleReserve(event)">
+        <div class="form-group">
+          <label class="form-label">Party Size</label>
+          <div class="btn-group" id="partyGroup">
+            <button type="button" class="toggle-btn active" data-group="party">1–2</button>
+            <button type="button" class="toggle-btn" data-group="party">3–4</button>
+            <button type="button" class="toggle-btn" data-group="party">5–6</button>
+            <button type="button" class="toggle-btn" data-group="party">7+</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date</label>
+          <input class="form-input-dark" type="date" name="date" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Preferred Time</label>
+          <div class="btn-group" id="timeGroup">
+            <button type="button" class="toggle-btn" data-group="time">6:00 PM</button>
+            <button type="button" class="toggle-btn active" data-group="time">7:00 PM</button>
+            <button type="button" class="toggle-btn" data-group="time">7:30 PM</button>
+            <button type="button" class="toggle-btn" data-group="time">8:00 PM</button>
+            <button type="button" class="toggle-btn" data-group="time">8:30 PM</button>
+            <button type="button" class="toggle-btn" data-group="time">9:00 PM</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div>
+              <label class="form-label">First Name</label>
+              <input class="form-input-dark" type="text" name="fname" placeholder="Kenji" required />
+            </div>
+            <div>
+              <label class="form-label">Last Name</label>
+              <input class="form-input-dark" type="text" name="lname" placeholder="Tanaka" required />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input-dark" type="email" name="email" placeholder="kenji@example.com" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Special Requests (optional)</label>
+          <input class="form-input-dark" type="text" name="notes" placeholder="Dietary needs, celebrations, seating preferences…" />
+        </div>
+        <button type="submit" class="btn-coral-full">
+          Request Table
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CHEF STORY -->
+  <section class="chef-section" id="chef">
+    <div class="chef-text reveal">
+      <span class="section-eyebrow">The kitchen</span>
+      <h2 class="chef-intro">Cooking that<br>doesn't <em>apologize</em></h2>
+      <p class="chef-body">Executive Chef Mei Nakamura grew up between Tokyo, Seoul, and Manila — eating street food at 6am and Michelin-starred tasting menus at midnight. HANABI is the restaurant she always wanted to eat at but never found: bold Pan-Asian cooking without the pretension, in a room that feels like an old friend's house.<br><br>Every dish on the menu is the result of obsession — sourced from local California farms, inspired by flavors across 12 countries, and executed with the precision of someone who has absolutely nothing to prove.</p>
+      <div class="chef-stats">
+        <div class="chef-stat">
+          <span class="chef-stat-num">12</span>
+          <span class="chef-stat-label">Countries of inspiration</span>
+        </div>
+        <div class="chef-stat">
+          <span class="chef-stat-num">15</span>
+          <span class="chef-stat-label">Years in professional kitchens</span>
+        </div>
+        <div class="chef-stat">
+          <span class="chef-stat-num">1</span>
+          <span class="chef-stat-label">Obsession: flavor</span>
+        </div>
+      </div>
+    </div>
+    <div class="chef-images reveal d2">
+      <div class="chef-img-main">
+        <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?auto=format&fit=crop&w=900&q=80"
+             alt="Chef Mei Nakamura in the HANABI kitchen" loading="lazy" />
+      </div>
+      <div class="chef-img-sm">
+        <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=500&q=80"
+             alt="Wok fire cooking at HANABI" loading="lazy" />
+      </div>
+      <div class="chef-img-sm">
+        <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=500&q=80"
+             alt="Food plating detail at HANABI" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY STRIP -->
+  <section class="gallery-section" id="gallery">
+    <div class="gallery-header reveal">
+      <span class="section-eyebrow">The experience</span>
+      <h2 class="section-title section-title-light">On the Plate</h2>
+    </div>
+    <div class="gallery-strip" id="galleryStrip">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=600&q=80" alt="Restaurant ambience" loading="lazy" />
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=600&q=80" alt="Ramen close-up" loading="lazy" />
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&w=600&q=80" alt="Asian cocktails" loading="lazy" />
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=600&q=80" alt="Dumplings" loading="lazy" />
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=600&q=80" alt="Wok cooking with fire" loading="lazy" />
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=600&q=80" alt="Plated dish detail" loading="lazy" />
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1559410545-0bdcd187e0a6?auto=format&fit=crop&w=600&q=80" alt="Sushi platter" loading="lazy" />
+      </div>
+    </div>
+    <p class="gallery-hint">← Drag to explore →</p>
+  </section>
+
+  <!-- PRESS -->
+  <section class="press-section" id="press">
+    <div class="press-header reveal">
+      <span class="section-eyebrow">Recognition</span>
+      <h2 class="section-title section-title-light" style="font-size:2rem;">As Featured In</h2>
+    </div>
+    <div class="press-logos reveal d1">
+      <span class="press-badge">Eater SF</span>
+      <span class="press-badge">SF Chronicle</span>
+      <span class="press-badge">Bon Appétit</span>
+      <span class="press-badge">Thrillist</span>
+      <span class="press-badge">Michelin Guide</span>
+    </div>
+    <div class="press-quotes">
+      <div class="press-card reveal d1">
+        <span class="press-quote-mark">"</span>
+        <p class="press-quote-text">HANABI is the most exciting thing to happen to the Mission's dining scene in years. Bold, surprising, and entirely its own thing.</p>
+        <div class="press-source">
+          <div class="press-source-rule"></div>
+          <span class="press-source-name">Eater SF</span>
+          <span class="press-source-date">October 2024</span>
+        </div>
+      </div>
+      <div class="press-card reveal d2">
+        <span class="press-quote-mark">"</span>
+        <p class="press-quote-text">Chef Nakamura cooks like she has something to say — and every plate delivers the message louder than the last.</p>
+        <div class="press-source">
+          <div class="press-source-rule"></div>
+          <span class="press-source-name">Bon Appétit</span>
+          <span class="press-source-date">November 2024</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <section class="cta-strip">
+    <div class="reveal">
+      <h2 class="cta-title">Hungry?<br><em>Let's fix that.</em></h2>
+      <p class="cta-sub">Reservations fill fast. Don't say we didn't warn you.</p>
+    </div>
+    <a href="#reserve" class="btn-white-pill reveal d2">
+      Reserve Now
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="reveal">
+      <span class="section-eyebrow">Find us</span>
+      <h2 class="section-title" style="margin-bottom:36px;">Come<br>Visit</h2>
+      <div class="contact-block">
+        <span class="contact-label">Address</span>
+        <div class="contact-value">3341 18th Street<br>San Francisco, CA 94110<br><br><a href="#">Get directions →</a></div>
+      </div>
+      <div class="contact-block">
+        <span class="contact-label">Contact</span>
+        <div class="contact-value">
+          <a href="tel:+14155550271">(415) 555-0271</a><br>
+          <a href="mailto:hello@hanabirestaurant.com">hello@hanabirestaurant.com</a>
+        </div>
+      </div>
+      <div class="social-row">
+        <a href="#" class="social-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
+        <a href="#" class="social-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          TikTok
+        </a>
+        <a href="#" class="social-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.96-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          YouTube
+        </a>
+      </div>
+    </div>
+    <div class="reveal d2">
+      <span class="contact-label">Hours</span>
+      <table class="hours-table">
+        <tr><td>Monday</td><td>Closed</td></tr>
+        <tr><td>Tuesday – Thursday</td><td>5:00 pm – 10:30 pm</td></tr>
+        <tr><td>Friday – Saturday</td><td>5:00 pm – 11:30 pm</td></tr>
+        <tr><td>Sunday</td><td>5:00 pm – 10:00 pm</td></tr>
+      </table>
+      <div class="walkin-note">Walk-ins welcome after 9pm (10pm Fri–Sat), based on availability at the bar.</div>
+      <div style="margin-top:24px;">
+        <span class="contact-label">Happy Hour</span>
+        <div class="contact-value">Tuesday – Friday · 3:00 pm – 6:00 pm<br>50% off all cocktails + $8 snack plates</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-wordmark">HAN<span>A</span>BI</div>
+      <nav class="footer-nav">
+        <a href="#menu">Menu</a>
+        <a href="#reserve">Reserve</a>
+        <a href="#chef">Story</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Visit</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2025 HANABI Restaurant & Bar. All rights reserved. Demo site by Smart KTeam.</span>
+      <a href="/" class="footer-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to Smart KTeam
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    /* ── PALETTE SWITCHER ────────────────────────────────────────── */
+    const palettes = {
+      coral:  { accent: '#E8451C', label: 'Coral' },
+      gold:   { accent: '#F5A623', label: 'Gold' },
+      mint:   { accent: '#2DB87C', label: 'Mint' },
+      purple: { accent: '#7C3AED', label: 'Purple' },
+    };
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const p = palettes[chip.dataset.color];
+        document.documentElement.style.setProperty('--coral', p.accent);
+        document.documentElement.style.setProperty('--accent', p.accent);
+        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        document.getElementById('palName').textContent = p.label;
+      });
+    });
+
+    /* ── NAV SCROLL ──────────────────────────────────────────────── */
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    }, { passive: true });
+
+    /* ── MOBILE NAV ──────────────────────────────────────────────── */
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navMobile').classList.toggle('open');
+    });
+    function closeMobile() { document.getElementById('navMobile').classList.remove('open'); }
+
+    /* ── TOGGLE BUTTONS (party size + time) ─────────────────────── */
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const group = btn.dataset.group;
+        document.querySelectorAll(`.toggle-btn[data-group="${group}"]`).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    /* ── HORIZONTAL GALLERY DRAG ─────────────────────────────────── */
+    const strip = document.getElementById('galleryStrip');
+    let isDown = false, startX, scrollLeft;
+    strip.addEventListener('mousedown', e => {
+      isDown = true;
+      strip.classList.add('grabbing');
+      startX = e.pageX - strip.offsetLeft;
+      scrollLeft = strip.scrollLeft;
+    });
+    strip.addEventListener('mouseleave', () => { isDown = false; strip.classList.remove('grabbing'); });
+    strip.addEventListener('mouseup', () => { isDown = false; strip.classList.remove('grabbing'); });
+    strip.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - strip.offsetLeft;
+      strip.scrollLeft = scrollLeft - (x - startX) * 1.4;
+    });
+
+    /* ── SCROLL REVEAL ───────────────────────────────────────────── */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── RESERVATION SUBMIT ──────────────────────────────────────── */
+    function handleReserve(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = 'Request Sent!';
+      btn.style.background = 'var(--gold)';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = 'Request Table <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
