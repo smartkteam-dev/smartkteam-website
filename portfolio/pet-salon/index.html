@@ -70,11 +70,11 @@
     .hero-bg {
       position: absolute; inset: 0;
       background-image: url('https://images.pexels.com/photos/6816866/pexels-photo-6816866.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop');
-      background-size: cover; background-position: center 60%;
+      background-size: cover; background-position: center 60%; transform: scaleX(-1);
     }
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(31,29,46,0.28) 0%, rgba(31,29,46,0.05) 60%, transparent 100%);
+      background: linear-gradient(to right, rgba(31,29,46,0.28) 0%, rgba(31,29,46,0.05) 60%, transparent 100%); transform: scaleX(-1);
     }
     .hero-card {
       position: absolute; top: 50%; left: 7%; transform: translateY(-50%);
