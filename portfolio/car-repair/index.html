@@ -287,9 +287,13 @@
     /* ── RESPONSIVE ── */
     /* ── SHOP GALLERY ── */
     .shop-gallery { display: grid; grid-template-columns: repeat(4, 1fr); }
-    .gallery-cell { aspect-ratio: 3/2; overflow: hidden; position: relative; }
+    .gallery-cell { aspect-ratio: 3/2; overflow: hidden; position: relative; background: #111; }
     .gallery-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
     .gallery-cell:hover img { transform: scale(1.05); }
+    .gallery-cell:nth-child(1) img { object-position: left center; }
+    .gallery-cell:nth-child(2) img { object-position: center 30%; }
+    .gallery-cell:nth-child(3) img { object-position: right center; }
+    .gallery-cell:nth-child(4) img { object-position: center 70%; }
     .gallery-cell-label {
       position: absolute; bottom: 0; left: 0; right: 0;
       padding: 32px 16px 14px;
@@ -442,19 +446,27 @@
 <!-- SHOP GALLERY -->
 <div class="shop-gallery">
   <div class="gallery-cell">
-    <img src="https://images.pexels.com/photos/4489791/pexels-photo-4489791.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" alt="Oil change service" loading="lazy" />
+    <img src="https://images.unsplash.com/photo-1562053425-fd4d99f82ec0?w=800&h=600&fit=crop&auto=format&q=80"
+         alt="Oil change service" loading="lazy"
+         onerror="this.src='https://images.pexels.com/photos/4489794/pexels-photo-4489794.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop';this.onerror=null;" />
     <span class="gallery-cell-label">Oil Service</span>
   </div>
   <div class="gallery-cell">
-    <img src="https://images.pexels.com/photos/4489795/pexels-photo-4489795.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" alt="Mechanic at work" loading="lazy" />
+    <img src="https://images.unsplash.com/photo-1530046339160-ce3e530de191?w=800&h=600&fit=crop&auto=format&q=80"
+         alt="Mechanic at work" loading="lazy"
+         onerror="this.src='https://images.pexels.com/photos/4489794/pexels-photo-4489794.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop';this.onerror=null;" />
     <span class="gallery-cell-label">Expert Technicians</span>
   </div>
   <div class="gallery-cell">
-    <img src="https://images.pexels.com/photos/4489796/pexels-photo-4489796.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" alt="Vehicle undercarriage inspection" loading="lazy" />
+    <img src="https://images.unsplash.com/photo-1486754735734-325b5831c3ad?w=800&h=600&fit=crop&auto=format&q=80"
+         alt="Engine bay inspection" loading="lazy"
+         onerror="this.src='https://images.pexels.com/photos/4489794/pexels-photo-4489794.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop';this.onerror=null;" />
     <span class="gallery-cell-label">Under the Hood</span>
   </div>
   <div class="gallery-cell">
-    <img src="https://images.pexels.com/photos/4489797/pexels-photo-4489797.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" alt="Team of mechanics" loading="lazy" />
+    <img src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=800&h=600&fit=crop&auto=format&q=80"
+         alt="Team of mechanics" loading="lazy"
+         onerror="this.src='https://images.pexels.com/photos/4489794/pexels-photo-4489794.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop';this.onerror=null;" />
     <span class="gallery-cell-label">Our Team</span>
   </div>
 </div>
@@ -665,7 +677,9 @@
 <section class="section-wrap shop-story">
   <div class="story-grid">
     <div class="story-photo-wrap reveal">
-      <img src="https://images.pexels.com/photos/4489799/pexels-photo-4489799.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&fit=crop" alt="Ironclad Auto garage interior" loading="lazy" />
+      <img src="https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&fit=crop"
+           alt="Ironclad Auto garage interior" loading="lazy"
+           onerror="this.src='https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=900&h=700&fit=crop&auto=format&q=80';this.onerror=function(){this.src='https://images.pexels.com/photos/4489794/pexels-photo-4489794.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&fit=crop';this.onerror=null;};" />
     </div>
     <div class="reveal d2">
       <span class="section-label">Our Story</span>
