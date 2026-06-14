@@ -285,11 +285,40 @@
     .d4 { transition-delay: 0.4s; }
 
     /* ── RESPONSIVE ── */
+    /* ── SHOP GALLERY ── */
+    .shop-gallery { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .gallery-cell { aspect-ratio: 3/2; overflow: hidden; position: relative; }
+    .gallery-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+    .gallery-cell:hover img { transform: scale(1.05); }
+    .gallery-cell-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 32px 16px 14px;
+      background: linear-gradient(transparent, rgba(15,15,15,0.75));
+      color: rgba(255,255,255,0.92); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .gallery-cell:hover .gallery-cell-label { opacity: 1; }
+
+    /* ── SHOP STORY ── */
+    .shop-story { background: var(--white); }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 72px; }
+    .story-photo-wrap { border-radius: 10px; overflow: hidden; }
+    .story-photo-wrap img { width: 100%; height: 480px; object-fit: cover; display: block; }
+    .story-body { font-size: 0.97rem; color: var(--mid); line-height: 1.82; margin-bottom: 36px; }
+    .story-stats { display: flex; flex-direction: column; }
+    .story-stat-row { display: flex; align-items: center; gap: 20px; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.08); }
+    .story-stat-row:last-child { border-bottom: none; }
+    .story-stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; width: 68px; flex-shrink: 0; }
+    .story-stat-text strong { display: block; font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+    .story-stat-text span { font-size: 0.8rem; color: var(--mid); }
+
     @media (max-width: 1024px) {
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .certs-grid { grid-template-columns: repeat(2, 1fr); }
       .team-grid { grid-template-columns: 1fr 1fr; }
       .contact-grid { gap: 44px; }
+      .story-grid { gap: 40px; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
@@ -307,6 +336,9 @@
       .trust-strip { padding: 18px 24px; gap: 18px; }
       .services-grid { grid-template-columns: 1fr 1fr; }
       .price-row { grid-template-columns: 1fr; gap: 8px; }
+      .shop-gallery { grid-template-columns: repeat(2, 1fr); }
+      .story-grid { grid-template-columns: 1fr; }
+      .story-photo-wrap img { height: 280px; }
       .steps-grid { grid-template-columns: 1fr; }
       .certs-grid { grid-template-columns: 1fr 1fr; }
       .team-grid { grid-template-columns: 1fr; }
@@ -404,6 +436,26 @@
   <div class="trust-item">
     <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
     <span class="trust-text">2-Year / 24K Mile Warranty</span>
+  </div>
+</div>
+
+<!-- SHOP GALLERY -->
+<div class="shop-gallery">
+  <div class="gallery-cell">
+    <img src="https://images.pexels.com/photos/3807329/pexels-photo-3807329.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" alt="Oil change service" loading="lazy" />
+    <span class="gallery-cell-label">Oil Service</span>
+  </div>
+  <div class="gallery-cell">
+    <img src="https://images.pexels.com/photos/4489793/pexels-photo-4489793.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" alt="Mechanic at work" loading="lazy" />
+    <span class="gallery-cell-label">Expert Technicians</span>
+  </div>
+  <div class="gallery-cell">
+    <img src="https://images.pexels.com/photos/1637855/pexels-photo-1637855.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" alt="Vehicle undercarriage inspection" loading="lazy" />
+    <span class="gallery-cell-label">Under the Hood</span>
+  </div>
+  <div class="gallery-cell">
+    <img src="https://images.pexels.com/photos/4488646/pexels-photo-4488646.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" alt="Team of mechanics" loading="lazy" />
+    <span class="gallery-cell-label">Our Team</span>
   </div>
 </div>
 
@@ -605,6 +657,38 @@
       <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <div class="cert-title">2-Year / 24K Mile Warranty</div>
       <p class="cert-desc">All parts and labor warranted for 2 years or 24,000 miles, whichever comes first. No questions asked.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP STORY -->
+<section class="section-wrap shop-story">
+  <div class="story-grid">
+    <div class="story-photo-wrap reveal">
+      <img src="https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&fit=crop" alt="Ironclad Auto garage interior" loading="lazy" />
+    </div>
+    <div class="reveal d2">
+      <span class="section-label">Our Story</span>
+      <h2 class="section-title" style="margin-bottom:20px;">21 years in <em>South Austin</em></h2>
+      <p class="story-body">Mike Delgado opened Ironclad Auto in 2003 with one bay, two lifts, and a handshake promise: no surprise charges, ever. Two decades later, the shop has grown — but the promise hasn't changed. We're still family owned, still on South 1st, and still the kind of place where the mechanic comes out to explain the repair in plain English.</p>
+      <div class="story-stats">
+        <div class="story-stat-row">
+          <span class="story-stat-num">21</span>
+          <div class="story-stat-text"><strong>Years in Business</strong><span>Opened on South 1st Street in 2003, still here today</span></div>
+        </div>
+        <div class="story-stat-row">
+          <span class="story-stat-num">3</span>
+          <div class="story-stat-text"><strong>ASE Certified Technicians</strong><span>Certified across all 8 automotive service areas</span></div>
+        </div>
+        <div class="story-stat-row">
+          <span class="story-stat-num">1,200+</span>
+          <div class="story-stat-text"><strong>Five-Star Google Reviews</strong><span>4.9 average rating — earned one honest job at a time</span></div>
+        </div>
+        <div class="story-stat-row">
+          <span class="story-stat-num">2 yr</span>
+          <div class="story-stat-text"><strong>Parts &amp; Labor Warranty</strong><span>24,000-mile coverage, no fine print, no exceptions</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
