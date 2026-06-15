@@ -336,6 +336,13 @@
   .service-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--accent);transition:width 0.45s;}
   .service-card:hover::after{width:100%;}
   .hidden-service{display:none !important;}
+  .service-card-special{background:var(--accent)!important;}
+  .service-card-special:hover{background:var(--accent-light)!important;}
+  .service-card-special .service-num{color:rgba(250,249,247,0.6);}
+  .service-card-special .service-name{color:var(--ivory);}
+  .service-card-special .service-desc{color:rgba(250,249,247,0.75);}
+  .service-card-special .service-arrow{color:var(--ivory);}
+  .service-card-special::after{background:rgba(250,249,247,0.4)!important;}
   .service-card-inner{position:relative;z-index:1;}
   .service-num{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--accent);margin-bottom:28px;letter-spacing:0.12em;}
   .service-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--ivory);margin-bottom:14px;line-height:1.2;}
@@ -866,7 +873,7 @@
           <a href="/google-ads" class="service-arrow">Learn More →</a>
         </div>
       </div>
-      <div class="service-card reveal reveal-delay-2">
+      <div class="service-card reveal reveal-delay-2 service-card-special">
         <div class="service-card-inner">
           <div class="service-num">05</div>
           <h3 class="service-name">Insurance Claims for Massage Therapists</h3>

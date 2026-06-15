@@ -109,9 +109,9 @@
   .nav-cta::after{display:none!important;}
 
   /* SHARED */
-  .page-hero{height:58vh;min-height:420px;background:var(--slate);display:flex;align-items:flex-end;padding:100px 64px 72px;position:relative;overflow:hidden;}
+  .page-hero{height:58vh;min-height:420px;background:var(--slate);position:relative;overflow:hidden;}
   .page-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.12;}
-  .page-hero-content{position:relative;z-index:2;}
+  .page-hero-content{position:absolute;bottom:72px;left:64px;right:64px;z-index:2;}
   .page-hero-eyebrow{font-size:var(--text-xs);letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;font-weight:600;}
   .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,78px);font-weight:300;color:var(--ivory);line-height:1.05;}
   .page-hero h1 em{font-style:italic;color:var(--accent-light);}
@@ -208,7 +208,7 @@
     footer{padding:64px 36px 36px;}
     .footer-top{grid-template-columns:1fr 1fr;gap:40px;}
     .section-pad{padding:80px 36px;}
-    .page-hero{padding:100px 36px 56px;}
+    .page-hero-content{bottom:56px;left:36px;right:36px;}
   }
 
   /* MOBILE */
@@ -286,7 +286,7 @@
 <div class="page-hero">
   <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1400&q=85')"></div>
   <div class="page-hero-content">
-    <div class="page-hero-eyebrow">Services</div>
+    <div class="page-hero-eyebrow">Special Services</div>
     <h1>Insurance Claims for<br><em>Massage Therapists</em></h1>
     <p class="page-hero-sub">Stop chasing insurance companies. ClinicFlow manages your credentialing and claims end-to-end — so you stay focused on your patients, not your paperwork.</p>
   </div>
