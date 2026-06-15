@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<!-- PRIMARY SEO -->
+<title>Insurance Claims for Massage Therapists | Seattle — Smart KTeam</title>
+<meta name="description" content="ClinicFlow handles insurance credentialing and claims management end-to-end for massage therapy businesses in Seattle, Bellevue & the Pacific Northwest. Focus on your patients — we handle the paperwork.">
+<meta name="keywords" content="massage therapy insurance claims Seattle, massage therapist credentialing Bellevue, insurance billing massage therapy Pacific Northwest, ClinicFlow massage insurance management">
+<meta name="author" content="Smart KTeam">
+<meta name="robots" content="index, follow">
+<meta name="geo.region" content="US-WA">
+<meta name="geo.placename" content="Bellevue, Washington">
+<meta name="geo.position" content="47.5951;-122.1479">
+<meta name="ICBM" content="47.5951, -122.1479">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="canonical" href="https://smartkteam.com/insurance-claims">
+
+<!-- OPEN GRAPH -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Smart KTeam">
+<meta property="og:title" content="Insurance Claims for Massage Therapists | Smart KTeam Seattle">
+<meta property="og:description" content="ClinicFlow handles insurance credentialing and claims management end-to-end for massage therapy businesses. Focus on your patients — we handle the paperwork.">
+<meta property="og:url" content="https://smartkteam.com/insurance-claims">
+<meta property="og:image" content="https://smartkteam.com/og-image.png">
+<meta property="og:locale" content="en_US">
+
+<!-- TWITTER CARD -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Insurance Claims for Massage Therapists | Smart KTeam Seattle">
+<meta name="twitter:description" content="ClinicFlow handles insurance credentialing and claims management end-to-end for massage therapy businesses. Focus on your patients — we handle the paperwork.">
+<meta name="twitter:image" content="https://smartkteam.com/og-image.png">
+
+<!-- LOCAL BUSINESS STRUCTURED DATA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Smart KTeam",
+  "description": "Smart KTeam is a digital marketing agency based in Bellevue, WA, helping small businesses across the Pacific Northwest get found online through website design, local SEO, Google Ads, booking systems, and insurance claims management for massage therapists.",
+  "url": "https://smartkteam.com",
+  "email": "smart.kteam.us@gmail.com",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1248 121st Ave NE",
+    "addressLocality": "Bellevue",
+    "addressRegion": "WA",
+    "postalCode": "98005",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 47.5951,
+    "longitude": -122.1479
+  },
+  "sameAs": [
+    "https://www.facebook.com/smartkteam",
+    "https://www.instagram.com/smartkteam/"
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1a2e;--ivory:#faf9f7;--accent:#e8521a;--accent-light:#f07340;
+    --slate:#16213e;--mid:#6e7191;--warm:#f0ebe3;--rule:rgba(232,82,26,0.2);
+    --text-xs:11px;--text-sm:13px;--text-base:15px;--text-lg:17px;
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Montserrat',sans-serif;background:var(--ivory);color:var(--ink);overflow-x:hidden;cursor:none;}
+
+  /* CURSOR */
+  .cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;}
+  .cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.18s ease;opacity:0.5;}
+  .cursor-ring.hover{transform:translate(-50%,-50%) scale(1.8);opacity:0.25;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:28px 64px;transition:background 0.4s,padding 0.4s,box-shadow 0.4s;}
+  nav.scrolled{background:rgba(250,249,247,0.97);backdrop-filter:blur(16px);padding:18px 64px;box-shadow:0 1px 0 var(--rule);}
+  nav.dark-nav{background:transparent;}
+  .nav-logo{display:flex;align-items:center;text-decoration:none;cursor:none;flex-shrink:0;}
+  .nav-logo svg{height:46px;width:auto;transition:filter 0.4s;}
+  nav:not(.scrolled) .logo-bar{fill:#e8521a;}
+  nav:not(.scrolled) .logo-text-path{fill:#faf9f7;}
+  nav.scrolled .logo-bar{fill:#e8521a;}
+  nav.scrolled .logo-text-path{fill:#1a1a2e;}
+  .nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+  .nav-links > li{display:flex;align-items:center;}
+  .nav-links a{font-size:var(--text-sm);letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,242,236,0.85);text-decoration:none;transition:color 0.3s;font-weight:500;cursor:none;position:relative;white-space:nowrap;}
+  .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--accent);transition:width 0.3s;}
+  .nav-links a:hover::after{width:100%;}
+  nav.scrolled .nav-links a{color:var(--mid);}
+  .nav-links a:hover,nav.scrolled .nav-links a:hover{color:var(--accent);}
+  .nav-dropdown{position:relative;}
+  .nav-dropdown-menu{display:none;position:absolute;top:100%;left:0;background:var(--ivory);border:1px solid var(--rule);min-width:240px;padding:12px 0;box-shadow:0 12px 48px rgba(26,26,46,0.12);padding-top:20px;}
+  .nav-dropdown-menu::before{content:'';position:absolute;top:-16px;left:0;right:0;height:16px;}
+  .nav-dropdown:hover .nav-dropdown-menu{display:block;}
+  .nav-dropdown-menu a{display:block;padding:12px 24px;font-size:var(--text-sm);letter-spacing:0.1em;color:var(--mid)!important;text-transform:uppercase;}
+  .nav-dropdown-menu a::after{display:none;}
+  .nav-dropdown-menu a:hover{color:var(--accent)!important;background:var(--warm);}
+  .nav-cta{color:var(--accent)!important;border:1.5px solid var(--accent);padding:11px 26px;transition:all 0.3s!important;}
+  .nav-cta:hover{background:var(--accent);color:var(--ivory)!important;}
+  .nav-cta::after{display:none!important;}
+
+  /* SHARED */
+  .page-hero{height:58vh;min-height:420px;background:var(--slate);display:flex;align-items:flex-end;padding:100px 64px 72px;position:relative;overflow:hidden;}
+  .page-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.12;}
+  .page-hero-content{position:relative;z-index:2;}
+  .page-hero-eyebrow{font-size:var(--text-xs);letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;font-weight:600;}
+  .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,78px);font-weight:300;color:var(--ivory);line-height:1.05;}
+  .page-hero h1 em{font-style:italic;color:var(--accent-light);}
+  .page-hero-sub{font-size:var(--text-base);line-height:1.85;color:rgba(245,242,236,0.55);margin-top:20px;max-width:600px;font-weight:300;letter-spacing:0.02em;}
+  .section-pad{padding:110px 64px;}
+  .eyebrow{font-size:var(--text-xs);letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:18px;}
+  .section-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,58px);font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:28px;}
+  .section-h2 em{font-style:italic;color:var(--accent);}
+  .section-h2-light{color:var(--ivory);}
+  .body-text{font-size:var(--text-base);line-height:1.95;color:var(--mid);font-weight:300;letter-spacing:0.02em;}
+  .back-link{display:inline-flex;align-items:center;gap:10px;font-size:var(--text-sm);letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:48px;cursor:none;text-decoration:none;}
+  .back-link::before{content:'←';}
+  .btn-primary{display:inline-block;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;background:var(--accent);color:var(--ivory);padding:18px 40px;text-decoration:none;font-weight:600;transition:all 0.3s;cursor:none;border:none;font-family:'Montserrat',sans-serif;}
+  .btn-primary:hover{background:var(--accent-light);transform:translateY(-1px);}
+
+  /* TWO COL */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;}
+  .two-col-img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+
+  /* BENEFITS */
+  .benefits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--rule);margin-top:64px;}
+  .benefit-card{background:var(--ivory);padding:40px 36px;border-left:3px solid transparent;transition:border-color 0.3s;}
+  .benefit-card:hover{border-left-color:var(--accent);}
+  .benefit-title{font-size:var(--text-sm);letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:var(--ink);margin-bottom:12px;}
+  .benefit-desc{font-size:var(--text-base);line-height:1.85;color:var(--mid);font-weight:300;}
+
+  /* HOW IT WORKS */
+  .how-section{background:var(--slate);padding:110px 64px;}
+  .steps-list{display:flex;flex-direction:column;margin-top:56px;}
+  .step-item{display:grid;grid-template-columns:72px 1fr;gap:24px;padding:36px 0;border-bottom:1px solid rgba(232,82,26,0.15);}
+  .step-item:last-child{border-bottom:none;}
+  .step-num{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--accent);opacity:0.5;line-height:1;}
+  .step-title{font-size:var(--text-sm);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:var(--ivory);margin-bottom:8px;}
+  .step-desc{font-size:var(--text-base);line-height:1.85;color:rgba(245,242,236,0.5);font-weight:300;}
+
+  /* CTA BAND */
+  .cta-band{background:var(--slate);padding:80px 64px;display:flex;justify-content:space-between;align-items:center;gap:48px;}
+  .cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,3.5vw,50px);font-weight:300;color:var(--ivory);}
+  .cta-band h2 em{font-style:italic;color:var(--accent-light);}
+
+  /* FOOTER */
+  footer{background:#0d1020;padding:88px 64px 44px;border-top:1px solid rgba(232,82,26,0.08);}
+  .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;padding-bottom:56px;border-bottom:1px solid rgba(232,82,26,0.07);}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--ivory);letter-spacing:0.05em;margin-bottom:16px;display:block;}
+  .footer-tagline{font-size:var(--text-sm);line-height:1.85;color:rgba(245,242,236,0.32);font-weight:300;letter-spacing:0.04em;max-width:260px;}
+  .footer-address{font-size:var(--text-sm);line-height:2;color:rgba(245,242,236,0.2);font-weight:300;margin-top:24px;}
+  .footer-col-title{font-size:var(--text-xs);letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:20px;}
+  .footer-links{list-style:none;display:flex;flex-direction:column;gap:13px;}
+  .footer-links a{font-size:var(--text-sm);color:rgba(245,242,236,0.32);text-decoration:none;letter-spacing:0.04em;font-weight:300;transition:color 0.3s;cursor:none;}
+  .footer-links a:hover{color:var(--accent);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;}
+  .footer-copy{font-size:var(--text-sm);letter-spacing:0.1em;color:rgba(245,242,236,0.18);}
+  .footer-socials{display:flex;gap:24px;}
+  .footer-socials a{font-size:var(--text-sm);letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,242,236,0.25);text-decoration:none;transition:color 0.3s;cursor:none;}
+  .footer-socials a:hover{color:var(--accent);}
+
+  /* MOBILE NAV */
+  .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+  @media (max-width:768px){
+    .nav-hamburger{display:flex;}
+    .nav-links{display:none;}
+  }
+  .nav-hamburger span{display:block;width:24px;height:2px;background:var(--ivory);transition:all 0.3s;}
+  nav.scrolled .nav-hamburger span{background:var(--ink);}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-hamburger.open span:nth-child(2){opacity:0;}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-nav-overlay{display:none;position:fixed;inset:0;background:var(--slate);z-index:99;flex-direction:column;padding:100px 36px 48px;overflow-y:auto;}
+  .mobile-nav-overlay.open{display:flex;}
+  .mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:0;}
+  .mobile-nav-links > li > a{display:block;font-size:28px;font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--ivory);padding:18px 0;border-bottom:1px solid rgba(232,82,26,0.12);text-decoration:none;letter-spacing:0.02em;}
+  .mobile-nav-links > li > a:hover{color:var(--accent);}
+  .mobile-nav-submenu{display:flex;flex-direction:column;gap:0;padding-left:16px;}
+  .mobile-nav-submenu a{display:block;font-size:15px;color:rgba(245,242,236,0.55);padding:12px 0;border-bottom:1px solid rgba(232,82,26,0.06);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;font-weight:400;}
+  .mobile-nav-submenu a:hover{color:var(--accent);}
+  .mobile-nav-cta{margin-top:36px;}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.75s ease,transform 0.75s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .reveal-delay-1{transition-delay:0.12s;}
+  .reveal-delay-2{transition-delay:0.24s;}
+  .reveal-delay-3{transition-delay:0.36s;}
+
+  /* TABLET */
+  @media (max-width:1024px){
+    nav{padding:22px 36px;}
+    nav.scrolled{padding:16px 36px;}
+    .two-col{grid-template-columns:1fr;gap:40px;}
+    .two-col-img{max-height:320px;}
+    .benefits-grid{grid-template-columns:1fr 1fr;}
+    .how-section{padding:80px 36px;}
+    .cta-band{padding:60px 36px;flex-direction:column;text-align:center;gap:28px;}
+    footer{padding:64px 36px 36px;}
+    .footer-top{grid-template-columns:1fr 1fr;gap:40px;}
+    .section-pad{padding:80px 36px;}
+    .page-hero{padding:100px 36px 56px;}
+  }
+
+  /* MOBILE */
+  @media (max-width:768px){
+    body{cursor:auto;}
+    .cursor,.cursor-ring{display:none;}
+    nav{padding:16px 20px;}
+    .benefits-grid{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr;gap:32px;}
+    .footer-bottom{flex-direction:column;gap:12px;align-items:flex-start;}
+    section{padding:60px 20px;}
+  }
+
+  html,body{max-width:100vw;overflow-x:hidden;}
+  img,video,iframe{max-width:100%;height:auto;}
+</style>
+</head>
+<body class="non-home">
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav" class="dark-nav">
+  <a href="/" class="nav-logo">
+    <svg viewBox="0 0 220 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect class="logo-bar" x="0" y="6" width="4" height="36" rx="2" fill="#e8521a"/>
+      <text class="logo-text-path" x="18" y="35" font-family="'Montserrat', sans-serif" font-size="22" font-weight="600" letter-spacing="-0.5" fill="#faf9f7">smart kteam</text>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <a href="#" onclick="return false;">Services ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="/website-design">Website Design</a>
+        <a href="/seo">SEO</a>
+        <a href="/booking-payment">Booking &amp; Payment</a>
+        <a href="/google-ads">Google Ads</a>
+        <a href="/insurance-claims">Insurance Claims</a>
+      </div>
+    </li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/qa">Q&amp;A</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/#contact" class="nav-cta">Free Consultation</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="mobile-nav-overlay" id="mobileNav">
+  <ul class="mobile-nav-links">
+    <li>
+      <a href="#" onclick="return false;" style="color:var(--accent);">Services</a>
+      <div class="mobile-nav-submenu">
+        <a href="/website-design">Website Design</a>
+        <a href="/seo">SEO</a>
+        <a href="/booking-payment">Booking &amp; Payment</a>
+        <a href="/google-ads">Google Ads</a>
+        <a href="/insurance-claims">Insurance Claims</a>
+      </div>
+    </li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/qa">Q&amp;A</a></li>
+    <li><a href="/blog">Blog</a></li>
+  </ul>
+  <div class="mobile-nav-cta">
+    <a href="/#contact" class="btn-primary" style="display:block;text-align:center;">Free Consultation</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1400&q=85')"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Services</div>
+    <h1>Insurance Claims for<br><em>Massage Therapists</em></h1>
+    <p class="page-hero-sub">Stop chasing insurance companies. ClinicFlow manages your credentialing and claims end-to-end — so you stay focused on your patients, not your paperwork.</p>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="section-pad">
+  <a href="/" class="back-link">Back to Home</a>
+  <div class="two-col">
+    <div>
+      <div class="eyebrow">Hands-Off Claims Management</div>
+      <h2 class="section-h2">Focus on Healing.<br><em>We Handle the Rest.</em></h2>
+      <p class="body-text">Insurance billing is one of the biggest administrative burdens for massage therapy practices. Between credentialing with insurers, submitting claims, tracking denials, and chasing follow-ups, it can take hours every week — hours better spent with patients. ClinicFlow is a fully managed service that takes this burden completely off your plate. From getting you credentialed with major insurers like Premera, Aetna, Kaiser, and BCBS, to managing every claim through its full lifecycle, we handle it all. You share your business information once — then you grow.</p>
+    </div>
+    <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=800&q=85" alt="Massage therapy wellness" class="two-col-img reveal">
+  </div>
+  <div class="benefits-grid">
+    <div class="benefit-card reveal">
+      <div class="benefit-title">Provider Credentialing</div>
+      <div class="benefit-desc">We prepare and submit all insurer applications, collect required documents, and actively monitor status with Premera, Aetna, Kaiser, BCBS, and more — until you're approved.</div>
+    </div>
+    <div class="benefit-card reveal reveal-delay-1">
+      <div class="benefit-title">Claim Lifecycle Management</div>
+      <div class="benefit-desc">From creation to submission to follow-up and denial appeals — every claim is tracked and resolved. No more lost revenue sitting in a follow-up loop.</div>
+    </div>
+    <div class="benefit-card reveal reveal-delay-2">
+      <div class="benefit-title">Full Transparency</div>
+      <div class="benefit-desc">Monthly PDF reports and a real-time analytics dashboard give you complete visibility into claim status, pending revenue, and practice performance at a glance.</div>
+    </div>
+    <div class="benefit-card reveal reveal-delay-3">
+      <div class="benefit-title">Zero Setup Required</div>
+      <div class="benefit-desc">No software to install, no hardware to configure. Share your practice information and we get to work immediately — it's that simple.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="eyebrow">The Process</div>
+  <h2 class="section-h2 section-h2-light">Simple by <em>Design</em></h2>
+  <div class="steps-list">
+    <div class="step-item reveal">
+      <div class="step-num">01</div>
+      <div>
+        <div class="step-title">Onboard</div>
+        <div class="step-desc">Share your practice details with us — no setup fees, no complex intake forms. We ask for what we need and nothing more.</div>
+      </div>
+    </div>
+    <div class="step-item reveal reveal-delay-1">
+      <div class="step-num">02</div>
+      <div>
+        <div class="step-title">We Work</div>
+        <div class="step-desc">ClinicFlow manages your insurer relationships, submits claims, handles denials, and follows up — interacting with insurers entirely on your behalf.</div>
+      </div>
+    </div>
+    <div class="step-item reveal reveal-delay-2">
+      <div class="step-num">03</div>
+      <div>
+        <div class="step-title">You Grow</div>
+        <div class="step-desc">Receive monthly PDF reports and access your real-time dashboard anytime to see exactly what's been submitted, approved, and paid.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band reveal">
+  <h2>Ready to stop wrestling<br><em>with insurance paperwork?</em></h2>
+  <a href="https://clinicflow-website.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-primary">Learn More About ClinicFlow →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-logo">Smart KTeam</span>
+      <p class="footer-tagline">Digital growth for ambitious small businesses in Seattle and beyond.</p>
+      <div class="footer-address">1248 121st Ave NE · Bellevue, WA 98005<br>smart.kteam.us@gmail.com</div>
+    </div>
+    <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="/website-design">Website Design</a></li><li><a href="/seo">SEO Ranking</a></li><li><a href="/booking-payment">Booking Systems</a></li><li><a href="/google-ads">Google Ads</a></li><li><a href="/insurance-claims">Insurance Claims</a></li></ul></div>
+    <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="/">About Us</a></li><li><a href="/blog">Blog</a></li><li><a href="/qa">Q&amp;A</a></li><li><a href="/#contact">Contact</a></li></ul></div>
+    <div><div class="footer-col-title">Connect</div><ul class="footer-links"><li><a href="https://www.facebook.com/smartkteam" target="_blank">Facebook</a></li><li><a href="https://www.instagram.com/smartkteam/" target="_blank">Instagram</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Smart KTeam. All Rights Reserved.</div>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/smartkteam" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/smartkteam/" target="_blank">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============ MOBILE NAV ============
+function toggleMobileNav(){
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+  document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+}
+
+// ============ CURSOR ============
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function anim(){
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+  rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(anim);
+})();
+document.querySelectorAll('a,button,.benefit-card,.step-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
+});
+
+// ============ NAV ============
+const nav=document.getElementById('nav');
+(function(){
+  function upd(){
+    if(window.scrollY>60){nav.classList.add('scrolled');nav.classList.remove('dark-nav');}
+    else{nav.classList.remove('scrolled');nav.classList.add('dark-nav');}
+    var t=document.querySelector('.logo-text-path');
+    if(t){t.setAttribute('fill', nav.classList.contains('scrolled')?'#1a1a2e':'#faf9f7');}
+  }
+  upd();
+  window.addEventListener('scroll',upd);
+})();
+
+// ============ DROPDOWN CLOSE ON CLICK ============
+document.querySelectorAll('.nav-dropdown-menu a').forEach(function(link){
+  link.addEventListener('click', function(){
+    var menu = this.closest('.nav-dropdown-menu');
+    if(menu){ menu.style.display='none'; setTimeout(function(){ menu.style.display=''; }, 400); }
+  });
+});
+
+// ============ REVEAL ============
+(function(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+})();
+
+// Handle hash on initial load
+if(window.location.hash){
+  setTimeout(function(){
+    var el=document.getElementById(window.location.hash.substring(1));
+    if(el)el.scrollIntoView({behavior:'smooth'});
+  },300);
+}
+</script>
+</body>
+</html>
