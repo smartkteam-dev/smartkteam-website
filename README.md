@@ -1,67 +1,63 @@
-# Smart KTeam — Multi-Page Site Deployment Guide
+# Smart KTeam — Site Structure & Deployment Guide
 
-## What changed
-The site has been split from a Single Page Application (1 HTML file with JS routing) into **8 standalone HTML pages**, each with its own SEO metadata, canonical URL, and rich Schema.org structured data. This is the correct architecture for SEO — each page can now rank independently on Google.
+## Pages
 
-## Files to push to GitHub
+| File | URL | Notes |
+|---|---|---|
+| `index.html` | smartkteam.com/ | Homepage; 5 service cards + portfolio bento grid |
+| `website-design.html` | /website-design | Service page |
+| `seo.html` | /seo | Service page |
+| `booking-payment.html` | /booking-payment | Service page |
+| `google-ads.html` | /google-ads | Service page |
+| `insurance-claims.html` | /insurance-claims | Service page — promotes ClinicFlow |
+| `google-business-profile.html` | /google-business-profile | Unlinked (hidden from nav/grid) |
+| `blog.html` | /blog | Blog index |
+| `qa.html` | /qa | Q&A page |
+| `vercel.json` | — | Clean URLs (no .html), rewrites |
+| `sitemap.xml` | /sitemap.xml | 9 indexed pages |
+| `robots.txt` | /robots.txt | Points crawlers to sitemap |
 
-| File | Purpose |
-|---|---|
-| `index.html` | Homepage (smartkteam.com) |
-| `google-business-profile.html` | smartkteam.com/google-business-profile |
-| `website-design.html` | smartkteam.com/website-design |
-| `seo.html` | smartkteam.com/seo |
-| `booking-payment.html` | smartkteam.com/booking-payment |
-| `google-ads.html` | smartkteam.com/google-ads |
-| `qa.html` | smartkteam.com/qa |
-| `blog.html` | smartkteam.com/blog |
-| `vercel.json` | Vercel config — enables clean URLs (no .html in URL bar) |
-| `sitemap.xml` | Tells Google all 8 pages exist |
-| `robots.txt` | Points crawlers to the sitemap |
+## Service card numbering
 
-## Deployment steps
+GBP card is hidden via CSS (`display:none!important`) but remains in the DOM. Visible cards are numbered 01–05:
 
-1. **Replace** the existing `index.html` in your GitHub repo with the new `index.html`
-2. **Add** all 7 other HTML files to the same repo root
-3. **Add** `vercel.json`, `sitemap.xml`, and `robots.txt` to the repo root
-4. **Commit and push** — Vercel will auto-deploy
+| # | Service |
+|---|---------|
+| 01 | Website Design |
+| 02 | SEO |
+| 03 | Booking & Payment Systems |
+| 04 | Google Ads |
+| 05 | Insurance Claims for Massage Therapists *(Special)* |
 
-## After deployment
+## Hero CSS pattern (all 5 service pages)
 
-1. Visit each URL to confirm they all load:
-   - https://smartkteam.com/
-   - https://smartkteam.com/google-business-profile
-   - https://smartkteam.com/website-design
-   - https://smartkteam.com/seo
-   - https://smartkteam.com/booking-payment
-   - https://smartkteam.com/google-ads
-   - https://smartkteam.com/qa
-   - https://smartkteam.com/blog
+Bounded absolute positioning prevents the nav logo from overlapping the hero eyebrow text:
 
-2. **Submit sitemap to Google Search Console**:
-   - Go to https://search.google.com/search-console
-   - Add property: smartkteam.com
-   - Sitemaps → submit: `https://smartkteam.com/sitemap.xml`
+```css
+.page-hero { height:60vh; min-height:520px; position:relative; overflow:hidden; }
+.page-hero-content { position:absolute; top:110px; bottom:72px; left:64px; right:64px; z-index:2;
+                     display:flex; flex-direction:column; justify-content:flex-end; }
 
-3. **Submit to Bing Webmaster Tools** (optional but recommended):
-   - https://www.bing.com/webmasters
-   - Same process
+@media (max-width:1024px) { .page-hero-content { top:90px; bottom:56px; left:36px; right:36px; } }
+@media (max-width:768px)  { .page-hero { min-height:380px; }
+                             .page-hero-content { top:70px; bottom:40px; left:20px; right:20px; } }
+```
 
-## SEO benefits you just unlocked
+Note: `.section-pad` must be overridden explicitly in the 768px block — class specificity beats the generic `section` element rule.
 
-- 8 indexable pages instead of 1
-- Each service page can rank for its own keywords
-- Per-page meta titles, descriptions, OG tags
-- Canonical URLs prevent duplicate content issues
-- Schema.org LocalBusiness + ProfessionalService structured data on every page
-- Geo-targeting metadata (geo.region, ICBM) for local search
-- Proper sitemap for crawlers
+## Deployment
 
-## SEO checklist for next steps
+Hosted on Vercel, auto-deploys on push to `main`.
 
-- [ ] Verify Google Search Console
-- [ ] Verify Bing Webmaster Tools
-- [ ] Add a real `og-image.jpg` (1200x630px) to the repo root for social sharing
-- [ ] Set up Google Analytics 4 (optional but recommended)
-- [ ] Build city-specific landing pages later (e.g., /seattle-seo, /portland-website-design) for broader West Coast geo expansion
-- [ ] Add real blog posts to /blog for ongoing SEO content
+1. Push changes to GitHub → Vercel deploys automatically
+2. Verify at https://smartkteam.com
+
+## SEO checklist
+
+- [x] Multi-page architecture (each page ranks independently)
+- [x] Per-page meta titles, descriptions, OG tags
+- [x] Schema.org LocalBusiness structured data
+- [x] Sitemap submitted to Google Search Console
+- [ ] Google Analytics 4
+- [ ] City-specific landing pages (/seattle-seo, /portland-website-design)
+- [ ] Real blog posts for ongoing SEO content
