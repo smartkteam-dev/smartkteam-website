@@ -335,6 +335,7 @@
   .service-card:hover{background:#0c1628;}
   .service-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--accent);transition:width 0.45s;}
   .service-card:hover::after{width:100%;}
+  .hidden-service{display:none !important;}
   .service-card-inner{position:relative;z-index:1;}
   .service-num{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--accent);margin-bottom:28px;letter-spacing:0.12em;}
   .service-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--ivory);margin-bottom:14px;line-height:1.2;}
@@ -668,7 +669,6 @@
     <li class="nav-dropdown">
       <button class="nav-link-btn" aria-label="Services menu" aria-expanded="false">Services ▾</button>
       <div class="nav-dropdown-menu">
-        <a href="/google-business-profile">Google Business Profile</a>
         <a href="/website-design">Website Design</a>
         <a href="/seo">SEO</a>
         <a href="/booking-payment">Booking &amp; Payment</a>
@@ -693,7 +693,6 @@
     <li>
       <button class="mobile-nav-link-btn" aria-label="Services menu" aria-expanded="false" style="color:var(--accent);">Services</button>
       <div class="mobile-nav-submenu">
-        <a href="/google-business-profile">Google Business Profile</a>
         <a href="/website-design">Website Design</a>
         <a href="/seo">SEO</a>
         <a href="/booking-payment">Booking &amp; Payment</a>
@@ -756,7 +755,6 @@
     <div class="ticker-track">
       <span class="ticker-item"><span class="ticker-dot"></span>Website Design</span>
       <span class="ticker-item"><span class="ticker-dot"></span>SEO Ranking</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Google Business Profile</span>
       <span class="ticker-item"><span class="ticker-dot"></span>Booking Systems</span>
       <span class="ticker-item"><span class="ticker-dot"></span>Payment Integration</span>
       <span class="ticker-item"><span class="ticker-dot"></span>Google Ads</span>
@@ -764,7 +762,6 @@
       <span class="ticker-item"><span class="ticker-dot"></span>English · Español · 中文</span>
       <span class="ticker-item"><span class="ticker-dot"></span>Website Design</span>
       <span class="ticker-item"><span class="ticker-dot"></span>SEO Ranking</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Google Business Profile</span>
       <span class="ticker-item"><span class="ticker-dot"></span>Booking Systems</span>
       <span class="ticker-item"><span class="ticker-dot"></span>Payment Integration</span>
       <span class="ticker-item"><span class="ticker-dot"></span>Google Ads</span>
@@ -822,10 +819,10 @@
         <div class="eyebrow reveal">What We Do</div>
         <h2 class="section-h2 section-h2-light reveal">Full-Spectrum<br><em>Digital Services</em></h2>
       </div>
-      <div class="home-section-count reveal">05</div>
+      <div class="home-section-count reveal">04</div>
     </div>
     <div class="services-grid">
-      <div class="service-card reveal">
+      <div class="service-card reveal hidden-service">
         <div class="service-card-inner">
           <div class="service-num">01</div>
           <h3 class="service-name">Google Business Profile</h3>
@@ -1127,7 +1124,7 @@
           <option value="" disabled selected>Service of Interest</option>
           <option>Website Design</option>
           <option>SEO Ranking</option>
-          <option>Google Business Profile</option>
+          <option hidden>Google Business Profile</option>
           <option>Booking &amp; Payment System</option>
           <option>Google Ads</option>
           <option>Full Package</option>
@@ -1155,7 +1152,7 @@
       <p class="footer-tagline">Digital growth for ambitious small businesses in Seattle and beyond.</p>
       <div class="footer-address">1248 121st Ave NE · Bellevue, WA 98005<br>smart.kteam.us@gmail.com</div>
     </div>
-    <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="/google-business-profile">Google Business Profile</a></li><li><a href="/website-design">Website Design</a></li><li><a href="/seo">SEO Ranking</a></li><li><a href="/booking-payment">Booking Systems</a></li><li><a href="/google-ads">Google Ads</a></li></ul></div>
+    <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="/website-design">Website Design</a></li><li><a href="/seo">SEO Ranking</a></li><li><a href="/booking-payment">Booking Systems</a></li><li><a href="/google-ads">Google Ads</a></li></ul></div>
     <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="/">About Us</a></li><li><a href="/blog">Blog</a></li><li><a href="/qa">Q&amp;A</a></li><li><a href="/#contact">Contact</a></li></ul></div>
     <div><div class="footer-col-title">Connect</div><ul class="footer-links"><li><a href="https://www.facebook.com/smartkteam" target="_blank">Facebook</a></li><li><a href="https://www.instagram.com/smartkteam/" target="_blank">Instagram</a></li></ul></div>
   </div>
