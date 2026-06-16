@@ -178,17 +178,26 @@
   .packages-section{background:var(--slate);padding:110px 64px;}
   .packages-grid{display:grid;gap:2px;margin-top:56px;}
   .packages-grid-3{grid-template-columns:repeat(3,1fr);}
-  .package-card{background:rgba(255,255,255,0.04);padding:48px 36px;border-top:2px solid rgba(255,255,255,0.06);position:relative;transition:background 0.3s;}
+  .package-card{display:flex;flex-direction:column;background:rgba(255,255,255,0.04);padding:48px 36px;border-top:2px solid rgba(255,255,255,0.06);position:relative;transition:background 0.3s;}
   .package-card.featured{background:rgba(232,82,26,0.09);border-top-color:var(--accent);}
   .package-card:hover{background:rgba(255,255,255,0.08);}
   .pkg-badge{position:absolute;top:-1px;right:28px;background:var(--accent);font-size:var(--text-xs);letter-spacing:0.2em;text-transform:uppercase;color:var(--ivory);padding:5px 14px;font-weight:700;}
   .pkg-name{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--ivory);margin-bottom:6px;}
   .pkg-price{font-size:var(--text-sm);letter-spacing:0.05em;color:var(--accent);font-weight:600;margin-bottom:28px;}
   .pkg-rule{width:32px;height:2px;background:rgba(232,82,26,0.4);margin-bottom:28px;}
-  .pkg-features{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .pkg-price-amount{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:600;color:var(--accent);line-height:1;margin-bottom:6px;letter-spacing:0.04em;}
+  .pkg-price-amount sup{font-size:13px;font-weight:500;color:var(--accent);vertical-align:super;line-height:0;margin-right:1px;}
+  .pkg-philosophy{font-size:var(--text-base);line-height:1.9;color:rgba(245,242,236,0.72);max-width:660px;font-weight:300;letter-spacing:0.02em;margin-top:16px;}
+  .pkg-addons{padding-top:56px;border-top:1px solid rgba(232,82,26,0.12);margin-top:56px;}
+  .pkg-addons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(232,82,26,0.1);margin-top:28px;}
+  .pkg-addon-card{background:rgba(255,255,255,0.03);padding:32px 28px;}
+  .pkg-addon-name{font-size:var(--text-xs);letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:rgba(245,242,236,0.6);margin-bottom:12px;}
+  .pkg-addon-price{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--accent);margin-bottom:10px;}
+  .pkg-addon-desc{font-size:var(--text-sm);line-height:1.75;color:rgba(245,242,236,0.35);font-weight:300;}
+  .pkg-features{list-style:none;display:flex;flex-direction:column;gap:12px;flex:1;}
   .pkg-features li{font-size:var(--text-sm);letter-spacing:0.04em;color:rgba(245,242,236,0.6);font-weight:300;display:flex;gap:12px;align-items:flex-start;line-height:1.6;}
   .pkg-features li::before{content:'—';color:var(--accent);flex-shrink:0;}
-  .pkg-cta{display:inline-block;margin-top:36px;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;border:1.5px solid rgba(232,82,26,0.5);color:var(--accent);padding:14px 28px;text-decoration:none;transition:all 0.3s;cursor:none;font-weight:600;}
+  .pkg-cta{display:inline-block;margin-top:36px;align-self:flex-start;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;border:1.5px solid rgba(232,82,26,0.5);color:var(--accent);padding:14px 28px;text-decoration:none;transition:all 0.3s;cursor:none;font-weight:600;}
   .pkg-cta:hover{background:var(--accent);color:var(--ivory);}
 
   /* STEPS */
@@ -456,6 +465,7 @@
 
     .packages-section{padding:80px 36px;}
     .packages-grid-3{grid-template-columns:1fr 1fr;}
+    .pkg-addons-grid{grid-template-columns:1fr 1fr;}
 
     .benefits-grid{grid-template-columns:1fr 1fr;}
 
@@ -508,7 +518,7 @@
     .service-hero p{font-size:0.95rem;}
     .pricing-grid{grid-template-columns:1fr;gap:1.5rem;max-width:420px;margin-inline:auto;}
     .pricing-card{padding:2rem 1.5rem;}
-    .packages-grid,.packages-grid-3{grid-template-columns:1fr!important;}
+    .packages-grid,.packages-grid-3,.pkg-addons-grid{grid-template-columns:1fr!important;}
     .features-grid{grid-template-columns:1fr;gap:1.5rem;}
     .feature-item{padding:1.5rem;}
     .why-grid{grid-template-columns:1fr;gap:1.5rem;}
@@ -634,7 +644,7 @@
   <section class="section-pad">
     <a href="/" class="back-link">Back to Home</a>
     <div class="two-col">
-      <div><div class="eyebrow">What is SEO?</div><h2 class="section-h2">Organic Growth <em>That Lasts</em></h2><p class="body-text">SEO (Search Engine Optimization) is a set of strategies that optimize your website's content, structure, and technical aspects to achieve higher rankings on Google and Bing. Unlike paid ads, SEO builds steady, lasting traffic at a lower long-term cost — and makes your brand look more trustworthy and professional.</p></div>
+      <div><div class="eyebrow">What is SEO?</div><h2 class="section-h2">Organic Growth <em>That Lasts</em></h2><p class="body-text">When a potential customer searches for what you offer, SEO decides whether they find you — or your competitor. Unlike paid ads that stop the moment you stop paying, SEO builds lasting visibility that keeps working long after the initial investment, making your business the trusted, go-to choice in your area.</p></div>
       <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=700&q=85" alt="SEO Search Ranking" class="two-col-img reveal">
     </div>
     <div class="steps-list">
@@ -646,12 +656,88 @@
     </div>
   </section>
   <section class="packages-section">
-    <div class="eyebrow">Pricing</div><h2 class="section-h2 section-h2-light">SEO <em>Packages</em></h2>
-    <p style="font-size:var(--text-sm);color:rgba(245,242,236,0.3);margin-top:8px;letter-spacing:0.04em;">6-Month subscription — special pricing</p>
+    <div class="eyebrow">Pricing</div>
+    <h2 class="section-h2 section-h2-light">SEO <em>Packages</em></h2>
+    <p class="pkg-philosophy">Our SEO packages are built for small businesses with real budgets. You'll get the same strategies used by larger brands — without the enterprise price tag. Most agencies charge 3–5× more for equivalent work.</p>
+    <p style="font-size:var(--text-xs);color:rgba(245,242,236,0.25);margin-top:16px;letter-spacing:0.04em;">6-month plans · billed monthly · cancel anytime after 6 months</p>
     <div class="packages-grid packages-grid-3">
-      <div class="package-card reveal"><div class="pkg-name">Silver</div><div class="pkg-price">$399 / 6 months</div><div class="pkg-rule"></div><ul class="pkg-features"><li>2 Competitor Analysis</li><li>Keyword Research</li><li>Page Speed Optimization (up to 10)</li><li>Google Analytics Setup</li><li>Google Search Console</li><li>Meta Data Optimization</li><li>GBP Optimization</li><li>700 Multi-Tier Backlinks</li></ul><a href="https://square.link/u/3FJkZEIe" target="_blank" class="pkg-cta">Order Now</a></div>
-      <div class="package-card featured reveal reveal-delay-1"><div class="pkg-badge">Best Value</div><div class="pkg-name">Gold</div><div class="pkg-price">$599 / 6 months</div><div class="pkg-rule"></div><ul class="pkg-features"><li>5 Competitor Analysis</li><li>Keyword Research</li><li>Page Speed Optimization (up to 20)</li><li>Google Analytics + Search Console</li><li>Meta Data &amp; GBP Optimization</li><li>200 One-Tier Backlinks (DA 70)</li><li>700 Multi-Tier Backlinks (DA 70)</li><li>Analytics &amp; Ranking Reports</li></ul><a href="https://square.link/u/obvShJzO" target="_blank" class="pkg-cta">Order Now</a></div>
-      <div class="package-card reveal reveal-delay-2"><div class="pkg-name">Platinum</div><div class="pkg-price">$799 / 6 months</div><div class="pkg-rule"></div><ul class="pkg-features"><li>10 Competitor Analysis</li><li>Keyword Research</li><li>Page Speed Optimization (up to 20)</li><li>Google Analytics + Search Console</li><li>Meta Data &amp; GBP Optimization</li><li>70 One-Tier Backlinks (DA 90)</li><li>1600 Multi-Tier Backlinks (DA 70)</li><li>Analytics &amp; Ranking Reports</li></ul><a href="https://square.link/u/XkPIUi7N" target="_blank" class="pkg-cta">Order Now</a></div>
+      <div class="package-card reveal">
+        <div class="pkg-name">Visibility</div>
+        <div class="pkg-price-amount"><sup>$</sup>399<span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:400;">/mo</span></div>
+        <div class="pkg-price">Get Found Locally</div>
+        <div class="pkg-rule"></div>
+        <ul class="pkg-features">
+          <li>Up to 10 Target Keywords</li>
+          <li>Google Business Profile Optimization</li>
+          <li>On-Page SEO (up to 10 pages)</li>
+          <li>Meta Titles &amp; Descriptions</li>
+          <li>Google Analytics + Search Console Setup</li>
+          <li>2 Competitor Analyses</li>
+          <li>Monthly Ranking Report</li>
+        </ul>
+        <a href="/#contact" class="pkg-cta">Get Started</a>
+      </div>
+      <div class="package-card featured reveal reveal-delay-1">
+        <div class="pkg-badge">Best Value</div>
+        <div class="pkg-name">Growth</div>
+        <div class="pkg-price-amount"><sup>$</sup>599<span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:400;">/mo</span></div>
+        <div class="pkg-price">Grow Your Traffic</div>
+        <div class="pkg-rule"></div>
+        <ul class="pkg-features">
+          <li>Up to 20 Target Keywords</li>
+          <li>Google Business Profile Optimization</li>
+          <li>On-Page SEO (up to 20 pages)</li>
+          <li>Meta Titles &amp; Descriptions</li>
+          <li>Google Analytics + Search Console</li>
+          <li>Local Citation Building (15+ directories)</li>
+          <li>Review Monitoring Setup</li>
+          <li>5 Competitor Analyses</li>
+          <li>Authority Link Building</li>
+          <li>Monthly Analytics &amp; Ranking Report</li>
+        </ul>
+        <a href="/#contact" class="pkg-cta">Get Started</a>
+      </div>
+      <div class="package-card reveal reveal-delay-2">
+        <div class="pkg-name">Authority</div>
+        <div class="pkg-price-amount"><sup>$</sup>799<span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:400;">/mo</span></div>
+        <div class="pkg-price">Dominate Search</div>
+        <div class="pkg-rule"></div>
+        <ul class="pkg-features">
+          <li>Up to 40 Target Keywords</li>
+          <li>Google Business Profile Optimization</li>
+          <li>On-Page SEO (unlimited pages)</li>
+          <li>Meta Titles &amp; Descriptions</li>
+          <li>Google Analytics + Search Console</li>
+          <li>Local Citation Building (15+ directories)</li>
+          <li>Review Monitoring Setup</li>
+          <li>10 Competitor Analyses</li>
+          <li>Premium Link Building (high authority sites)</li>
+          <li>Core Web Vitals Monitoring</li>
+          <li>Blog Content Recommendations (2/mo)</li>
+          <li>Monthly Analytics &amp; Ranking Report</li>
+        </ul>
+        <a href="/#contact" class="pkg-cta">Get Started</a>
+      </div>
+    </div>
+    <div class="pkg-addons reveal">
+      <div class="eyebrow">Add-Ons</div>
+      <div class="pkg-addons-grid">
+        <div class="pkg-addon-card">
+          <div class="pkg-addon-name">One-Time SEO Audit</div>
+          <div class="pkg-addon-price">$199</div>
+          <div class="pkg-addon-desc">Full technical site audit before you start — identifies quick wins and fixes that hold your rankings back.</div>
+        </div>
+        <div class="pkg-addon-card">
+          <div class="pkg-addon-name">Blog Content Writing</div>
+          <div class="pkg-addon-price">$150<span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:400;">/article</span></div>
+          <div class="pkg-addon-desc">SEO-optimized articles written for your industry, audience, and target keywords.</div>
+        </div>
+        <div class="pkg-addon-card">
+          <div class="pkg-addon-name">GBP Profile Setup</div>
+          <div class="pkg-addon-price">$149</div>
+          <div class="pkg-addon-desc">Full Google Business Profile build and optimization for businesses starting from scratch.</div>
+        </div>
+      </div>
     </div>
   </section>
   <div class="cta-band reveal"><h2>Ready to reach <em>page one?</em></h2><a href="/#contact" class="btn-primary">Get Free Consultation</a></div>
