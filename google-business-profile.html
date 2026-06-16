@@ -178,17 +178,34 @@
   .packages-section{background:var(--slate);padding:110px 64px;}
   .packages-grid{display:grid;gap:2px;margin-top:56px;}
   .packages-grid-3{grid-template-columns:repeat(3,1fr);}
-  .package-card{background:rgba(255,255,255,0.04);padding:48px 36px;border-top:2px solid rgba(255,255,255,0.06);position:relative;transition:background 0.3s;}
+  .package-card{display:flex;flex-direction:column;background:rgba(255,255,255,0.04);padding:48px 36px;border-top:2px solid rgba(255,255,255,0.06);position:relative;transition:background 0.3s;}
   .package-card.featured{background:rgba(232,82,26,0.09);border-top-color:var(--accent);}
   .package-card:hover{background:rgba(255,255,255,0.08);}
   .pkg-badge{position:absolute;top:-1px;right:28px;background:var(--accent);font-size:var(--text-xs);letter-spacing:0.2em;text-transform:uppercase;color:var(--ivory);padding:5px 14px;font-weight:700;}
   .pkg-name{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--ivory);margin-bottom:6px;}
+  .pkg-price-amount{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:600;color:var(--accent);line-height:1;margin-bottom:6px;letter-spacing:0.04em;}
+  .pkg-price-amount sup{font-size:13px;font-weight:500;color:var(--accent);vertical-align:super;line-height:0;margin-right:1px;}
   .pkg-price{font-size:var(--text-sm);letter-spacing:0.05em;color:var(--accent);font-weight:600;margin-bottom:28px;}
   .pkg-rule{width:32px;height:2px;background:rgba(232,82,26,0.4);margin-bottom:28px;}
-  .pkg-features{list-style:none;display:flex;flex-direction:column;gap:12px;}
-  .pkg-features li{font-size:var(--text-sm);letter-spacing:0.04em;color:rgba(245,242,236,0.6);font-weight:300;display:flex;gap:12px;align-items:flex-start;line-height:1.6;}
-  .pkg-features li::before{content:'—';color:var(--accent);flex-shrink:0;}
-  .pkg-cta{display:inline-block;margin-top:36px;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;border:1.5px solid rgba(232,82,26,0.5);color:var(--accent);padding:14px 28px;text-decoration:none;transition:all 0.3s;cursor:none;font-weight:600;}
+  .pkg-philosophy{font-size:var(--text-base);line-height:1.9;color:rgba(245,242,236,0.72);max-width:660px;font-weight:300;letter-spacing:0.02em;margin-top:16px;}
+  .pkg-addons{padding-top:56px;border-top:1px solid rgba(232,82,26,0.12);margin-top:56px;}
+  .pkg-addons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(232,82,26,0.1);margin-top:28px;}
+  .pkg-addon-card{background:rgba(255,255,255,0.03);padding:32px 28px;}
+  .pkg-addon-name{font-size:var(--text-xs);letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:rgba(245,242,236,0.6);margin-bottom:12px;}
+  .pkg-addon-price{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--accent);margin-bottom:10px;}
+  .pkg-addon-desc{font-size:var(--text-sm);line-height:1.75;color:rgba(245,242,236,0.35);font-weight:300;}
+  .addons-section{background:var(--warm);padding:80px 64px;border-top:1px solid var(--rule);}
+  .addons-section .pkg-addons{border-top:none;padding-top:0;margin-top:0;}
+  .addons-section .pkg-addons-grid{background:var(--rule);}
+  .addons-section .pkg-addon-card{background:var(--ivory);}
+  .addons-section .pkg-addon-name{color:var(--mid);}
+  .addons-section .pkg-addon-desc{color:var(--mid);}
+  .pkg-features{list-style:none;display:flex;flex-direction:column;gap:12px;flex:1;}
+  .pkg-features li{font-size:var(--text-sm);letter-spacing:0.04em;color:rgba(245,242,236,0.78);font-weight:300;display:flex;gap:12px;align-items:flex-start;line-height:1.6;}
+  .pkg-features li::before{content:'—';color:rgba(232,82,26,0.3);flex-shrink:0;}
+  .package-card.featured .pkg-cta{background:var(--accent);color:var(--ivory);border-color:var(--accent);}
+  .package-card.featured .pkg-cta:hover{background:var(--accent-light);border-color:var(--accent-light);}
+  .pkg-cta{display:inline-block;margin-top:36px;align-self:flex-start;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;border:1.5px solid rgba(232,82,26,0.5);color:var(--accent);padding:14px 28px;text-decoration:none;transition:all 0.3s;cursor:none;font-weight:600;}
   .pkg-cta:hover{background:var(--accent);color:var(--ivory);}
 
   /* STEPS */
@@ -225,9 +242,9 @@
   .blog-read-more:hover::after{transform:translateX(4px);}
 
   /* CTA BAND */
-  .cta-band{background:var(--slate);padding:80px 64px;display:flex;justify-content:space-between;align-items:center;gap:48px;}
-  .cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,3.5vw,50px);font-weight:300;color:var(--ivory);}
-  .cta-band h2 em{font-style:italic;color:var(--accent-light);}
+  .cta-band{background:var(--warm);padding:80px 64px;display:flex;justify-content:space-between;align-items:center;gap:48px;border-top:1px solid var(--rule);}
+  .cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,3.5vw,50px);font-weight:300;color:var(--ink);}
+  .cta-band h2 em{font-style:italic;color:var(--accent);}
 
   /* FOOTER */
   footer{background:#0d1020;padding:88px 64px 44px;border-top:1px solid rgba(232,82,26,0.08);}
@@ -456,6 +473,8 @@
 
     .packages-section{padding:80px 36px;}
     .packages-grid-3{grid-template-columns:1fr 1fr;}
+    .pkg-addons-grid{grid-template-columns:1fr 1fr;}
+    .addons-section{padding:60px 36px;}
 
     .benefits-grid{grid-template-columns:1fr 1fr;}
 
@@ -508,7 +527,7 @@
     .service-hero p{font-size:0.95rem;}
     .pricing-grid{grid-template-columns:1fr;gap:1.5rem;max-width:420px;margin-inline:auto;}
     .pricing-card{padding:2rem 1.5rem;}
-    .packages-grid,.packages-grid-3{grid-template-columns:1fr!important;}
+    .packages-grid,.packages-grid-3,.pkg-addons-grid{grid-template-columns:1fr!important;}
     .features-grid{grid-template-columns:1fr;gap:1.5rem;}
     .feature-item{padding:1.5rem;}
     .why-grid{grid-template-columns:1fr;gap:1.5rem;}
@@ -642,10 +661,76 @@
   </section>
   <section class="packages-section">
     <div class="eyebrow">Pricing</div><h2 class="section-h2 section-h2-light">Choose Your <em>Package</em></h2>
+    <p class="pkg-philosophy">Flat monthly rates designed for small businesses. No long-term contracts — cancel anytime. Your Google Business Profile access stays with you, always.</p>
     <div class="packages-grid packages-grid-3">
-      <div class="package-card reveal"><div class="pkg-name">Starter</div><div class="pkg-price">$199 / month</div><div class="pkg-rule"></div><ul class="pkg-features"><li>GBP Setup &amp; Maintenance</li><li>GBP SEO Optimization</li><li>3 Weekly Google Posts</li></ul><a href="/#contact" class="pkg-cta">Get Started</a></div>
-      <div class="package-card featured reveal reveal-delay-1"><div class="pkg-badge">Popular</div><div class="pkg-name">Growth</div><div class="pkg-price">$299 / month</div><div class="pkg-rule"></div><ul class="pkg-features"><li>GBP Setup &amp; Maintenance</li><li>GBP SEO Optimization</li><li>Google Review Response</li><<li>Daily Google Posts</li></ul><a href="/#contact" class="pkg-cta">Get Started</a></div>
-      <div class="package-card reveal reveal-delay-2"><div class="pkg-name">Authority</div><div class="pkg-price">$499 / month</div><div class="pkg-rule"></div><ul class="pkg-features"><li>GBP Setup &amp; Maintenance</li><li>GBP SEO Optimization</li><li>Google Review Response</li><li>Frequent Photo Updates</li><li>Daily Google Posts</li><li>Daily Facebook Posts</li><li>Daily Instagram Posts</li></ul><a href="/#contact" class="pkg-cta">Get Started</a></div>
+      <div class="package-card reveal">
+        <div class="pkg-name">Starter</div>
+        <div class="pkg-price-amount"><sup>$</sup>199<span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:400;">/mo</span></div>
+        <div class="pkg-price">Presence Maintenance</div>
+        <div class="pkg-rule"></div>
+        <ul class="pkg-features">
+          <li>GBP Setup & Verification Support</li>
+          <li>Profile SEO Optimization</li>
+          <li>3 Google Posts per Week</li>
+          <li>Monthly Performance Report</li>
+          <li>Business Info Updates</li>
+        </ul>
+        <a href="/#contact" class="pkg-cta">Get Started</a>
+      </div>
+      <div class="package-card featured reveal reveal-delay-1">
+        <div class="pkg-badge">Popular</div>
+        <div class="pkg-name">Growth</div>
+        <div class="pkg-price-amount"><sup>$</sup>299<span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:400;">/mo</span></div>
+        <div class="pkg-price">Active Engagement</div>
+        <div class="pkg-rule"></div>
+        <ul class="pkg-features">
+          <li>Everything in Starter</li>
+          <li>Daily Google Posts</li>
+          <li>Google Review Responses</li>
+          <li>Photo & Media Updates</li>
+          <li>Q&amp;A Management</li>
+          <li>Competitor Monitoring</li>
+        </ul>
+        <a href="/#contact" class="pkg-cta">Get Started</a>
+      </div>
+      <div class="package-card reveal reveal-delay-2">
+        <div class="pkg-name">Authority</div>
+        <div class="pkg-price-amount"><sup>$</sup>499<span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:400;">/mo</span></div>
+        <div class="pkg-price">Full Dominance</div>
+        <div class="pkg-rule"></div>
+        <ul class="pkg-features">
+          <li>Everything in Growth</li>
+          <li>Daily Facebook Posts</li>
+          <li>Daily Instagram Posts</li>
+          <li>Offer & Event Posts</li>
+          <li>Keyword Rank Tracking</li>
+          <li>Monthly Strategy Call</li>
+        </ul>
+        <a href="/#contact" class="pkg-cta">Get Started</a>
+      </div>
+    </div>
+  </section>
+  <section class="addons-section">
+    <div class="pkg-addons reveal">
+      <div class="eyebrow">Add-Ons</div>
+      <h2 class="section-h2">Optional <em>Extras</em></h2>
+      <div class="pkg-addons-grid">
+        <div class="pkg-addon-card">
+          <div class="pkg-addon-name">Review Generation Campaign</div>
+          <div class="pkg-addon-price">$149</div>
+          <div class="pkg-addon-desc">One-time setup of an automated post-visit review request flow to grow your star rating faster.</div>
+        </div>
+        <div class="pkg-addon-card">
+          <div class="pkg-addon-name">Local Citations Cleanup</div>
+          <div class="pkg-addon-price">$199</div>
+          <div class="pkg-addon-desc">Audit and fix inconsistent NAP (Name, Address, Phone) data across 30+ local directories.</div>
+        </div>
+        <div class="pkg-addon-card">
+          <div class="pkg-addon-name">Competitor Analysis Report</div>
+          <div class="pkg-addon-price">$99</div>
+          <div class="pkg-addon-desc">Deep-dive into how your top 3 local competitors rank and what they're doing differently.</div>
+        </div>
+      </div>
     </div>
   </section>
   <div class="cta-band reveal"><h2>Ready to dominate <em>local search?</em></h2><a href="/#contact" class="btn-primary">Get Free Consultation</a></div>

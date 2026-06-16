@@ -178,17 +178,34 @@
   .packages-section{background:var(--slate);padding:110px 64px;}
   .packages-grid{display:grid;gap:2px;margin-top:56px;}
   .packages-grid-3{grid-template-columns:repeat(3,1fr);}
-  .package-card{background:rgba(255,255,255,0.04);padding:48px 36px;border-top:2px solid rgba(255,255,255,0.06);position:relative;transition:background 0.3s;}
+  .package-card{display:flex;flex-direction:column;background:rgba(255,255,255,0.04);padding:48px 36px;border-top:2px solid rgba(255,255,255,0.06);position:relative;transition:background 0.3s;}
   .package-card.featured{background:rgba(232,82,26,0.09);border-top-color:var(--accent);}
   .package-card:hover{background:rgba(255,255,255,0.08);}
   .pkg-badge{position:absolute;top:-1px;right:28px;background:var(--accent);font-size:var(--text-xs);letter-spacing:0.2em;text-transform:uppercase;color:var(--ivory);padding:5px 14px;font-weight:700;}
   .pkg-name{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--ivory);margin-bottom:6px;}
+  .pkg-price-amount{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:600;color:var(--accent);line-height:1;margin-bottom:6px;letter-spacing:0.04em;}
+  .pkg-price-amount sup{font-size:13px;font-weight:500;color:var(--accent);vertical-align:super;line-height:0;margin-right:1px;}
   .pkg-price{font-size:var(--text-sm);letter-spacing:0.05em;color:var(--accent);font-weight:600;margin-bottom:28px;}
   .pkg-rule{width:32px;height:2px;background:rgba(232,82,26,0.4);margin-bottom:28px;}
-  .pkg-features{list-style:none;display:flex;flex-direction:column;gap:12px;}
-  .pkg-features li{font-size:var(--text-sm);letter-spacing:0.04em;color:rgba(245,242,236,0.6);font-weight:300;display:flex;gap:12px;align-items:flex-start;line-height:1.6;}
-  .pkg-features li::before{content:'—';color:var(--accent);flex-shrink:0;}
-  .pkg-cta{display:inline-block;margin-top:36px;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;border:1.5px solid rgba(232,82,26,0.5);color:var(--accent);padding:14px 28px;text-decoration:none;transition:all 0.3s;cursor:none;font-weight:600;}
+  .pkg-philosophy{font-size:var(--text-base);line-height:1.9;color:rgba(245,242,236,0.72);max-width:660px;font-weight:300;letter-spacing:0.02em;margin-top:16px;}
+  .pkg-addons{padding-top:56px;border-top:1px solid rgba(232,82,26,0.12);margin-top:56px;}
+  .pkg-addons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(232,82,26,0.1);margin-top:28px;}
+  .pkg-addon-card{background:rgba(255,255,255,0.03);padding:32px 28px;}
+  .pkg-addon-name{font-size:var(--text-xs);letter-spacing:0.2em;text-transform:uppercase;font-weight:700;color:rgba(245,242,236,0.6);margin-bottom:12px;}
+  .pkg-addon-price{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--accent);margin-bottom:10px;}
+  .pkg-addon-desc{font-size:var(--text-sm);line-height:1.75;color:rgba(245,242,236,0.35);font-weight:300;}
+  .addons-section{background:var(--warm);padding:80px 64px;border-top:1px solid var(--rule);}
+  .addons-section .pkg-addons{border-top:none;padding-top:0;margin-top:0;}
+  .addons-section .pkg-addons-grid{background:var(--rule);}
+  .addons-section .pkg-addon-card{background:var(--ivory);}
+  .addons-section .pkg-addon-name{color:var(--mid);}
+  .addons-section .pkg-addon-desc{color:var(--mid);}
+  .pkg-features{list-style:none;display:flex;flex-direction:column;gap:12px;flex:1;}
+  .pkg-features li{font-size:var(--text-sm);letter-spacing:0.04em;color:rgba(245,242,236,0.78);font-weight:300;display:flex;gap:12px;align-items:flex-start;line-height:1.6;}
+  .pkg-features li::before{content:'—';color:rgba(232,82,26,0.3);flex-shrink:0;}
+  .package-card.featured .pkg-cta{background:var(--accent);color:var(--ivory);border-color:var(--accent);}
+  .package-card.featured .pkg-cta:hover{background:var(--accent-light);border-color:var(--accent-light);}
+  .pkg-cta{display:inline-block;margin-top:36px;align-self:flex-start;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;border:1.5px solid rgba(232,82,26,0.5);color:var(--accent);padding:14px 28px;text-decoration:none;transition:all 0.3s;cursor:none;font-weight:600;}
   .pkg-cta:hover{background:var(--accent);color:var(--ivory);}
 
   /* STEPS */
@@ -225,9 +242,9 @@
   .blog-read-more:hover::after{transform:translateX(4px);}
 
   /* CTA BAND */
-  .cta-band{background:var(--slate);padding:80px 64px;display:flex;justify-content:space-between;align-items:center;gap:48px;}
-  .cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,3.5vw,50px);font-weight:300;color:var(--ivory);}
-  .cta-band h2 em{font-style:italic;color:var(--accent-light);}
+  .cta-band{background:var(--warm);padding:80px 64px;display:flex;justify-content:space-between;align-items:center;gap:48px;border-top:1px solid var(--rule);}
+  .cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,3.5vw,50px);font-weight:300;color:var(--ink);}
+  .cta-band h2 em{font-style:italic;color:var(--accent);}
 
   /* FOOTER */
   footer{background:#0d1020;padding:88px 64px 44px;border-top:1px solid rgba(232,82,26,0.08);}
@@ -456,6 +473,8 @@
 
     .packages-section{padding:80px 36px;}
     .packages-grid-3{grid-template-columns:1fr 1fr;}
+    .pkg-addons-grid{grid-template-columns:1fr 1fr;}
+    .addons-section{padding:60px 36px;}
 
     .benefits-grid{grid-template-columns:1fr 1fr;}
 
@@ -508,7 +527,7 @@
     .service-hero p{font-size:0.95rem;}
     .pricing-grid{grid-template-columns:1fr;gap:1.5rem;max-width:420px;margin-inline:auto;}
     .pricing-card{padding:2rem 1.5rem;}
-    .packages-grid,.packages-grid-3{grid-template-columns:1fr!important;}
+    .packages-grid,.packages-grid-3,.pkg-addons-grid{grid-template-columns:1fr!important;}
     .features-grid{grid-template-columns:1fr;gap:1.5rem;}
     .feature-item{padding:1.5rem;}
     .why-grid{grid-template-columns:1fr;gap:1.5rem;}
@@ -644,6 +663,81 @@
       <div class="step-item reveal"><div class="step-num">04</div><div><div class="step-title">Ad Copy &amp; Creative Optimization</div><div class="step-desc">Craft compelling ad copy and visuals that grab attention, communicate value, and drive clicks.</div></div></div>
       <div class="step-item reveal reveal-delay-1"><div class="step-num">05</div><div><div class="step-title">Bid Strategy &amp; Budget Management</div><div class="step-desc">Optimize bids and allocate budgets strategically to maximize ROI and ensure cost-effective campaigns.</div></div></div>
       <div class="step-item reveal reveal-delay-2"><div class="step-num">06</div><div><div class="step-title">Performance Tracking &amp; Optimization</div><div class="step-desc">Monitor campaigns using analytics, adjust strategies based on data, and continually improve results.</div></div></div>
+    </div>
+  </section>
+  <section class="packages-section">
+    <div class="eyebrow">Pricing</div><h2 class="section-h2 section-h2-light">Management <em>Plans</em></h2>
+    <p class="pkg-philosophy">Our fee covers strategy, setup, and ongoing optimization — your ad spend goes directly to Google and stays in your account. We work with any budget, starting from $500/mo in ad spend.</p>
+    <div class="packages-grid packages-grid-3">
+      <div class="package-card reveal">
+        <div class="pkg-name">Launch</div>
+        <div class="pkg-price-amount"><sup>$</sup>399<span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:400;">/mo</span></div>
+        <div class="pkg-price">Starter Campaign</div>
+        <div class="pkg-rule"></div>
+        <ul class="pkg-features">
+          <li>1 Search Campaign</li>
+          <li>Keyword Research & Selection</li>
+          <li>Ad Copy Creation (3 variations)</li>
+          <li>Negative Keyword Management</li>
+          <li>Monthly Performance Report</li>
+        </ul>
+        <a href="/#contact" class="pkg-cta">Get Started</a>
+      </div>
+      <div class="package-card featured reveal reveal-delay-1">
+        <div class="pkg-badge">Popular</div>
+        <div class="pkg-name">Growth</div>
+        <div class="pkg-price-amount"><sup>$</sup>699<span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:400;">/mo</span></div>
+        <div class="pkg-price">Multi-Campaign</div>
+        <div class="pkg-rule"></div>
+        <ul class="pkg-features">
+          <li>Up to 3 Search Campaigns</li>
+          <li>A/B Ad Copy Testing</li>
+          <li>Bid Strategy Optimization</li>
+          <li>Audience & Remarketing Setup</li>
+          <li>Weekly Performance Check</li>
+          <li>Competitor Ad Monitoring</li>
+        </ul>
+        <a href="/#contact" class="pkg-cta">Get Started</a>
+      </div>
+      <div class="package-card reveal reveal-delay-2">
+        <div class="pkg-name">Scale</div>
+        <div class="pkg-price-amount"><sup>$</sup>999<span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:400;">/mo</span></div>
+        <div class="pkg-price">Full Funnel</div>
+        <div class="pkg-rule"></div>
+        <ul class="pkg-features">
+          <li>Unlimited Campaigns</li>
+          <li>Search + Display + YouTube</li>
+          <li>Full Conversion Tracking Setup</li>
+          <li>Landing Page Recommendations</li>
+          <li>Monthly Strategy Call</li>
+          <li>Priority Response & Support</li>
+          <li>Quarterly Growth Review</li>
+        </ul>
+        <a href="/#contact" class="pkg-cta">Get Started</a>
+      </div>
+    </div>
+  </section>
+  <section class="addons-section">
+    <div class="pkg-addons reveal">
+      <div class="eyebrow">Add-Ons</div>
+      <h2 class="section-h2">Optional <em>Extras</em></h2>
+      <div class="pkg-addons-grid">
+        <div class="pkg-addon-card">
+          <div class="pkg-addon-name">Landing Page Design</div>
+          <div class="pkg-addon-price">from $350</div>
+          <div class="pkg-addon-desc">A dedicated, conversion-optimized landing page built specifically to match your ad campaign.</div>
+        </div>
+        <div class="pkg-addon-card">
+          <div class="pkg-addon-name">Google Display Ads</div>
+          <div class="pkg-addon-price">$199<span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:400;">/mo</span></div>
+          <div class="pkg-addon-desc">Visual banner ads across millions of websites to keep your brand visible to past visitors and new audiences.</div>
+        </div>
+        <div class="pkg-addon-card">
+          <div class="pkg-addon-name">Conversion Rate Audit</div>
+          <div class="pkg-addon-price">$199</div>
+          <div class="pkg-addon-desc">One-time review of your landing pages with actionable recommendations to improve lead conversion.</div>
+        </div>
+      </div>
     </div>
   </section>
   <div class="cta-band reveal"><h2>Ready to grow with <em>Google Ads?</em></h2><a href="/#contact" class="btn-primary">Get Free Consultation</a></div>
