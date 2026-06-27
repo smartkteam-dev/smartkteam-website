@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumière Beauty Studio | Glow From Within</title>
+<meta name="description" content="Premium beauty salon offering facials, nails, lash extensions, massage and more in the heart of the city.">
+
+<!-- Schema.org structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  "name": "Lumière Beauty Studio",
+  "description": "Premium beauty and wellness salon offering facials, nail care, lash extensions, and massage therapy.",
+  "url": "https://smartkteam.com/portfolio/beauty-salon",
+  "telephone": "+1-555-234-5678",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "412 Blossom Lane",
+    "addressLocality": "Seattle",
+    "addressRegion": "WA",
+    "postalCode": "98101",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "47.6062",
+    "longitude": "-122.3321"
+  },
+  "openingHours": "Tu-Sa 09:00-19:00",
+  "priceRange": "$$"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --accent: #c9967a;
+    --accent-light: #f5ede7;
+    --accent-dark: #8a5c42;
+    --accent-mid: #e8c4af;
+    --bg: #faf8f5;
+    --bg2: #f3ede6;
+    --text: #2a1f1a;
+    --text-soft: #7a6358;
+    --white: #ffffff;
+    --radius-pill: 60px;
+    --radius-card: 28px;
+    --transition: 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+  #palette-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(250,248,245,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(201,150,122,0.2); padding: 10px 32px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  #palette-bar span { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); white-space: nowrap; }
+  .palette-swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+  .swatch { width: 28px; height: 28px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.2s, border-color 0.2s; position: relative; }
+  .swatch:hover { transform: scale(1.18); }
+  .swatch.active { border-color: var(--text); transform: scale(1.15); }
+  .swatch::after { content: attr(data-name); position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%); font-size: 9px; white-space: nowrap; color: var(--text-soft); opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+  .swatch:hover::after { opacity: 1; }
+
+  nav { position: fixed; top: 52px; left: 0; right: 0; z-index: 999; padding: 16px 48px; display: flex; align-items: center; justify-content: space-between; transition: background 0.4s, box-shadow 0.4s; }
+  nav.scrolled { background: rgba(250,248,245,0.95); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(201,150,122,0.15); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; letter-spacing: 0.04em; color: var(--text); text-decoration: none; }
+  .nav-logo em { font-style: italic; color: var(--accent); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); text-decoration: none; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { background: var(--accent); color: white !important; padding: 10px 24px; border-radius: var(--radius-pill); font-size: 11px !important; letter-spacing: 0.12em !important; transition: background 0.3s, transform 0.2s !important; }
+  .nav-cta:hover { background: var(--accent-dark) !important; transform: translateY(-1px); color: white !important; }
+
+  #hero { min-height: 100vh; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding-top: 110px; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(201,150,122,0.18) 0%, rgba(250,248,245,0) 50%), linear-gradient(0deg, rgba(42,31,26,0.45) 0%, rgba(42,31,26,0.1) 60%, transparent 100%), url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1800&q=85&fit=crop&crop=center') center/cover no-repeat; z-index: 0; transform: scale(1.04); animation: heroZoom 16s ease-out forwards; }
+  @keyframes heroZoom { from { transform: scale(1.08); } to { transform: scale(1.0); } }
+
+  .hero-blob { position: absolute; border-radius: 50%; z-index: 1; opacity: 0.22; filter: blur(55px); animation: blobFloat 12s ease-in-out infinite; }
+  .hero-blob-1 { width: 500px; height: 500px; background: var(--accent-mid); top: -100px; right: -80px; animation-delay: 0s; }
+  .hero-blob-2 { width: 360px; height: 360px; background: var(--accent); bottom: 60px; left: -60px; animation-delay: -5s; }
+  @keyframes blobFloat { 0%, 100% { transform: translate(0,0) scale(1); } 33% { transform: translate(20px, -30px) scale(1.05); } 66% { transform: translate(-15px, 20px) scale(0.96); } }
+
+  .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 24px; max-width: 760px; }
+  .hero-eyebrow { display: inline-block; font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-mid); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.9s 0.3s forwards; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 8vw, 92px); font-weight: 300; line-height: 1.05; color: white; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.9s 0.55s forwards; }
+  .hero-title em { font-style: italic; color: var(--accent-mid); display: block; }
+  .hero-sub { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.78); line-height: 1.7; max-width: 480px; margin: 0 auto 40px; opacity: 0; animation: fadeUp 0.9s 0.8s forwards; }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s 1.0s forwards; }
+
+  .btn-primary { background: var(--accent); color: white; padding: 15px 38px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background var(--transition), transform 0.2s; display: inline-block; border: none; cursor: pointer; font-family: 'Jost', sans-serif; }
+  .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); }
+
+  .hero-scroll { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fadeUp 0.9s 1.4s forwards; }
+  .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5)); animation: scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%, 100% { opacity: 0.3; transform: scaleY(0.8); } 50% { opacity: 1; transform: scaleY(1); } }
+  .scroll-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+  .intro-strip { background: var(--accent); padding: 22px 48px; display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; overflow: hidden; }
+  .intro-stat { display: flex; align-items: center; gap: 14px; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: white; }
+  .stat-label { font-size: 11px; font-weight: 300; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.75); line-height: 1.5; max-width: 90px; }
+  .intro-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.3); }
+
+  section { padding: 100px 48px; }
+  .section-eyebrow { font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 54px); font-weight: 300; line-height: 1.15; color: var(--text); margin-bottom: 16px; }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-lead { font-size: 16px; font-weight: 300; color: var(--text-soft); line-height: 1.75; max-width: 520px; }
+
+  #about { background: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; padding: 100px 80px; }
+  .about-image-wrap { position: relative; }
+  .about-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 48% 52% 58% 42% / 44% 56% 44% 56%; display: block; transition: border-radius 4s ease-in-out; animation: morphBlob 10s ease-in-out infinite; }
+  @keyframes morphBlob { 0%,100% { border-radius: 48% 52% 58% 42% / 44% 56% 44% 56%; } 25% { border-radius: 60% 40% 44% 56% / 56% 44% 60% 40%; } 50% { border-radius: 40% 60% 54% 46% / 48% 52% 42% 58%; } 75% { border-radius: 55% 45% 48% 52% / 40% 60% 55% 45%; } }
+
+  .about-badge { position: absolute; bottom: 32px; right: -20px; background: var(--accent); color: white; border-radius: 50%; width: 110px; height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 12px 40px rgba(201,150,122,0.35); animation: badgeSpin 20s linear infinite; }
+  .about-badge-num { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; line-height: 1; }
+  .about-badge-sub { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; margin-top: 2px; }
+
+  .about-features { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
+  .about-feature { display: flex; align-items: flex-start; gap: 16px; }
+  .feature-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-top: 7px; flex-shrink: 0; }
+  .feature-text strong { display: block; font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+  .feature-text span { font-size: 14px; color: var(--text-soft); font-weight: 300; }
+
+  #services { background: var(--bg); text-align: center; }
+  #services .section-lead { margin: 0 auto 60px; }
+
+  .carousel-wrap { position: relative; overflow: hidden; margin: 0 -48px; padding: 0 48px 40px; }
+  .carousel-track { display: flex; gap: 24px; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
+  .service-card { flex: 0 0 300px; background: var(--white); border-radius: var(--radius-card); overflow: hidden; box-shadow: 0 4px 24px rgba(42,31,26,0.07); transition: transform 0.3s, box-shadow 0.3s; text-align: left; }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(201,150,122,0.2); }
+  .card-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+  .card-body { padding: 28px 28px 32px; }
+  .card-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: block; }
+  .card-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--text); margin-bottom: 10px; line-height: 1.2; }
+  .card-desc { font-size: 14px; font-weight: 300; color: var(--text-soft); line-height: 1.7; margin-bottom: 20px; }
+  .card-meta { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--accent-light); padding-top: 18px; }
+  .card-price { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--accent); }
+  .card-price span { font-family: 'Jost', sans-serif; font-size: 12px; color: var(--text-soft); font-weight: 300; }
+  .card-duration { font-size: 12px; color: var(--text-soft); display: flex; align-items: center; gap: 5px; }
+  .card-duration::before { content: ''; display: inline-block; width: 14px; height: 14px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9967a' stroke-width='1.5'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 6v6l4 2'/%3E%3C/svg%3E") center/contain no-repeat; }
+
+  .carousel-controls { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 44px; }
+  .carousel-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--accent-mid); background: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s, border-color 0.3s, transform 0.2s; color: var(--accent); }
+  .carousel-btn:hover { background: var(--accent); border-color: var(--accent); color: white; transform: scale(1.08); }
+  .carousel-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+  .carousel-dots { display: flex; gap: 8px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-mid); cursor: pointer; transition: background 0.3s, transform 0.3s; }
+  .dot.active { background: var(--accent); transform: scale(1.4); }
+
+  .booking-strip { background: var(--bg2); padding: 80px 80px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; border-radius: 0; }
+  .booking-strip h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3vw, 42px); font-weight: 300; line-height: 1.2; color: var(--text); }
+  .booking-strip h2 em { font-style: italic; color: var(--accent); }
+  .booking-strip p { font-size: 15px; color: var(--text-soft); font-weight: 300; margin-top: 12px; max-width: 480px; }
+
+  #testimonials { background: var(--text); padding: 100px 80px; text-align: center; }
+  #testimonials .section-eyebrow { color: var(--accent-mid); }
+  #testimonials .section-title { color: white; margin: 0 auto 60px; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1100px; margin: 0 auto; }
+  .testimonial-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 36px 32px; text-align: left; transition: background 0.3s; }
+  .testimonial-card:hover { background: rgba(255,255,255,0.08); }
+  .stars { display: flex; gap: 4px; margin-bottom: 20px; }
+  .star { width: 14px; height: 14px; background: var(--accent); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+  .testimonial-text { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 300; font-style: italic; color: rgba(255,255,255,0.88); line-height: 1.7; margin-bottom: 28px; }
+  .testimonial-author { display: flex; align-items: center; gap: 14px; }
+  .author-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+  .author-name { font-size: 14px; font-weight: 500; color: white; }
+  .author-service { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+
+  #contact { background: var(--white); padding: 100px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-info { padding-top: 8px; }
+  .contact-items { margin-top: 40px; display: flex; flex-direction: column; gap: 24px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 16px; }
+  .contact-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+  .contact-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; }
+  .contact-value { font-size: 15px; color: var(--text); font-weight: 300; line-height: 1.6; }
+  .contact-form { display: flex; flex-direction: column; gap: 18px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); }
+  .form-input, .form-select, .form-textarea { background: var(--bg); border: 1px solid var(--accent-mid); border-radius: 14px; padding: 14px 18px; font-family: 'Jost', sans-serif; font-size: 14px; color: var(--text); outline: none; transition: border-color 0.3s; width: 100%; appearance: none; }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea { height: 110px; resize: vertical; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  footer { background: var(--text); color: rgba(255,255,255,0.5); padding: 48px 80px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  footer .logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: white; text-decoration: none; }
+  footer .logo em { font-style: italic; color: var(--accent); }
+  footer p { font-size: 13px; font-weight: 300; }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    section { padding: 70px 24px; }
+    #about, #contact { grid-template-columns: 1fr; padding: 70px 24px; gap: 48px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .booking-strip { grid-template-columns: 1fr; padding: 60px 24px; }
+    nav { padding: 12px 24px; }
+    .nav-links { display: none; }
+    footer { padding: 40px 24px; }
+    #testimonials { padding: 70px 24px; }
+    .intro-strip { padding: 18px 24px; gap: 24px; }
+    .intro-divider { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 44px; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+    #palette-bar { padding: 8px 16px; }
+  }
+
+  * { transition: background-color 0.45s ease, border-color 0.45s ease, color 0.3s ease; }
+  .hero-bg, .about-img, .card-img, .author-avatar { transition: none !important; }
+</style>
+</head>
+<body>
+
+<div id="palette-bar">
+  <span>Color Palette</span>
+  <div class="palette-swatches" id="swatches"></div>
+</div>
+
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Lumi<em>ère</em></a>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#testimonials">Clients</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Seattle's Premier Beauty Studio</span>
+    <h1 class="hero-title">Where Beauty<em>Finds its Glow</em></h1>
+    <p class="hero-sub">Indulge in rituals crafted for you. From luminous facials to artful nails — your glow begins here.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Reserve Your Visit</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">Scroll</span>
+  </div>
+</section>
+
+<div class="intro-strip">
+  <div class="intro-stat"><span class="stat-num">12+</span><span class="stat-label">Years of expertise</span></div>
+  <div class="intro-divider"></div>
+  <div class="intro-stat"><span class="stat-num">3K+</span><span class="stat-label">Happy clients</span></div>
+  <div class="intro-divider"></div>
+  <div class="intro-stat"><span class="stat-num">8</span><span class="stat-label">Specialty services</span></div>
+  <div class="intro-divider"></div>
+  <div class="intro-stat"><span class="stat-num">100%</span><span class="stat-label">Organic products</span></div>
+</div>
+
+<section id="about">
+  <div class="about-image-wrap reveal">
+    <img class="about-img" src="https://images.unsplash.com/photo-1552693673-1bf958298935?w=800&q=80&fit=crop" alt="Beauty studio interior" loading="lazy">
+    <div class="about-badge"><span class="about-badge-num">★ 4.9</span><span class="about-badge-sub">Rated by clients</span></div>
+  </div>
+  <div class="about-text reveal">
+    <span class="section-eyebrow">Our Philosophy</span>
+    <h2 class="section-title">Beauty rooted in<em>nature & care</em></h2>
+    <p class="section-lead">At Lumière, we believe every visit should feel like a breath of fresh air. We pair premium organic products with skilled hands to give you results that last.</p>
+    <div class="about-features">
+      <div class="about-feature"><div class="feature-dot"></div><div class="feature-text"><strong>Certified Estheticians</strong><span>Advanced certifications in skin science and beauty care.</span></div></div>
+      <div class="about-feature"><div class="feature-dot"></div><div class="feature-text"><strong>100% Organic Products</strong><span>Free of parabens, sulfates, and harsh synthetics.</span></div></div>
+      <div class="about-feature"><div class="feature-dot"></div><div class="feature-text"><strong>Personalized Rituals</strong><span>Tailored treatments for your unique needs.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <span class="section-eyebrow reveal">What We Offer</span>
+  <h2 class="section-title reveal">Treatments crafted<em>for every glow</em></h2>
+  <p class="section-lead reveal">From skin renewal to nail art, every service is designed around your comfort and results.</p>
+  <div class="carousel-wrap">
+    <div class="carousel-track" id="track">
+      <div class="service-card"><img class="card-img" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80&fit=crop" alt="Facial" loading="lazy"><div class="card-body"><span class="card-tag">Skin Care</span><h3 class="card-name">Signature Facial</h3><p class="card-desc">Deep-cleanse, exfoliate, and hydrate with our bespoke facial tailored to your skin type.</p><div class="card-meta"><div class="card-price">$95 <span>/ session</span></div><div class="card-duration">60 min</div></div></div></div>
+      <div class="service-card"><img class="card-img" src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80&fit=crop" alt="Nails" loading="lazy"><div class="card-body"><span class="card-tag">Nail Care</span><h3 class="card-name">Nail Artistry</h3><p class="card-desc">From classic gel to intricate nail art — full manicure and pedicure experience.</p><div class="card-meta"><div class="card-price">$65 <span>/ session</span></div><div class="card-duration">75 min</div></div></div></div>
+      <div class="service-card"><img class="card-img" src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=80&fit=crop" alt="Lashes" loading="lazy"><div class="card-body"><span class="card-tag">Eye Beauty</span><h3 class="card-name">Lash Extensions</h3><p class="card-desc">Wake up with voluminous, full lashes. Classic, hybrid, or volume sets available.</p><div class="card-meta"><div class="card-price">$130 <span>/ set</span></div><div class="card-duration">90 min</div></div></div></div>
+      <div class="service-card"><img class="card-img" src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80&fit=crop" alt="Massage" loading="lazy"><div class="card-body"><span class="card-tag">Wellness</span><h3 class="card-name">Relaxation Massage</h3><p class="card-desc">Swedish-technique full body massage with warm oils and gentle rhythms.</p><div class="card-meta"><div class="card-price">$110 <span>/ session</span></div><div class="card-duration">60–90 min</div></div></div></div>
+      <div class="service-card"><img class="card-img" src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&q=80&fit=crop" alt="Brows" loading="lazy"><div class="card-body"><span class="card-tag">Brow & Wax</span><h3 class="card-name">Brow Design</h3><p class="card-desc">Expert shaping, tinting, and lamination to frame your face perfectly.</p><div class="card-meta"><div class="card-price">$45 <span>/ session</span></div><div class="card-duration">30 min</div></div></div></div>
+      <div class="service-card"><img class="card-img" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&fit=crop" alt="Hair" loading="lazy"><div class="card-body"><span class="card-tag">Hair Care</span><h3 class="card-name">Keratin Treatment</h3><p class="card-desc">Smooth frizz, restore shine, and cut your styling time in half.</p><div class="card-meta"><div class="card-price">$180 <span>/ session</span></div><div class="card-duration">120 min</div></div></div></div>
+      <div class="service-card"><img class="card-img" src="https://images.unsplash.com/photo-1591019052241-e4d84ee0c303?w=600&q=80&fit=crop" alt="Scrub" loading="lazy"><div class="card-body"><span class="card-tag">Body Care</span><h3 class="card-name">Glow Body Scrub</h3><p class="card-desc">Exfoliate and nourish head to toe with our full body scrub and wrap.</p><div class="card-meta"><div class="card-price">$85 <span>/ session</span></div><div class="card-duration">60 min</div></div></div></div>
+      <div class="service-card"><img class="card-img" src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80&fit=crop" alt="Microderm" loading="lazy"><div class="card-body"><span class="card-tag">Advanced Skin</span><h3 class="card-name">Microdermabrasion</h3><p class="card-desc">Resurface, even tone, and stimulate collagen with medical-grade exfoliation.</p><div class="card-meta"><div class="card-price">$145 <span>/ session</span></div><div class="card-duration">50 min</div></div></div></div>
+    </div>
+  </div>
+  <div class="carousel-controls"><button class="carousel-btn" id="prev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><div class="carousel-dots" id="dots"></div><button class="carousel-btn" id="next" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+</section>
+
+<div class="booking-strip reveal"><div><h2>Ready for your<em> moment of glow?</em></h2><p>Book online anytime or call us to speak with a beauty specialist.</p></div><a href="#contact" class="btn-primary">Book Your Appointment</a></div>
+
+<section id="testimonials">
+  <span class="section-eyebrow">Client Stories</span>
+  <h2 class="section-title">What our clients <em>say</em></h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal"><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="testimonial-text">"The signature facial left my skin looking better than it has in years."</p><div class="testimonial-author"><img class="author-avatar" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&q=80&fit=crop&crop=face" alt="Sarah" loading="lazy"><div><div class="author-name">Sarah M.</div><div class="author-service">Signature Facial</div></div></div></div>
+    <div class="testimonial-card reveal"><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="testimonial-text">"I've been coming for 2 years. They always look natural and my artist remembers exactly what I like."</p><div class="testimonial-author"><img class="author-avatar" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&q=80&fit=crop&crop=face" alt="Priya" loading="lazy"><div><div class="author-name">Priya K.</div><div class="author-service">Lash Extensions</div></div></div></div>
+    <div class="testimonial-card reveal"><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="testimonial-text">"The massage was transcendent. Soft music, warm oils, and hands that knew exactly where tension lived."</p><div class="testimonial-author"><img class="author-avatar" src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=100&q=80&fit=crop&crop=face" alt="Dana" loading="lazy"><div><div class="author-name">Dana R.</div><div class="author-service">Relaxation Massage</div></div></div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-info reveal">
+    <span class="section-eyebrow">Get in Touch</span>
+    <h2 class="section-title">Let's plan your<em>perfect visit</em></h2>
+    <div class="contact-items">
+      <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="contact-label">Location</div><div class="contact-value">412 Blossom Lane, Seattle, WA 98101</div></div></div>
+      <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div><div class="contact-label">Phone</div><div class="contact-value">+1 (555) 234-5678</div></div></div>
+      <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="contact-label">Hours</div><div class="contact-value">Tue – Sat: 9am – 7pm<br>Sun – Mon: Closed</div></div></div>
+    </div>
+  </div>
+  <form class="contact-form reveal" id="bookingForm" onsubmit="submitBooking(event)">
+    <div class="form-row">
+      <div class="form-group"><label class="form-label" for="bs-fname">First Name</label><input class="form-input" id="bs-fname" type="text" placeholder="Sophie" required></div>
+      <div class="form-group"><label class="form-label" for="bs-lname">Last Name</label><input class="form-input" id="bs-lname" type="text" placeholder="Laurent" required></div>
+    </div>
+    <div class="form-group"><label class="form-label" for="bs-email">Email</label><input class="form-input" id="bs-email" type="email" placeholder="hello@email.com" required></div>
+    <div class="form-group"><label class="form-label" for="bs-service">Service</label><select class="form-select" id="bs-service" required><option value="">Select a service…</option><option>Signature Facial — $95</option><option>Nail Artistry — $65</option><option>Lash Extensions — $130</option><option>Relaxation Massage — $110</option><option>Brow Design — $45</option><option>Keratin Treatment — $180</option><option>Glow Body Scrub — $85</option><option>Microdermabrasion — $145</option></select></div>
+    <div class="form-group"><label class="form-label" for="bs-date">Preferred Date &amp; Time</label><input class="form-input" id="bs-date" type="datetime-local"></div>
+    <div class="form-group"><label class="form-label" for="bs-notes">Notes (optional)</label><textarea class="form-textarea" id="bs-notes" placeholder="Any skin concerns, allergies, or special requests…"></textarea></div>
+    <div id="bs-success" style="display:none;padding:16px 20px;background:var(--accent-light);border-radius:14px;text-align:center;font-size:14px;color:var(--accent-dark);font-family:'Jost',sans-serif;">Thank you! We'll confirm your appointment within 24 hours.</div>
+    <button class="btn-primary" type="submit" style="width:100%;text-align:center;border:none;cursor:pointer;font-family:'Jost',sans-serif;">Request Appointment</button>
+  </form>
+</section>
+
+<footer><a href="#hero" class="logo">Lumi<em>ère</em></a><p>© 2025 Lumière Beauty Studio. All rights reserved.</p><p style="font-size:12px;">412 Blossom Lane, Seattle, WA · +1 (555) 234-5678</p></footer>
+
+<script>
+const palettes = [
+  { name: "Rose Blush",    accent: "#c9967a", light: "#f5ede7", dark: "#8a5c42", mid: "#e8c4af", bg: "#faf8f5", bg2: "#f3ede6" },
+  { name: "Sage Garden",   accent: "#7a9e7e", light: "#eaf2eb", dark: "#4a6e4e", mid: "#b8d4bb", bg: "#f6faf6", bg2: "#edf5ed" },
+  { name: "Dusty Mauve",   accent: "#a07898", light: "#f3ecf1", dark: "#6b4468", mid: "#cfb2c8", bg: "#faf7f9", bg2: "#f2ecf0" },
+  { name: "Warm Sand",     accent: "#c4a87a", light: "#f5efdf", dark: "#8a6e40", mid: "#e6d4b0", bg: "#faf8f2", bg2: "#f3eddf" },
+  { name: "Slate Blue",    accent: "#7899b8", light: "#eaeff5", dark: "#446480", mid: "#b2c9db", bg: "#f6f8fb", bg2: "#edf1f7" },
+  { name: "Terracotta",    accent: "#c47866", light: "#f5e9e5", dark: "#8a4a38", mid: "#e6bab2", bg: "#faf7f5", bg2: "#f3ece8" },
+  { name: "Forest Dusk",   accent: "#7a8c6e", light: "#eaefeb", dark: "#4a5c3e", mid: "#b8c8b2", bg: "#f6f8f5", bg2: "#edf2ed" },
+  { name: "Champagne",     accent: "#c4b090", light: "#f5f0e5", dark: "#8a7450", mid: "#e6d8c0", bg: "#fafaf5", bg2: "#f3f0e5" },
+  { name: "Deep Rose",     accent: "#b06080", light: "#f2e8ed", dark: "#763050", mid: "#d8b0c4", bg: "#faf7f9", bg2: "#f2e8ee" },
+  { name: "Midnight Teal", accent: "#5a9090", light: "#e5f0f0", dark: "#2a6060", mid: "#a8cccc", bg: "#f5f9f9", bg2: "#e8f2f2" },
+];
+
+const swatchContainer = document.getElementById('swatches');
+let activePalette = 0;
+
+function applyPalette(idx) {
+  activePalette = idx;
+  const p = palettes[idx];
+  const r = document.documentElement;
+  r.style.setProperty('--accent', p.accent);
+  r.style.setProperty('--accent-light', p.light);
+  r.style.setProperty('--accent-dark', p.dark);
+  r.style.setProperty('--accent-mid', p.mid);
+  r.style.setProperty('--bg', p.bg);
+  r.style.setProperty('--bg2', p.bg2);
+  document.querySelectorAll('.swatch').forEach((s, i) => s.classList.toggle('active', i === idx));
+}
+
+palettes.forEach((p, i) => {
+  const s = document.createElement('button');
+  s.className = 'swatch' + (i === 0 ? ' active' : '');
+  s.style.background = p.accent;
+  s.setAttribute('data-name', p.name);
+  s.setAttribute('aria-label', p.name);
+  s.addEventListener('click', () => applyPalette(i));
+  swatchContainer.appendChild(s);
+});
+
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+
+const track = document.getElementById('track');
+const dotsWrap = document.getElementById('dots');
+const cards = track.querySelectorAll('.service-card');
+const cardW = 300 + 24;
+let visible = Math.min(3, Math.floor((window.innerWidth - 96) / cardW));
+let current = 0;
+const maxIndex = Math.max(0, cards.length - visible);
+
+function buildDots() {
+  dotsWrap.innerHTML = '';
+  for (let i = 0; i <= maxIndex; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(d);
+  }
+}
+
+function goTo(idx) {
+  current = Math.max(0, Math.min(idx, maxIndex));
+  track.style.transform = `translateX(-${current * cardW}px)`;
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+}
+
+document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+buildDots();
+window.addEventListener('resize', () => {
+  visible = Math.min(3, Math.floor((window.innerWidth - 96) / cardW));
+  goTo(Math.min(current, cards.length - visible));
+  buildDots();
+}, { passive: true });
+
+function submitBooking(e) {
+  e.preventDefault();
+  const form = document.getElementById('bookingForm');
+  const success = document.getElementById('bs-success');
+  success.style.display = 'block';
+  form.querySelector('button[type="submit"]').style.display = 'none';
+}
+
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
