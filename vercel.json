@@ -8,6 +8,10 @@
     { "source": "/post/why-your-small-business-must-be-on-google-maps", "destination": "/blog-google-maps-ranking", "permanent": true },
     { "source": "/post/why-your-google-ads-aren-t-bringing-customers", "destination": "/blog-website-not-getting-calls", "permanent": true },
     { "source": "/zh/blog", "destination": "/blog", "permanent": true },
-    { "source": "/general-5", "destination": "/", "permanent": true }
+    { "source": "/general-5", "destination": "/", "permanent": true },
+    { "source": "/website", "destination": "/website-design", "permanent": true },
+    { "source": "/booking-payment-system", "destination": "/booking-payment", "permanent": true },
+    { "source": "/about-1", "destination": "/", "permanent": true },
+    { "source": "/groupon", "destination": "/", "permanent": true }
   ]
 }
