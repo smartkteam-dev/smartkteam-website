@@ -1,7 +1,7 @@
 // ============ CANVAS HERO ANIMATION ============
 (function(){
   const canvas = document.getElementById('heroCanvas');
-  if(!canvas) return;
+  if(!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const ctx = canvas.getContext('2d');
   let W, H, particles = [], lines = [];
   const ACCENT = 'rgba(232,82,26,';
@@ -93,7 +93,10 @@
     for(let i=0;i<30;i++) lines.push(new FlowLine());
   }
 
+  let heroVisible=true, heroRunning=false;
   function animate(){
+    if(!heroVisible){heroRunning=false;return;}
+    heroRunning=true;
     ctx.clearRect(0,0,W,H);
     drawGrid();
     lines.forEach(l=>{l.update();l.draw();});
@@ -125,6 +128,7 @@
   });
   init();
   animate();
+  new IntersectionObserver(es=>{heroVisible=es[0].isIntersecting;if(heroVisible&&!heroRunning)animate();}).observe(canvas);
 })();
 
 // ============ SLIDESHOW ============
@@ -136,7 +140,9 @@
 
   // Build dots
   slides.forEach((_,i)=>{
-    const d = document.createElement('div');
+    const d = document.createElement('button');
+    d.type = 'button';
+    d.setAttribute('aria-label','Go to slide '+(i+1));
     d.className = 'slide-dot'+(i===0?' active':'');
     d.onclick = ()=>goTo(i);
     dotsContainer.appendChild(d);
@@ -149,11 +155,11 @@
     slides[current].classList.add('active');
     dotsContainer.children[current].classList.add('active');
     clearInterval(timer);
-    timer = setInterval(()=>goTo(current+1), 5000);
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) timer = setInterval(()=>goTo(current+1), 5000);
   }
 
   window.slideMove = (dir)=>goTo(current+dir);
-  timer = setInterval(()=>goTo(current+1), 5000);
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) timer = setInterval(()=>goTo(current+1), 5000);
 })();
 
 // ============ MOBILE NAV ============
@@ -208,7 +214,7 @@ window.addEventListener('scroll',()=>{
 // ============ ROUTING (real URLs now) ============
 function showPage(id){
   // Legacy bridge for any inline onclick handlers — navigates by URL.
-  var map={home:'/',gbp:'/google-business-profile',website:'/website-design',seo:'/seo',booking:'/booking-payment',ads:'/google-ads',qa:'/qa',blog:'/blog'};
+  var map={home:'/',website:'/website-design',seo:'/seo',booking:'/booking-payment',ads:'/google-ads',qa:'/qa',blog:'/blog'};
   if(map[id]) window.location.href=map[id];
 }
 function scrollAfter(id){

@@ -96,7 +96,7 @@ nav.scrolled .nav-logo svg .logo-text{fill:var(--ink);}
 .slide-caption-label{font-size:var(--text-sm);letter-spacing:0.25em;text-transform:uppercase;color:rgba(245,242,236,0.8);font-weight:600;}
 .slide-caption-counter{font-family:'Cormorant Garamond',serif;font-size:20px;color:rgba(245,242,236,0.35);font-style:italic;}
 .slide-dots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:3;}
-.slide-dot{width:28px;height:2px;background:rgba(245,242,236,0.25);transition:background 0.4s,width 0.4s;cursor:none;}
+.slide-dot{display:block;position:relative;border:0;padding:0;width:28px;height:2px;background:rgba(245,242,236,0.25);transition:background 0.4s,width 0.4s;cursor:none;}
 .slide-dot.active{background:var(--accent);width:48px;}
 .slide-prev,.slide-next{position:absolute;top:50%;transform:translateY(-50%);z-index:3;background:rgba(26,26,46,0.35);border:1px solid rgba(232,82,26,0.3);color:var(--accent);width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:none;transition:all 0.3s;font-size:18px;backdrop-filter:blur(4px);}
 .slide-prev{left:24px;}
@@ -166,3 +166,5 @@ nav.scrolled .nav-logo svg .logo-text{fill:var(--ink);}
 @keyframes scrollPulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
 @keyframes floatUp{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
 @media (max-width:768px){ .nav-hamburger{display:flex;} .nav-links{display:none;} }
+
+.slide-dot::before{content:'';position:absolute;inset:-14px -3px;}
