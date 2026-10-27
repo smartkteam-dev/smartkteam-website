@@ -1150,6 +1150,10 @@
         <textarea id="message" placeholder="Tell us about your business..."></textarea>
         <span class="field-error-msg">Please tell us about your business</span>
       </div>
+      <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+        <label for="website">Leave this field empty</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
       <div class="form-submit">
         <span class="form-note">Response within 24 hours</span>
         <button type="button" class="btn-submit" onclick="submitContactForm()">Send Message</button>
@@ -1400,7 +1404,7 @@ async function submitContactForm(){
     const response = await fetch('/api/contact', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({firstName,lastName,businessName,email,service,message})
+      body: JSON.stringify({firstName,lastName,businessName,email,service,message,website:document.getElementById('website').value})
     });
 
     const result = await response.json();
