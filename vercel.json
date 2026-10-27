@@ -12,6 +12,7 @@
     { "source": "/website", "destination": "/website-design", "permanent": true },
     { "source": "/booking-payment-system", "destination": "/booking-payment", "permanent": true },
     { "source": "/about-1", "destination": "/", "permanent": true },
-    { "source": "/groupon", "destination": "/", "permanent": true }
+    { "source": "/groupon", "destination": "/", "permanent": true },
+    { "source": "/zh/about-1", "destination": "/#about", "permanent": true }
   ]
 }
