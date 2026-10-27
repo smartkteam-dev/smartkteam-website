@@ -9,7 +9,6 @@ const TO = 'smart.kteam.us@gmail.com';
 const SERVICES = [
   'Website Design',
   'SEO Ranking',
-  'Google Business Profile',
   'Booking & Payment System',
   'Google Ads',
   'Insurance Claims',

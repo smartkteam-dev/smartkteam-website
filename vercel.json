@@ -4,7 +4,8 @@
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/home", "destination": "/", "permanent": true },
-    { "source": "/google-my-business", "destination": "/google-business-profile", "permanent": true },
+    { "source": "/google-my-business", "destination": "/seo", "permanent": true },
+    { "source": "/google-business-profile", "destination": "/seo", "permanent": true },
     { "source": "/post/why-your-small-business-must-be-on-google-maps", "destination": "/blog-google-maps-ranking", "permanent": true },
     { "source": "/post/why-your-google-ads-aren-t-bringing-customers", "destination": "/google-ads", "permanent": true },
     { "source": "/zh/blog", "destination": "/blog", "permanent": true },

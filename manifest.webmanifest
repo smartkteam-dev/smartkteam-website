@@ -1,0 +1,21 @@
+{
+  "name": "Smart KTeam",
+  "short_name": "Smart KTeam",
+  "description": "Digital marketing for small businesses",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#faf9f7",
+  "theme_color": "#1a1a2e",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ]
+}
