@@ -10,14 +10,14 @@
 | `booking-payment.html` | /booking-payment | Service page |
 | `google-ads.html` | /google-ads | Service page |
 | `insurance-claims.html` | /insurance-claims | Service page — promotes ClinicFlow |
-| `google-business-profile.html` | /google-business-profile | Unlinked (hidden from nav/grid) |
+| `404.html` | (any missing URL) | Branded not-found page, `noindex` |
 | `blog.html` | /blog | Blog index |
 | `blog-*.html` | /blog-… | 4 blog posts (website-not-getting-calls, small-business-marketing, google-maps-ranking, online-booking-system) |
 | `portfolio/<name>/index.html` | /portfolio/<name> | 7 independent demo sites (own CSS, not part of the shared assets) |
 | `qa.html` | /qa | Q&A page |
 | `vercel.json` | — | Clean URLs (no .html), legacy Wix redirects, `/images` cache header |
-| `sitemap.xml` | /sitemap.xml | 13 indexed pages |
-| `robots.txt` | /robots.txt | Points crawlers to sitemap |
+| `sitemap.xml` | /sitemap.xml | 12 indexed pages (update `lastmod` when a page changes) |
+| `robots.txt` | /robots.txt | Points crawlers to sitemap, blocks `/api/` |
 | `api/contact.js` | /api/contact | Contact form handler (Resend) |
 
 ## Shared assets and partials
@@ -27,8 +27,10 @@
 | `assets/base.css` | CSS common to all 13 main pages |
 | `assets/site.css` | CSS common to the 8 large pages (index, blog, qa, service pages) |
 | `assets/site.js` | Script shared by the 7 service pages |
+| `assets/nav-active.js` | Marks the current page in the nav (all pages) |
 | `images/` | All site photos, self-hosted WebP (cached for one year, so rename a file if you replace it) |
 | `partials/nav.html`, `partials/footer.html` | Single source for the nav (all pages except the homepage) and the footer (all pages) |
+| `favicon.ico`, `favicon.png`, `apple-touch-icon.png`, `icon-192.png`, `manifest.webmanifest` | Site icons and web manifest |
 | `scripts/sync-partials.js` | Copies the partials into every page |
 
 Each page keeps only its own CSS inline in `<style>`. Rules that could conflict with a page-specific rule were deliberately left inline so the cascade is unchanged: do not move rules into the shared files without checking the page still renders the same.
@@ -46,7 +48,7 @@ The handler validates input, has a hidden honeypot field (`website`) and a best-
 
 ## Service card numbering
 
-GBP card is hidden via CSS (`display:none!important`) but remains in the DOM. Visible cards are numbered 01–05:
+Visible service cards are numbered 01–05:
 
 | # | Service |
 |---|---------|
@@ -86,6 +88,15 @@ Hosted on Vercel, auto-deploys on push to `main`.
 - [x] Schema.org LocalBusiness structured data
 - [x] Sitemap submitted to Google Search Console
 - [ ] Google Analytics 4
-- [x] Legacy Wix URLs redirected (301) in `vercel.json`
+- [x] Unique titles/descriptions, Open Graph/Twitter tags, breadcrumb, Service and FAQ structured data
+- [x] Real favicon, apple-touch-icon, manifest
+- [x] Legacy Wix URLs redirected (301) in `vercel.json`; the removed Google Business Profile page redirects to `/seo`
 - [ ] City-specific landing pages (/seattle-seo, /portland-website-design)
 - [ ] Real blog posts for ongoing SEO content
+
+## Accessibility and motion
+
+- Every page has a skip link and a `<main id="main">` landmark; keyboard focus shows an orange outline.
+- `prefers-reduced-motion` is respected (ticker, hero particles, slideshow autoplay and scroll reveals are disabled).
+- The custom cursor (dot and ring) is desktop-only and hides over form fields.
+- Portfolio demos under `portfolio/` are `noindex`.
