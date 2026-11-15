@@ -1,4 +1,5 @@
-// Copies partials/nav.html and partials/footer.html into every page between the
+// Copies partials/nav.html, partials/footer.html and partials/schema-org.html (the
+// shared ProfessionalService JSON-LD) into every page between the
 // <!-- partial:NAME --> ... <!-- /partial:NAME --> markers.
 // Run `npm run sync` after editing a partial. `--check` exits 1 if any page is out of date.
 const fs = require('fs');
@@ -6,7 +7,7 @@ const path = require('path');
 
 const root = path.join(__dirname, '..');
 const check = process.argv.includes('--check');
-const partials = ['nav', 'footer'].map(name => ({
+const partials = ['nav', 'footer', 'schema-org'].map(name => ({
   name,
   html: fs.readFileSync(path.join(root, 'partials', name + '.html'), 'utf8').trim(),
 }));

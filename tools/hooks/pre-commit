@@ -1,0 +1,50 @@
+#!/bin/sh
+# Pre-commit hook for smartkteam.com. Enable once per clone with: npm run hooks
+#
+# Vercel deploys the committed files as-is (no build step), so generated files must be
+# committed up to date. This hook rebuilds them from the STAGED snapshot (not the working
+# tree, so unstaged edits don't interfere), runs the checks, and blocks the commit if a
+# check fails or a generated file differs from what is staged.
+# Docs-only commits (*.md, docs/) skip the checks.
+
+staged=$(git diff --cached --name-only --diff-filter=ACMRD)
+[ -z "$staged" ] && exit 0
+
+if [ -z "$(printf '%s\n' "$staged" | grep -vE '(\.md$|^docs/)')" ]; then
+  echo "pre-commit: docs-only commit, skipping site checks"
+  exit 0
+fi
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "pre-commit: node not found on PATH; cannot rebuild generated files" >&2
+  exit 1
+fi
+
+tmp=$(mktemp -d "${TMPDIR:-/tmp}/smartkteam-precommit.XXXXXX") || exit 1
+trap 'rm -rf "$tmp"' EXIT INT TERM
+git checkout-index -a --prefix="$tmp/" || exit 1
+
+if ! (cd "$tmp" && node scripts/sync-partials.js >/dev/null && node scripts/build-llms.js >/dev/null); then
+  echo "pre-commit: rebuilding generated files failed (see the error above)" >&2
+  exit 1
+fi
+
+stale=""
+for f in $(cd "$tmp" && ls *.html llms.txt llms-full.txt 2>/dev/null); do
+  if ! git cat-file -e ":$f" 2>/dev/null || ! git show ":$f" | cmp -s - "$tmp/$f"; then
+    stale="$stale $f"
+  fi
+done
+
+if ! (cd "$tmp" && node scripts/sync-partials.js --check >/dev/null && node scripts/build-llms.js --check); then
+  echo "pre-commit: checks failed, commit blocked" >&2
+  exit 1
+fi
+
+if [ -n "$stale" ]; then
+  echo "pre-commit: these generated files are out of date in the commit:$stale" >&2
+  echo "  run: npm run generate && git add$stale" >&2
+  exit 1
+fi
+
+echo "pre-commit: generated files up to date, checks passed"
