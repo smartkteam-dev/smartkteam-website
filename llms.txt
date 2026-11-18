@@ -1,0 +1,41 @@
+# Smart KTeam
+
+> Smart KTeam is a digital marketing agency based in Seattle, WA, helping small businesses across the US & Canada get found online through website design, local SEO, Google Ads, booking and payment systems, and insurance claims management for US massage therapists.
+
+## Key facts
+
+- Website: https://smartkteam.com
+- Based in: Seattle, WA, United States
+- Founded: 2023
+- Area served: United States and Canada
+- Insurance Claims for Massage Therapists: United States only
+- Office hours: Monday to Friday, 8:00 AM to 6:00 PM (Pacific Time)
+- Languages: English, Spanish, Chinese
+- Contact: email smart.kteam.us@gmail.com (no phone number is published), or the contact form at https://smartkteam.com/#contact
+- Pricing: published on each service page; starting prices are listed under Services and full package details are in llms-full.txt
+- Profiles: [Google Business Profile](https://maps.app.goo.gl/i5YFFXBN7QwyV4dU6), [Facebook](https://www.facebook.com/smartkteam), [Instagram](https://www.instagram.com/smartkteam/)
+
+## Services
+
+- [Website Design & Development](https://smartkteam.com/website-design): Fast, mobile-first websites that turn visitors into paying customers. Smart KTeam builds SEO-ready sites for small businesses in the US & Canada. Pricing: packages from $1,190.
+- [Local SEO & Search Ranking](https://smartkteam.com/seo): Rank higher on Google and get found by ready-to-buy customers. Local SEO, technical fixes and content strategy for small businesses. From $399. Pricing: packages from $399/mo.
+- [Booking & Payment Systems](https://smartkteam.com/booking-payment): Let customers book and pay 24/7. Smart KTeam sets up online booking and secure payments for salons, spas and service businesses in the US & Canada. Pricing: packages from $199.
+- [Google Ads Management](https://smartkteam.com/google-ads): Stop wasting ad budget. Smart KTeam runs data-driven Google Ads campaigns that bring qualified leads from day one. Serving the US & Canada. Pricing: packages from $299/mo.
+- [Insurance Claims for Massage Therapists](https://smartkteam.com/insurance-claims): ClinicFlow handles insurance credentialing and claims end to end for massage therapy practices across the US. You focus on patients, we do the paperwork. Pricing: from $10 per claim.
+
+## Pages
+
+- [Digital Marketing for Small Businesses](https://smartkteam.com/): Smart KTeam builds websites, SEO, Google Ads and booking systems for small businesses. Seattle-based, serving clients across the US & Canada.
+- [Digital Marketing Blog for Small Businesses](https://smartkteam.com/blog): Practical tips on SEO, Google Business Profile, Google Ads and website design for small businesses, from the Smart KTeam team.
+- [SEO, Google Ads & Website FAQ for Small Business](https://smartkteam.com/qa): Plain-language answers about SEO, Google Business Profile, Google Ads and website design for small businesses, from the Smart KTeam team.
+
+## Blog
+
+- [Why Your Website Isn't Getting Calls](https://smartkteam.com/blog-website-not-getting-calls): A nice-looking website can still silently fail your business. Here are the five most common reasons — and how to fix each one. (published 2026-06-27)
+- [Why Every Service Business Needs an Online Booking System](https://smartkteam.com/blog-online-booking-system): How automated scheduling reduces no-shows, saves time, and increases bookings for salons, spas, and service businesses. (published 2026-05-20)
+- [Small Business Marketing: The Complete 2026 Playbook](https://smartkteam.com/blog-small-business-marketing): Everything a local small business needs to build a digital presence that attracts customers and generates consistent revenue. (published 2026-04-08)
+- [How to Improve Your Google Maps Ranking in 2026](https://smartkteam.com/blog-google-maps-ranking): A step-by-step guide to getting your small business into the top 3 local results on Google Maps — without paying for ads. (published 2026-03-12)
+
+## Full content
+
+- [llms-full.txt](https://smartkteam.com/llms-full.txt): the full text of every page and blog post above, in Markdown

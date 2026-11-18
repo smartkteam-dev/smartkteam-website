@@ -5,7 +5,9 @@
     "resend": "^3.0.0"
   },
   "scripts": {
+    "generate": "node scripts/sync-partials.js && node scripts/build-llms.js",
+    "check": "node scripts/sync-partials.js --check && node scripts/build-llms.js --check",
     "sync": "node scripts/sync-partials.js",
-    "check": "node scripts/sync-partials.js --check"
+    "hooks": "git config core.hooksPath tools/hooks"
   }
 }
