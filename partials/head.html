@@ -1,16 +1,25 @@
 <!-- Google tag (Analytics GA4 property G-T8LVV5ZH9J, loaded through Google tag GTM-MTQT6VM2).
-     The tag loads after the page has finished loading so its ~180 KB doesn't slow the first screen
-     (LCP) on phones. gtag() calls made before that are queued in dataLayer and sent once it loads. -->
+     The tag loads 2.5 s after the page's load event, or at the visitor's first scroll, tap or key
+     press if that comes sooner, so its ~180 KB doesn't count against the first screen (LCP) on
+     phones. gtag() calls made before that are queued in dataLayer and sent once it loads. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  window.addEventListener('load', function () {
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-MTQT6VM2';
-    document.head.appendChild(s);
-  });
+  (function () {
+    var done = false, events = ['scroll', 'pointerdown', 'keydown', 'touchstart'];
+    function loadTag() {
+      if (done) return;
+      done = true;
+      events.forEach(function (e) { window.removeEventListener(e, loadTag); });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-MTQT6VM2';
+      document.head.appendChild(s);
+    }
+    events.forEach(function (e) { window.addEventListener(e, loadTag, { once: true, passive: true }); });
+    window.addEventListener('load', function () { setTimeout(loadTag, 2500); });
+  })();
 </script>
 <script src="/assets/analytics.js" defer></script>
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
