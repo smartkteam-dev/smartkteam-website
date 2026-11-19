@@ -5,18 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- partial:head -->
 <!-- Google tag (Analytics GA4 property G-T8LVV5ZH9J, loaded through Google tag GTM-MTQT6VM2).
-     The tag loads after the page has finished loading so its ~180 KB doesn't slow the first screen
-     (LCP) on phones. gtag() calls made before that are queued in dataLayer and sent once it loads. -->
+     The tag loads 2.5 s after the page's load event, or at the visitor's first scroll, tap or key
+     press if that comes sooner, so its ~180 KB doesn't count against the first screen (LCP) on
+     phones. gtag() calls made before that are queued in dataLayer and sent once it loads. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  window.addEventListener('load', function () {
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-MTQT6VM2';
-    document.head.appendChild(s);
-  });
+  (function () {
+    var done = false, events = ['scroll', 'pointerdown', 'keydown', 'touchstart'];
+    function loadTag() {
+      if (done) return;
+      done = true;
+      events.forEach(function (e) { window.removeEventListener(e, loadTag); });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-MTQT6VM2';
+      document.head.appendChild(s);
+    }
+    events.forEach(function (e) { window.addEventListener(e, loadTag, { once: true, passive: true }); });
+    window.addEventListener('load', function () { setTimeout(loadTag, 2500); });
+  })();
 </script>
 <script src="/assets/analytics.js?v=73819f0397" defer></script>
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -432,19 +441,19 @@ nav:not(.scrolled) .nav-cta{color:#f4845a!important;border-color:#f4845a;}
       <div class="slide-caption"><span class="slide-caption-label">SEO Strategy</span><span class="slide-caption-counter">01 / 05</span></div>
     </div>
     <div class="slide">
-      <img loading="lazy" decoding="async" width="1600" height="1068" src="/images/small-business-website-design-laptop-w1600.webp" srcset="/images/small-business-website-design-laptop-w800.webp 800w, /images/small-business-website-design-laptop-w1600.webp 1600w" sizes="100vw" alt="Web Design">
+      <img loading="lazy" decoding="async" width="1600" height="1068" data-src="/images/small-business-website-design-laptop-w1600.webp" data-srcset="/images/small-business-website-design-laptop-w800.webp 800w, /images/small-business-website-design-laptop-w1600.webp 1600w" sizes="100vw" alt="Web Design">
       <div class="slide-caption"><span class="slide-caption-label">Web Design</span><span class="slide-caption-counter">02 / 05</span></div>
     </div>
     <div class="slide">
-      <img loading="lazy" decoding="async" width="1600" height="1067" src="/images/digital-marketing-campaign-team-w1600.webp" srcset="/images/digital-marketing-campaign-team-w800.webp 800w, /images/digital-marketing-campaign-team-w1600.webp 1600w" sizes="100vw" alt="Digital Campaigns">
+      <img loading="lazy" decoding="async" width="1600" height="1067" data-src="/images/digital-marketing-campaign-team-w1600.webp" data-srcset="/images/digital-marketing-campaign-team-w800.webp 800w, /images/digital-marketing-campaign-team-w1600.webp 1600w" sizes="100vw" alt="Digital Campaigns">
       <div class="slide-caption"><span class="slide-caption-label">Digital Campaigns</span><span class="slide-caption-counter">03 / 05</span></div>
     </div>
     <div class="slide">
-      <img loading="lazy" decoding="async" width="1600" height="1003" src="/images/online-booking-payment-system.webp" srcset="/images/online-booking-payment-system-w800.webp 800w, /images/online-booking-payment-system.webp 1600w" sizes="100vw" alt="Booking & Payments">
+      <img loading="lazy" decoding="async" width="1600" height="1003" data-src="/images/online-booking-payment-system.webp" data-srcset="/images/online-booking-payment-system-w800.webp 800w, /images/online-booking-payment-system.webp 1600w" sizes="100vw" alt="Booking & Payments">
       <div class="slide-caption"><span class="slide-caption-label">Booking & Payments</span><span class="slide-caption-counter">04 / 05</span></div>
     </div>
     <div class="slide">
-      <img loading="lazy" decoding="async" width="1600" height="1067" src="/images/local-small-business-growth-w1600.webp" srcset="/images/local-small-business-growth-w800.webp 800w, /images/local-small-business-growth-w1600.webp 1600w" sizes="100vw" alt="Local Business Growth">
+      <img loading="lazy" decoding="async" width="1600" height="1067" data-src="/images/local-small-business-growth-w1600.webp" data-srcset="/images/local-small-business-growth-w800.webp 800w, /images/local-small-business-growth-w1600.webp 1600w" sizes="100vw" alt="Local Business Growth">
       <div class="slide-caption"><span class="slide-caption-label">Local Business Growth</span><span class="slide-caption-counter">05 / 05</span></div>
     </div>
     <button class="slide-prev" onclick="slideMove(-1)" aria-label="Previous slide">&#8592;</button>
@@ -983,6 +992,21 @@ nav:not(.scrolled) .nav-cta{color:#f4845a!important;border-color:#f4845a;}
   if(!slides.length || !dotsContainer) return;
   let current = 0, timer;
 
+  // Slides 2-5 carry data-src/data-srcset so they don't download with the first screen (LCP).
+  // The slideshow sits right under the hero, so "near the screen" would be immediate on phones:
+  // instead they load 2.5 s after the page's load event (same moment as the Google tag, see
+  // partials/head.html), or right before one is shown, whichever comes first.
+  function loadSlide(slide){
+    const img = slide.querySelector('img[data-src]');
+    if(!img) return;
+    if(img.dataset.srcset) img.srcset = img.dataset.srcset;
+    img.src = img.dataset.src;
+    img.removeAttribute('data-src'); img.removeAttribute('data-srcset');
+  }
+  const loadAll = ()=>slides.forEach(loadSlide);
+  if(document.readyState === 'complete') setTimeout(loadAll, 2500);
+  else window.addEventListener('load', ()=>setTimeout(loadAll, 2500));
+
   // Build dots
   slides.forEach((_,i)=>{
     const d = document.createElement('button');
@@ -997,6 +1021,7 @@ nav:not(.scrolled) .nav-cta{color:#f4845a!important;border-color:#f4845a;}
     slides[current].classList.remove('active');
     dotsContainer.children[current].classList.remove('active');
     current = (n+slides.length)%slides.length;
+    loadSlide(slides[current]);
     slides[current].classList.add('active');
     dotsContainer.children[current].classList.add('active');
     clearInterval(timer);
