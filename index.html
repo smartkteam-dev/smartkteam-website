@@ -4,12 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- partial:head -->
-<!-- Google tag (Analytics GA4 property G-T8LVV5ZH9J, loaded through Google tag GTM-MTQT6VM2) -->
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MTQT6VM2"></script>
+<!-- Google tag (Analytics GA4 property G-T8LVV5ZH9J, loaded through Google tag GTM-MTQT6VM2).
+     The tag loads after the page has finished loading so its ~180 KB doesn't slow the first screen
+     (LCP) on phones. gtag() calls made before that are queued in dataLayer and sent once it loads. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+  window.addEventListener('load', function () {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-MTQT6VM2';
+    document.head.appendChild(s);
+  });
 </script>
 <script src="/assets/analytics.js?v=73819f0397" defer></script>
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -127,7 +134,7 @@
 </script>
 
 <link rel="stylesheet" href="/assets/base.css?v=c24106cbc0">
-<link rel="stylesheet" href="/assets/site.css?v=aac83ebd31">
+<link rel="stylesheet" href="/assets/site.css?v=46601846d0">
 <style>
 #scrollProgress{position:absolute;bottom:0;left:0;height:3px;width:100%;background:#fff;transform:scaleX(0);transform-origin:left;will-change:transform;pointer-events:none;z-index:1;}
 nav.scrolled #scrollProgress{background:var(--accent);}
@@ -1081,6 +1088,18 @@ function initReveal(){
   document.querySelectorAll('.reveal:not(.visible)').forEach(r=>obs.observe(r));
 }
 initReveal();
+
+// ============ LAZY SECTION BACKGROUNDS ============
+// Photos used as CSS backgrounds load only when their section is within ~800px of the screen,
+// so they don't compete with the hero image on first load (see .bg-in rules in site.css).
+(function(){
+  const els=document.querySelectorAll('.why-visual,.testimonial,.process-img,.cta-section');
+  if(!('IntersectionObserver' in window)){els.forEach(el=>el.classList.add('bg-in'));return;}
+  const bgObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('bg-in');bgObs.unobserve(e.target);}});
+  },{rootMargin:'800px 0px'});
+  els.forEach(el=>bgObs.observe(el));
+})();
 
 // ============ DROPDOWN CLOSE ON CLICK ============
 document.querySelectorAll('.nav-dropdown-menu a').forEach(function(link){
