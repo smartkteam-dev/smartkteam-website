@@ -256,44 +256,51 @@ img,video,iframe{max-width:100%;height:auto;}
 @media (max-width:768px){ section.section-pad > div[style*="display:flex"][style*="max-width:400px"]{ flex-direction:column !important; max-width:100% !important; gap:12px; } section.section-pad > div[style*="display:flex"][style*="max-width:400px"] input, section.section-pad > div[style*="display:flex"][style*="max-width:400px"] button{ width:100% !important; } .blog-grid > *,.packages-grid > *,.packages-grid-3 > *{min-width:0;} .pricing-card,.blog-card,.feature-item{min-width:0;} }
 /* Form fields show the normal text cursor; the custom dot and ring hide while over them */
 body.native-cursor .cursor,body.native-cursor .cursor-ring{opacity:0 !important;}
-/* Hero leaves room for the 56px services ticker so the strip sits inside the first screen */
-.hero{height:calc(100vh - 56px);}
-/* Tall desktop windows: centre the headline block vertically, in line with the stats. Short windows keep the bottom-anchored layout so nothing collides with the nav. */
-@media (min-width:1025px) and (min-height:840px){ .hero-left{justify-content:center;padding:100px 64px;} }
-/* Massive hero headline: keep everything in the first screen on short screens, and let the phone hero grow instead of clipping the buttons. */
+/* Hero + services band fill exactly one screen at every size (band pinned to the bottom).
+   On a screen too short for the content, the hero grows instead of clipping. */
+:root{--band-h:40px;}
+.hero{height:auto;min-height:calc(100vh - var(--band-h));min-height:calc(100svh - var(--band-h));}
+.ticker-band{height:var(--band-h);padding:0;border-top-width:1px;overflow:hidden;}
+.ticker-track{height:100%;align-items:center;}
+.ticker-item{font-size:var(--text-xs);letter-spacing:0.16em;padding:0 28px;gap:12px;color:rgba(245,242,236,0.6);}
+.ticker-dot{width:4px;height:4px;}
+/* Hero text block: centred in the space below the menu bar. Buttons always stack under the intro sentence;
+   on short screens the headline shrinks (height-based clamp) so the whole block still fits. */
+.hero-left{height:auto;align-self:stretch;justify-content:center;padding:96px 64px 48px;}
+.hero-eyebrow{letter-spacing:0.26em;margin-bottom:20px;}
+.hero-title{font-size:clamp(48px,min(6.4vw,calc((100vh - 450px) / 2.8)),112px);font-size:clamp(48px,min(6.4vw,calc((100svh - 450px) / 2.8)),112px);}
+.hero-rule{margin:28px 0 24px;}
+.hero-sub{font-size:var(--text-base);line-height:1.65;}
+.hero-cta-group{margin-top:28px;flex-direction:column;align-items:flex-start;gap:16px;}
 .hero-cta-group .btn-primary{padding:14px 28px;font-size:var(--text-xs);letter-spacing:0.2em;}
 .hero-cta-group .btn-ghost{font-size:var(--text-xs);}
-@media (min-width:769px) and (max-height:860px){
-  /* Short screens: the intro and the buttons sit side by side under the headline, so the headline can take the height. */
-  .hero-left{display:grid;grid-template-columns:minmax(0,420px) auto;column-gap:56px;align-content:end;justify-content:start;padding-top:80px;padding-bottom:32px;}
-  .hero-eyebrow,.hero-title,.hero-rule{grid-column:1/-1;}
-  .hero-eyebrow{margin-bottom:14px;}
-  .hero-title{font-size:clamp(56px,min(8vw,calc((100vh - 300px) / 3.3)),150px);}
-  .hero-rule{margin:28px 0 24px;}
-  .hero-sub{font-size:var(--text-base);line-height:1.65;max-width:none;align-self:center;}
-  .hero-cta-group{margin-top:0;flex-direction:column;align-items:flex-start;gap:16px;align-self:center;}
-  .hero-scroll{display:none;}
-}
-@media (min-width:769px) and (max-width:1024px) and (max-height:860px){ .hero-title{font-size:clamp(56px,min(10vw,calc((100vh - 300px) / 3.3)),110px);} }
-/* Hero readability: lighter orange on the dark hero (4.8:1), readable stat labels, smaller stats. */
+@media (max-height:860px){ .hero-scroll{display:none;} }
+/* Hero readability: lighter orange on the dark hero (4.8:1), readable stat labels, compact stats. */
 .hero-eyebrow{color:#f4845a;}
 nav:not(.scrolled) .nav-cta{color:#f4845a!important;border-color:#f4845a;}
-.hero-stat-num{font-size:56px;line-height:1;}
-.hero-stat-num span{font-size:26px;}
-.hero-stat-label{color:rgba(245,242,236,0.72);margin-top:12px;}
-.hero-stat{padding:28px 0;}
-@media (max-width:480px){ .hero-eyebrow{letter-spacing:0.2em;} .hero-eyebrow::after{display:none;} }
-@media (max-width:768px){
-  /* Phones and small tablets: content starts right under the menu bar and the buttons stay on the first screen. */
-  .hero{height:auto;}
-  .hero-content{padding:104px 0 48px;}
-  .hero-left{padding:0;justify-content:center;}
-  .hero-eyebrow{margin-bottom:20px;}
-  .hero-rule{margin:24px 0;}
-  .hero-cta-group{margin-top:28px;flex-wrap:wrap;gap:16px 24px;}
+.hero-stat-num{font-size:44px;line-height:1;}
+.hero-stat-num span{font-size:20px;}
+.hero-stat-label{font-size:var(--text-xs);letter-spacing:0.18em;color:rgba(245,242,236,0.72);margin-top:8px;}
+.hero-stat{padding:20px 0;}
+@media (max-width:1024px){
+  /* Tablets: single column, same centred block. */
+  .hero-left{padding:96px 36px 48px;}
+  .hero-title{font-size:clamp(48px,min(8vw,calc((100vh - 450px) / 2.8)),88px);font-size:clamp(48px,min(8vw,calc((100svh - 450px) / 2.8)),88px);}
   .hero-scroll{display:none;}
 }
-@media (max-width:768px){ .hero{min-height:0;} }
+@media (max-width:480px){ .hero-eyebrow::after{display:none;} }
+@media (max-width:768px){
+  /* Phones and small tablets: same one-screen hero, text centred below the menu bar. */
+  .hero{padding:0 20px;}
+  .hero-content{padding:88px 0 32px;}
+  .hero-left{padding:0;}
+  .hero-eyebrow{font-size:10px;letter-spacing:0.2em;margin-bottom:16px;}
+  .hero-title{font-size:clamp(2.4rem,11.2vw,4.25rem);line-height:0.95;}
+  .hero-rule{margin:20px 0;}
+  .hero-sub{line-height:1.6;}
+  .hero-cta-group{margin-top:24px;}
+  .ticker-item{font-size:10px;letter-spacing:0.14em;padding:0 18px;gap:10px;}
+}
 </style>
 </head>
 <body>
