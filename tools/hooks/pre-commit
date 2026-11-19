@@ -36,7 +36,7 @@ for f in $(cd "$tmp" && ls *.html llms.txt llms-full.txt 2>/dev/null); do
   fi
 done
 
-if ! (cd "$tmp" && node scripts/sync-partials.js --check >/dev/null && node scripts/build-llms.js --check); then
+if ! (cd "$tmp" && node scripts/sync-partials.js --check >/dev/null && node scripts/build-llms.js --check && node scripts/check-seo.js); then
   echo "pre-commit: checks failed, commit blocked" >&2
   exit 1
 fi

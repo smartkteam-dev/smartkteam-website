@@ -6,8 +6,9 @@
   },
   "scripts": {
     "generate": "node scripts/sync-partials.js && node scripts/build-llms.js",
-    "check": "node scripts/sync-partials.js --check && node scripts/build-llms.js --check",
+    "check": "node scripts/sync-partials.js --check && node scripts/build-llms.js --check && node scripts/check-seo.js",
     "sync": "node scripts/sync-partials.js",
-    "hooks": "git config core.hooksPath tools/hooks"
+    "hooks": "git config core.hooksPath tools/hooks",
+    "og-image": "sh scripts/og-image.sh"
   }
 }
