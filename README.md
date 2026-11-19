@@ -88,7 +88,7 @@ The pre-commit hook rebuilds from the **staged** snapshot, runs the checks and b
 
 ## Analytics (Google Analytics 4)
 
-The Google tag `GTM-MTQT6VM2` (GA4 property `G-T8LVV5ZH9J`) is in `partials/head.html`, so it is on every page. Events sent:
+The Google tag `GTM-MTQT6VM2` (GA4 property `G-T8LVV5ZH9J`) is in `partials/head.html`, so it is on every page. It loads after the page's `load` event so its ~180 KB doesn't delay the first screen (LCP) on phones; `gtag()` calls made earlier are queued in `dataLayer` and sent when it loads. Keep it that way: loading it in `<head>` with `async` added over a second to mobile LCP. Events sent:
 
 | Event | When |
 |---|---|
@@ -97,7 +97,9 @@ The Google tag `GTM-MTQT6VM2` (GA4 property `G-T8LVV5ZH9J`) is in `partials/head
 | `email_click` | A `mailto:` link was clicked |
 | `phone_click`, `sms_click`, `whatsapp_click` | Ready for when a phone number is published (`tel:`, `sms:`, `wa.me` links) |
 
-In GA4, mark `generate_lead` (and optionally `consultation_click`, `email_click`) as key events under Admin → Events. Search Console is verified as a Domain property (DNS TXT record at Namecheap).
+`generate_lead` is a key event in GA4 (created ahead of time under Admin → Data display → Key events, "Create with code"); `consultation_click` and `email_click` can be added the same way.
+
+**Performance note:** on the home page, the photos used as CSS backgrounds (`.why-visual`, `.testimonial`, `.process-img`, `.cta-section`) only load once their section is within ~800px of the screen: the image lives in a `.bg-in` rule in `assets/site.css`, and a small observer in `index.html` adds that class. A new below-the-fold CSS background photo should follow the same pattern, so it doesn't compete with the hero image. Search Console is verified as a Domain property (DNS TXT record at Namecheap).
 
 ## Keyword map
 
