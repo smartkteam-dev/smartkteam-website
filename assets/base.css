@@ -1,13 +1,17 @@
+/* Self-hosted fonts (latin subset, variable weight). Files in /fonts, preloaded in partials/head.html. */
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:300 700;font-display:swap;src:url(/fonts/montserrat-latin.woff2) format("woff2");}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:300 600;font-display:swap;src:url(/fonts/cormorant-garamond-latin.woff2) format("woff2");}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:300 400;font-display:swap;src:url(/fonts/cormorant-garamond-italic-latin.woff2) format("woff2");}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Montserrat',sans-serif;background:var(--ivory);color:var(--ink);overflow-x:hidden;cursor:none;}
 .cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;}
 .cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.18s ease;opacity:0.5;}
 .cursor-ring.hover{transform:translate(-50%,-50%) scale(1.8);opacity:0.25;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:28px 64px;transition:background 0.4s,padding 0.4s,box-shadow 0.4s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 64px;transition:background 0.4s,padding 0.4s,box-shadow 0.4s;}
 .nav-logo{display:flex;align-items:center;text-decoration:none;cursor:none;flex-shrink:0;}
-.nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
-.nav-links a{font-size:var(--text-sm);letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,242,236,0.85);text-decoration:none;transition:color 0.3s;font-weight:500;cursor:none;position:relative;white-space:nowrap;}
+.nav-links{display:flex;gap:32px;list-style:none;align-items:center;}
+.nav-links a{font-size:var(--text-xs);letter-spacing:0.14em;text-transform:uppercase;color:rgba(245,242,236,0.85);text-decoration:none;transition:color 0.3s;font-weight:500;cursor:none;position:relative;white-space:nowrap;}
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--accent);transition:width 0.3s;}
 .nav-links a:hover::after{width:100%;}
 nav.scrolled .nav-links a{color:var(--mid);}
@@ -18,19 +22,19 @@ nav.scrolled .nav-links a{color:var(--mid);}
 .nav-dropdown:hover .nav-dropdown-menu{display:block;}
 .nav-dropdown-menu a{display:block;padding:12px 24px;font-size:var(--text-sm);letter-spacing:0.1em;color:var(--mid)!important;text-transform:uppercase;}
 .nav-dropdown-menu a::after{display:none;}
-.nav-cta{color:var(--accent)!important;border:1.5px solid var(--accent);padding:11px 26px;transition:all 0.3s!important;}
+.nav-cta{color:var(--accent)!important;border:1.5px solid var(--accent);padding:9px 20px;transition:all 0.3s!important;}
 .nav-cta::after{display:none!important;}
-.page-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.12;}
+.page-hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.12;}
 .page-hero-eyebrow{font-size:var(--text-xs);letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;font-weight:600;}
 .back-link::before{content:'←';}
 footer{background:#0d1020;padding:88px 64px 44px;border-top:1px solid rgba(232,82,26,0.08);}
-.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;padding-bottom:56px;border-bottom:1px solid rgba(232,82,26,0.07);}
-.footer-tagline{font-size:var(--text-sm);line-height:1.85;color:rgba(245,242,236,0.32);font-weight:300;letter-spacing:0.04em;max-width:260px;}
-.footer-address{font-size:var(--text-sm);line-height:2;color:rgba(245,242,236,0.2);font-weight:300;margin-top:24px;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:64px;padding-bottom:56px;border-bottom:1px solid rgba(232,82,26,0.07);}
+.footer-tagline{font-size:var(--text-sm);line-height:1.85;color:rgba(245,242,236,0.62);font-weight:300;letter-spacing:0.04em;max-width:260px;}
+.footer-address{font-size:var(--text-sm);line-height:2;color:rgba(245,242,236,0.6);font-weight:300;margin-top:24px;}
 .footer-col-title{font-size:var(--text-xs);letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:20px;}
 .footer-links{list-style:none;display:flex;flex-direction:column;gap:13px;}
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;}
-.footer-copy{font-size:var(--text-sm);letter-spacing:0.1em;color:rgba(245,242,236,0.18);}
+.footer-copy{font-size:var(--text-sm);letter-spacing:0.1em;color:rgba(245,242,236,0.55);}
 .footer-socials{display:flex;flex-wrap:wrap;gap:12px 24px;}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
 .nav-hamburger.open span:nth-child(2){opacity:0;}
@@ -59,3 +63,16 @@ html{scroll-behavior:auto;}
 /* Current page in the nav */
 .nav-links a.is-current::after{width:100%;}
 .nav-dropdown-menu a[aria-current="page"],.mobile-nav-links a[aria-current="page"]{color:var(--accent);}
+nav.breadcrumbs{position:static;display:block;padding:0;z-index:auto;background:none;box-shadow:none;transition:none;}
+.breadcrumbs{margin-bottom:48px;font-size:var(--text-xs);letter-spacing:0.12em;text-transform:uppercase;font-weight:600;}
+.breadcrumbs ol{list-style:none;display:flex;flex-wrap:wrap;gap:6px 0;padding:0;margin:0;}
+.breadcrumbs li{color:var(--mid);display:inline-flex;align-items:center;}
+.breadcrumbs li+li::before{content:"/";margin:0 10px;color:var(--mid);opacity:0.6;}
+.breadcrumbs a{color:#c2410c;text-decoration:none;cursor:none;}
+.breadcrumbs a:hover{text-decoration:underline;}
+.breadcrumbs li[aria-current]{color:var(--mid);max-width:60ch;}
+.footer-address a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(245,242,236,0.25);}
+.footer-address a:hover{color:var(--ivory);}
+/* Custom cursor: hidden until the mouse moves, and never on touch screens or narrow windows. */
+body:not(.cursor-on) .cursor,body:not(.cursor-on) .cursor-ring{opacity:0;}
+@media (max-width:768px),(hover:none){.cursor,.cursor-ring{display:none;}}

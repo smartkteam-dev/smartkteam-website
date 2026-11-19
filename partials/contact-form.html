@@ -1,0 +1,55 @@
+<form id="contactForm" class="cta-form reveal">
+  <div id="formSuccess" class="form-success" role="status" aria-live="polite">
+    <span class="success-icon">✓</span>
+    <span class="success-text">Your message has been sent to our team!</span>
+    <span class="success-sub">We'll be in touch within 24 hours</span>
+  </div>
+  <div class="form-row">
+    <div class="form-field" id="field-fname">
+      <label for="fname">First Name</label>
+      <input type="text" id="fname" name="firstName" autocomplete="given-name" placeholder="First Name">
+      <span class="field-error-msg" role="alert">First name is required</span>
+    </div>
+    <div class="form-field" id="field-lname">
+      <label for="lname">Last Name</label>
+      <input type="text" id="lname" name="lastName" autocomplete="family-name" placeholder="Last Name">
+      <span class="field-error-msg" role="alert">Last name is required</span>
+    </div>
+  </div>
+  <div class="form-field" id="field-bname">
+    <label for="bname">Business Name</label>
+    <input type="text" id="bname" name="businessName" autocomplete="organization" placeholder="Business Name">
+    <span class="field-error-msg" role="alert">Business name is required</span>
+  </div>
+  <div class="form-field" id="field-email">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" autocomplete="email" placeholder="Email Address">
+    <span class="field-error-msg" role="alert">A valid email address is required</span>
+  </div>
+  <div class="form-field" id="field-service">
+    <label for="service">Service of Interest</label>
+    <select id="service" name="service" autocomplete="off">
+      <option value="" disabled selected>Service of Interest</option>
+      <option>Website Design</option>
+      <option>SEO Ranking</option>
+      <option>Booking &amp; Payment System</option>
+      <option>Google Ads</option>
+      <option>Insurance Claims</option>
+      <option>Full Package</option>
+    </select>
+    <span class="field-error-msg" role="alert">Please select a service</span>
+  </div>
+  <div class="form-field" id="field-message">
+    <label for="message">Tell us about your business</label>
+    <textarea id="message" name="message" autocomplete="off" placeholder="Tell us about your business..."></textarea>
+    <span class="field-error-msg" role="alert">Please tell us about your business</span>
+  </div>
+  <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+    <label for="website">Leave this field empty</label>
+    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+  </div>
+  <div class="form-submit">
+    <span class="form-note">Response within 24 hours</span>
+    <button type="button" class="btn-submit" onclick="submitContactForm()">Send Message</button>
+  </div>
+</form>

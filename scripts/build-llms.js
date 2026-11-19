@@ -7,6 +7,7 @@
 // What goes where:
 //   - Pages: every root *.html page that is indexable (not 404.html, no noindex).
 //   - Services: the order and names of partials/schema-org.html hasOfferCatalog (each needs a url).
+//   - Industry websites: pages named websites-for-*.html (website design for one type of business).
 //   - Blog posts: any page with BlogPosting JSON-LD, newest first.
 //   - Everything else (home, blog index, Q&A, any new page) goes under "Pages".
 //   - Page text comes from <main>, converted to Markdown. Decorative labels, images, icons,
@@ -326,9 +327,11 @@ function loadSite() {
   const serviceUrls = new Set(services.map(s => s.page.url));
   const posts = pages.filter(p => p.post)
     .sort((a, b) => b.post.datePublished.localeCompare(a.post.datePublished) || a.url.localeCompare(b.url));
-  const others = pages.filter(p => !p.post && !serviceUrls.has(p.url))
+  const industries = pages.filter(p => /^websites-for-/.test(p.file)).sort((a, b) => a.url.localeCompare(b.url));
+  const industryUrls = new Set(industries.map(p => p.url));
+  const others = pages.filter(p => !p.post && !serviceUrls.has(p.url) && !industryUrls.has(p.url))
     .sort((a, b) => (a.url === SITE + '/' ? -1 : b.url === SITE + '/' ? 1 : a.url.localeCompare(b.url)));
-  return { org, pages, services, posts, others };
+  return { org, pages, services, industries, posts, others };
 }
 
 // Starting price from the page's own package cards, or from a Service offer in its JSON-LD.
@@ -371,7 +374,7 @@ function profileLabel(url) {
 }
 
 function renderIndex(site) {
-  const { org, services, posts, others } = site;
+  const { org, services, industries, posts, others } = site;
   const a = org.address;
   const tz = TIMEZONES[a.addressRegion];
   const L = [];
@@ -398,6 +401,8 @@ function renderIndex(site) {
   for (const s of services) {
     L.push(`- [${s.name}](${s.page.url}): ${s.page.description} Pricing: ${startingPrice(s.page)}.`);
   }
+  L.push('', '## Industry websites', '');
+  for (const p of industries) L.push(`- [${p.title}](${p.url}): ${p.description} Pricing: ${startingPrice(p)}.`);
   L.push('', '## Pages', '');
   for (const p of others) L.push(`- [${p.title}](${p.url}): ${p.description}`);
   L.push('', '## Blog', '');
@@ -408,7 +413,7 @@ function renderIndex(site) {
 }
 
 function renderFull(site) {
-  const ordered = [site.others[0], ...site.services.map(s => s.page), ...site.others.slice(1), ...site.posts];
+  const ordered = [site.others[0], ...site.services.map(s => s.page), ...site.industries, ...site.others.slice(1), ...site.posts];
   return ordered.map(p => {
     const head = [`# ${p.title}`, `URL: ${p.url}`];
     if (p.post) {
