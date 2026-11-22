@@ -2,3 +2,5 @@
 .claude/
 api/.Rhistory
 *.Rhistory
+.gstack/
+.impeccable/
