@@ -1,7 +1,8 @@
 // On-page SEO checks for every root page. Run by `npm run check` and the pre-commit hook.
 // Fails (exit 1) on any of:
-//   - <title> missing, longer than 60 characters, or used by another page
-//   - meta description missing, longer than 155 characters, or used by another page
+//   - <title> missing, outside 30-60 characters, or used by another page
+//   - meta description missing, outside 120-155 characters, used by another page,
+//     opening with the title verbatim, or ending on the same sentence as 3+ other pages
 //   - not exactly one <h1>
 //   - an <img> without an alt attribute (alt="" is allowed for decorative images)
 //   - <html lang> not set, or the Google tag partial (Analytics) missing
@@ -10,7 +11,8 @@
 //   - og:image or twitter:image missing, not a file in this repo, or og:image:width/height not its real size
 //   - a JSON-LD block that is not valid JSON
 //   - an internal link or image that points to nothing (no page, file or vercel.json redirect)
-//   - a sitemap URL whose page is missing or noindex
+//   - a sitemap URL whose page is missing or noindex, or whose URL is a vercel.json redirect source
+//   - sitemap.xml has a <priority> or <changefreq> element (Google ignores both)
 const fs = require('fs');
 const path = require('path');
 
@@ -54,21 +56,34 @@ const pages = fs.readdirSync(root).filter(f => f.endsWith('.html')).sort();
 const titles = new Map();
 const descs = new Map();
 const noindex = new Set();
+const closings = new Map();
 
 for (const page of pages) {
   const h = fs.readFileSync(path.join(root, page), 'utf8');
   const expected = page === 'index.html' ? `${SITE}/` : `${SITE}/${page.replace(/\.html$/, '')}`;
   if (/<meta name="robots" content="[^"]*noindex/.test(h)) noindex.add(expected);
 
+  const isNoindex = /<meta name="robots" content="[^"]*noindex/.test(h);
   const title = decode(((h.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || '').trim());
   if (!title) err(page, 'missing <title>');
   else if (title.length > 60) err(page, `title is ${title.length} characters (max 60): "${title}"`);
+  else if (!isNoindex && title.length < 30) err(page, `title is ${title.length} characters (want 30-60): "${title}"`);
   if (title) titles.set(title, [...(titles.get(title) || []), page]);
 
   const desc = meta(h, 'name', 'description');
   if (!desc) err(page, 'missing meta description');
   else if (desc.length > 155) err(page, `meta description is ${desc.length} characters (max 155)`);
+  else if (!isNoindex && desc.length < 120) err(page, `meta description is ${desc.length} characters (want 120-155)`);
   if (desc) descs.set(desc, [...(descs.get(desc) || []), page]);
+  // Templated metadata: a description that opens by repeating the title verbatim, or that ends
+  // on the exact same stock sentence as several other pages, is one generated shape site-wide
+  // even though each string is unique. A shared closing phrase written deliberately for the
+  // brand across a couple of pages is fine; the same exact sentence on 4+ pages is a template.
+  if (desc && title && desc.startsWith(title)) err(page, 'meta description opens with the title verbatim');
+  if (desc) {
+    const lastSentence = desc.replace(/\.+$/, '').split('.').pop().trim();
+    if (lastSentence) closings.set(lastSentence, [...(closings.get(lastSentence) || []), page]);
+  }
 
   const h1 = (h.match(/<h1[\s>]/g) || []).length;
   if (h1 !== 1) err(page, `has ${h1} <h1> elements (expected 1)`);
@@ -125,13 +140,24 @@ for (const page of pages) {
 
 for (const [t, ps] of titles) if (ps.length > 1) err(ps.join(', '), `share the title "${t}"`);
 for (const [d, ps] of descs) if (ps.length > 1) err(ps.join(', '), `share the same meta description`);
+for (const [sentence, ps] of closings) {
+  if (ps.length > 3) err(ps.join(', '), `templated description: ${ps.length} pages end on the identical sentence "${sentence}"`);
+}
 
 const sitemap = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8');
+if (/<priority>|<changefreq>/.test(sitemap)) {
+  err('sitemap.xml', '<priority>/<changefreq> present; Google ignores both, remove them');
+}
+const redirectSources = new Set(redirects);
 for (const m of sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) {
   const url = m[1];
   const file = url === `${SITE}/` ? 'index.html' : url.slice(SITE.length + 1) + '.html';
   if (!fs.existsSync(path.join(root, file))) err('sitemap.xml', `${url} has no page`);
   else if (noindex.has(url)) err('sitemap.xml', `${url} is noindex and should not be in the sitemap`);
+  const urlPath = url === `${SITE}/` ? '/' : '/' + url.slice(SITE.length + 1);
+  if (redirectSources.has(urlPath) || redirectSources.has(urlPath + '.html')) {
+    err('sitemap.xml', `${url} is a vercel.json redirect source and should not be in the sitemap`);
+  }
 }
 
 if (errors.length) {
