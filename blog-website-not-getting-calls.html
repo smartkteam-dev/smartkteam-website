@@ -67,7 +67,7 @@
   "@type": "BlogPosting",
   "headline": "Why Your Website Isn't Getting Calls",
   "description": "A nice-looking website can still silently fail your business. Here are the five most common reasons — and how to fix each one.",
-  "image": "https://smartkteam.com/images/small-business-website-phone-calls-w1200.webp",
+  "image": "https://smartkteam.com/images/blog/website-not-getting-calls-w1200.webp",
   "datePublished": "2026-06-27",
   "dateModified": "2026-06-27",
   "author": {"@type": "Organization", "name": "Smart KTeam", "url": "https://smartkteam.com"},
@@ -89,7 +89,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="/assets/base.css?v=c24106cbc0">
+<link rel="stylesheet" href="/assets/base.css?v=3b44df182a">
 <style>
 :root{--ink:#1a1a2e;--ivory:#faf9f7;--accent:#e8521a;--accent-light:#f07340;--slate:#16213e;--mid:#6e7191;--warm:#f0ebe3;--rule:rgba(232,82,26,0.2);--text-xs:11px;--text-sm:13px;--text-base:15px;--text-lg:17px;}
 nav.scrolled{background:rgba(250,249,247,0.97);backdrop-filter:blur(16px);padding:18px 64px;box-shadow:0 1px 0 var(--rule);}
@@ -153,7 +153,7 @@ nav.scrolled .nav-hamburger span{background:var(--ink);}
   <a href="/" class="nav-logo" aria-label="Smart KTeam home">
     <svg viewBox="0 0 220 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect class="logo-bar" x="0" y="6" width="4" height="36" rx="2" fill="#e8521a"/>
-      <text class="logo-text-path" x="18" y="35" font-family="'Montserrat', sans-serif" font-size="22" font-weight="600" letter-spacing="-0.5" fill="#faf9f7">smart kteam</text>
+      <text class="logo-text-path" x="20" y="35" font-family="'Montserrat', sans-serif" font-size="22" font-weight="600" letter-spacing="-0.5" fill="#faf9f7">smart kteam</text>
     </svg>
   </a>
   <ul class="nav-links">
@@ -202,7 +202,7 @@ nav.scrolled .nav-hamburger span{background:var(--ink);}
 <main id="main">
 
 <div class="page-hero">
-  <img class="page-hero-bg" src="/images/small-business-website-phone-calls-w1400.webp" srcset="/images/small-business-website-phone-calls-w800.webp 800w, /images/small-business-website-phone-calls-w1400.webp 1400w" sizes="100vw" width="1400" height="2100" alt="" fetchpriority="high" decoding="async">
+  <img class="page-hero-bg" src="/images/blog/website-not-getting-calls-w1200.webp" srcset="/images/blog/website-not-getting-calls-w800.webp 800w, /images/blog/website-not-getting-calls-w1200.webp 1200w" sizes="100vw" width="1200" height="893" alt="" fetchpriority="high" decoding="async">
   <div class="page-hero-content">
     <div class="page-hero-eyebrow">Smart KTeam Blog</div>
     <h1>Why Your Website <em>Isn't Getting Calls</em></h1>
@@ -219,6 +219,11 @@ nav.scrolled .nav-hamburger span{background:var(--ink);}
     <p>You paid to have a <a href="/website-design" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">website built</a>. It looks decent. Maybe even good. But the phone isn't ringing the way you expected it to, and you're not sure why.</p>
 
     <p>This is one of the most common frustrations we hear from small business owners. The website exists — but it's not doing anything. A nice-looking site and an effective site are two very different things. Here are the five most common reasons a website fails to generate calls, and what you can do about each one.</p>
+
+    <figure class="article-float float-right">
+      <img loading="lazy" decoding="async" width="512" height="683" src="/images/blog/website-not-getting-calls-inline-1-w512.webp" alt="A man frowning at his phone beside an open laptop">
+      <figcaption>If a page is slow or confusing on a phone, most visitors leave before they call.</figcaption>
+    </figure>
 
     <h2>Reason 1: It Loads <em>Too Slowly</em></h2>
     <p>Research consistently shows that most visitors will leave a website if it takes more than three seconds to load. On mobile, that number drops even lower. If your site has large uncompressed images, outdated code, or a slow hosting provider, you could be losing more than half your visitors before they even see your content.</p>
@@ -238,6 +243,11 @@ nav.scrolled .nav-hamburger span{background:var(--ink);}
     </div>
 
     <p>Your CTA should be visible without scrolling — what designers call "above the fold." Don't make visitors work to find out how to hire you.</p>
+
+    <figure class="article-float float-left">
+      <img loading="lazy" decoding="async" width="700" height="933" src="/images/blog/website-not-getting-calls-inline-2-w700.webp" alt="A woman browsing on her phone over a coffee in a cafe">
+      <figcaption>Visitors decide whether to trust a business before they ever pick up the phone.</figcaption>
+    </figure>
 
     <h2>Reason 4: Missing <em>Trust Signals</em></h2>
     <p>When someone lands on your website for the first time, they're making a split-second judgment: can I trust this business? If your site has no customer reviews, no photos of real work, no staff photos, and no physical address — it looks like a risk. And people don't call businesses they're not sure about.</p>
@@ -304,7 +314,7 @@ nav.scrolled .nav-hamburger span{background:var(--ink);}
 function toggleMobileNav(){const h=document.getElementById('hamburger'),m=document.getElementById('mobileNav');h.classList.toggle('open');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;document.body.classList.add('cursor-on');});
 (function anim(){cursor.style.left=mx+'px';cursor.style.top=my+'px';rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
 document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hover'));el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));});
 const nav=document.getElementById('nav');

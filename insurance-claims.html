@@ -189,7 +189,7 @@
 }
 </script>
 
-<link rel="stylesheet" href="/assets/base.css?v=c24106cbc0">
+<link rel="stylesheet" href="/assets/base.css?v=3b44df182a">
 <style>
 :root{ --ink:#1a1a2e;--ivory:#faf9f7;--accent:#e8521a;--accent-light:#f07340; --slate:#16213e;--mid:#6e7191;--warm:#f0ebe3;--rule:rgba(232,82,26,0.2); --text-xs:11px;--text-sm:13px;--text-base:15px;--text-lg:17px; }
 nav.scrolled{background:rgba(250,249,247,0.97);backdrop-filter:blur(16px);padding:18px 64px;box-shadow:0 1px 0 var(--rule);}
@@ -270,7 +270,7 @@ img,video,iframe{max-width:100%;height:auto;}
   <a href="/" class="nav-logo" aria-label="Smart KTeam home">
     <svg viewBox="0 0 220 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect class="logo-bar" x="0" y="6" width="4" height="36" rx="2" fill="#e8521a"/>
-      <text class="logo-text-path" x="18" y="35" font-family="'Montserrat', sans-serif" font-size="22" font-weight="600" letter-spacing="-0.5" fill="#faf9f7">smart kteam</text>
+      <text class="logo-text-path" x="20" y="35" font-family="'Montserrat', sans-serif" font-size="22" font-weight="600" letter-spacing="-0.5" fill="#faf9f7">smart kteam</text>
     </svg>
   </a>
   <ul class="nav-links">
@@ -321,7 +321,7 @@ img,video,iframe{max-width:100%;height:auto;}
 
 <!-- HERO -->
 <div class="page-hero">
-  <img class="page-hero-bg" src="/images/massage-therapist-treatment-w1400.webp" srcset="/images/massage-therapist-treatment-w800.webp 800w, /images/massage-therapist-treatment-w1400.webp 1400w" sizes="100vw" width="1400" height="933" alt="" fetchpriority="high" decoding="async">
+  <img class="page-hero-bg" src="/images/site/massage-therapist-treatment-w1400.webp" srcset="/images/site/massage-therapist-treatment-w800.webp 800w, /images/site/massage-therapist-treatment-w1400.webp 1400w" sizes="100vw" width="1400" height="933" alt="" fetchpriority="high" decoding="async">
   <div class="page-hero-content">
     <div class="page-hero-eyebrow">Special Services</div>
     <h1>Insurance Claims for<br><em>Massage Therapists</em></h1>
@@ -339,7 +339,7 @@ img,video,iframe{max-width:100%;height:auto;}
       <p class="body-text">Insurance billing eats hours every week — credentialing, claim submissions, denials, follow-ups. ClinicFlow takes it all off your plate. We get you credentialed with Premera, Aetna, Kaiser, and BCBS, then manage every claim through its full lifecycle. Share your information once. We handle the rest.</p>
       <p class="body-text" style="margin-top:16px;"><strong style="font-weight:600;color:var(--ink);">Pricing starts from $10 per claim.</strong></p>
     </div>
-    <img loading="lazy" decoding="async" width="735" height="489" src="/images/massage-therapist-insurance-claims-billing.webp" alt="Healthcare professional reviewing insurance claims at computer" class="two-col-img reveal">
+    <img loading="lazy" decoding="async" width="735" height="489" src="/images/site/massage-therapist-insurance-claims-billing.webp" alt="Healthcare professional reviewing insurance claims at computer" class="two-col-img reveal">
   </div>
   <div class="benefits-grid">
     <div class="benefit-card reveal">
@@ -436,7 +436,7 @@ function toggleMobileNav(){
 // ============ CURSOR ============
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;document.body.classList.add('cursor-on');});
 (function anim(){
   cursor.style.left=mx+'px';cursor.style.top=my+'px';
   rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
