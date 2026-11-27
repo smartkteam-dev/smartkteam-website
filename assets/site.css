@@ -113,7 +113,7 @@ nav.scrolled .nav-logo svg .logo-text{fill:var(--ink);}
 .service-arrow{display:inline-flex;align-items:center;gap:10px;font-size:var(--text-sm);letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-top:28px;font-weight:600;opacity:0;transform:translateX(-10px);transition:all 0.3s;text-decoration:none;cursor:none;}
 .why-section{display:grid;grid-template-columns:1fr 1fr;min-height:75vh;}
 .why-visual{background:var(--slate);position:relative;}
-.why-visual.bg-in{background:url('/images/small-business-owner-portrait.webp') center/cover no-repeat;}
+.why-visual.bg-in{background:url('/images/site/small-business-owner-portrait.webp') center/cover no-repeat;}
 .why-visual-badge{position:absolute;bottom:40px;left:40px;z-index:1;background:var(--accent);color:var(--ivory);padding:20px 28px;}
 .why-visual-badge-text{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;font-style:italic;line-height:1.2;}
 .why-visual-badge-sub{font-size:var(--text-xs);letter-spacing:0.2em;text-transform:uppercase;font-weight:600;opacity:0.8;margin-top:6px;}
@@ -125,7 +125,7 @@ nav.scrolled .nav-logo svg .logo-text{fill:var(--ink);}
 .why-item-title{font-size:var(--text-sm);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:var(--ink);margin-bottom:6px;}
 .why-item-desc{font-size:var(--text-base);line-height:1.85;color:var(--mid);font-weight:300;}
 .testimonial{background:linear-gradient(rgba(22,33,62,0.95),rgba(22,33,62,0.95));padding:130px 64px;position:relative;overflow:hidden;}
-.testimonial.bg-in{background:linear-gradient(rgba(22,33,62,0.95),rgba(22,33,62,0.95)),url('/images/small-business-office-workspace-w1400.webp') center/cover no-repeat;}
+.testimonial.bg-in{background:linear-gradient(rgba(22,33,62,0.95),rgba(22,33,62,0.95)),url('/images/site/small-business-office-workspace-w1400.webp') center/cover no-repeat;}
 .testimonial-inner{max-width:860px;margin:0 auto;text-align:center;}
 .testimonial-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.2vw,44px);font-weight:300;font-style:italic;color:var(--ivory);line-height:1.55;}
 .testimonial-rule{width:40px;height:2px;background:var(--accent);margin:40px auto;}
@@ -142,7 +142,7 @@ nav.scrolled .nav-logo svg .logo-text{fill:var(--ink);}
 .process-step-desc{font-size:var(--text-base);line-height:1.85;color:var(--mid);font-weight:300;}
 .process-visual{position:sticky;top:100px;}
 .process-img{width:100%;aspect-ratio:3/4;background:var(--slate);}
-.process-img.bg-in{background:url('/images/digital-marketing-team-planning.webp') center/cover no-repeat;}
+.process-img.bg-in{background:url('/images/site/digital-marketing-team-planning.webp') center/cover no-repeat;}
 .process-img-caption{margin-top:20px;display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--rule);}
 .process-img-caption span{font-size:var(--text-sm);letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);}
 .languages{background:var(--accent);padding:56px 64px;display:flex;justify-content:space-between;align-items:center;}
@@ -150,7 +150,7 @@ nav.scrolled .nav-logo svg .logo-text{fill:var(--ink);}
 .lang-list{display:flex;gap:56px;}
 .lang-item{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--ink);}
 .cta-section{background:linear-gradient(rgba(26,26,46,0.95),rgba(26,26,46,0.95));padding:120px 64px;display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center;}
-.cta-section.bg-in{background:linear-gradient(rgba(26,26,46,0.95),rgba(26,26,46,0.95)),url('/images/digital-marketing-consultation-workspace-w1600.webp') center/cover no-repeat fixed;}
+.cta-section.bg-in{background:linear-gradient(rgba(26,26,46,0.95),rgba(26,26,46,0.95)),url('/images/site/digital-marketing-consultation-workspace-w1600.webp') center/cover no-repeat fixed;}
 .cta-form{display:flex;flex-direction:column;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-bottom:1px;}
 .form-field{margin-bottom:1px;}

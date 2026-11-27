@@ -76,3 +76,58 @@ nav.breadcrumbs{position:static;display:block;padding:0;z-index:auto;background:
 /* Custom cursor: hidden until the mouse moves, and never on touch screens or narrow windows. */
 body:not(.cursor-on) .cursor,body:not(.cursor-on) .cursor-ring{opacity:0;}
 @media (max-width:768px),(hover:none){.cursor,.cursor-ring{display:none;}}
+
+/* Sub-page heroes: shorter, photo visible, clear of the fixed nav. Overrides each page's inline .page-hero rules. */
+body .page-hero{height:auto;min-height:clamp(320px,42vh,420px);display:flex;align-items:flex-end;padding:148px 64px 52px;}
+body .page-hero-content{position:relative;inset:auto;top:auto;bottom:auto;left:auto;right:auto;width:100%;max-width:880px;justify-content:flex-end;}
+body .page-hero-bg{opacity:0.7;object-position:center 40%;}
+body .page-hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(22,33,62,0.78) 0,rgba(22,33,62,0) 34%),linear-gradient(90deg,rgba(22,33,62,0.94) 0,rgba(22,33,62,0.78) 42%,rgba(22,33,62,0.18) 100%);}
+body .page-hero-eyebrow{display:none;}
+body .page-hero h1{text-wrap:balance;text-shadow:0 2px 24px rgba(13,16,32,0.35);}
+body .page-hero-sub{color:rgba(245,242,236,0.82);}
+body .page-hero-date{color:rgba(245,242,236,0.8);}
+body .page-hero-meta{margin-top:20px;}
+/* Content directly under the hero: breadcrumbs sit close, not 100px away. */
+body .page-hero + .article-wrap{padding-top:40px;}
+body .page-hero + .section-pad,body .page-hero + section{padding-top:40px;}
+body nav.breadcrumbs{margin-bottom:36px;}
+body .article-body .lede{margin-top:0;}
+@media (max-width:1024px){body .page-hero{padding:128px 36px 44px;}body .page-hero + .article-wrap{padding-top:32px;}body .page-hero + .section-pad,body .page-hero + section{padding-top:32px;}}
+@media (max-width:768px){body .page-hero{min-height:300px;padding:112px 20px 36px;}body .page-hero::after{background:linear-gradient(180deg,rgba(22,33,62,0.7) 0,rgba(22,33,62,0.1) 30%),linear-gradient(0deg,rgba(22,33,62,0.9) 0,rgba(22,33,62,0.45) 70%,rgba(22,33,62,0.25) 100%);}body .page-hero + .article-wrap{padding-top:28px;}body .page-hero + .section-pad,body .page-hero + section{padding-top:28px;}}
+
+/* Blog index: lead article across the top, tighter search block. */
+@media (min-width:1025px){
+  #blogGrid{gap:40px 36px;margin-top:32px;}
+  #blogGrid .blog-card:first-child{grid-column:1/-1;display:grid;grid-template-columns:1.35fr 1fr;gap:0 48px;align-items:center;padding-bottom:40px;border-bottom:1px solid var(--rule);}
+  #blogGrid .blog-card:first-child .blog-img-wrap{grid-row:1/5;}
+  #blogGrid .blog-card:first-child .blog-meta{margin-top:0;align-self:end;}
+  #blogGrid .blog-card:first-child .blog-title{font-size:clamp(30px,3vw,40px);line-height:1.15;}
+  #blogGrid .blog-card:first-child .blog-excerpt{font-size:var(--text-lg);}
+}
+body .blog-search-wrap{margin-bottom:20px;}
+body .blog-search-count{margin:0 0 8px;}
+/* Hero photo whose subject is centred: push it to the right so the title never sits on it. */
+@media (min-width:1025px){body .page-hero-bg.bg-right{left:auto;right:0;width:48%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%);mask-image:linear-gradient(90deg,transparent 0,#000 30%);opacity:0.9;}}
+
+/* Articles: wider column and larger type so the page uses the screen; rounded photos. */
+body .article-wrap{max-width:1028px;}
+body .article-body p,body .article-body ul li{font-size:18px;line-height:1.9;}
+body .article-body .lede{font-size:22px;line-height:1.75;}
+body .article-body h2{font-size:clamp(28px,3.2vw,42px);}
+body .article-pullquote p{font-size:26px;}
+body .article-float img,body .blog-img-wrap,body .two-col-img,body .process-img{border-radius:16px;}
+body .blog-img-wrap{overflow:hidden;}
+@media(min-width:860px){body .article-float{width:340px;}body .article-float.float-left{margin-right:44px;}body .article-float.float-right{margin-left:44px;}}
+/* Let text keep flowing beside a floated photo: forced clears left large blank areas in the wide column. */
+body .article-body .article-clear{clear:none;}
+body .article-body .article-float{clear:both;}
+body .article-body .article-pullquote{display:flow-root;}
+/* Article bullets: flex on the li split a bold label and its sentence into columns. Keep them as one flowing line. */
+body .article-body ul li{display:block;position:relative;padding-left:30px;}
+body .article-body ul li::before{position:absolute;left:0;top:0;}
+/* Inline article photos, for posts whose own <style> doesn't define them. */
+.article-float{margin:6px 0 28px;}
+.article-float img{width:100%;height:auto;display:block;}
+.article-float figcaption{font-size:11px;letter-spacing:0.04em;color:var(--mid);margin-top:10px;font-weight:300;line-height:1.5;}
+@media(min-width:860px){.article-float.float-left{float:left;}.article-float.float-right{float:right;}}
+@media(max-width:859px){body .article-float{width:100%;}}
